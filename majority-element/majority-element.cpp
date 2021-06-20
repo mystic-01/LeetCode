@@ -7,7 +7,6 @@ public:
         }
         int cMax = nums[0], cFreq  = m[nums[0]];
         for (int i = 0; i < nums.size(); i++) {
-            cout << m[nums[i]] << endl;
             if (m[nums[i]] > cFreq) {
                 cMax = nums[i];
             }

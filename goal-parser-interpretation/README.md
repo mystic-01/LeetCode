@@ -31,6 +31,6 @@ The final concatenated result is "Goal".
 
 <ul>
 	<li><code>1 &lt;= command.length &lt;= 100</code></li>
-	<li><code>command</code> consists of <code>"G"</code>, <code>"()"</code>, and/or <code>"(al)"</code> in some order.</li>
+	<li><code>command</code> consists of <code>"G"</code>, <code>"()"</code>, and/or <code>"(al)"</code> in some random order.</li>
 </ul>
 </div>

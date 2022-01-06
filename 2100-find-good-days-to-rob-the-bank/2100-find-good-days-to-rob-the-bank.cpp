@@ -7,9 +7,7 @@ public:
             if (security[i + 1] >= security[i]) {
                 incCount++;
             } else {
-                for (int j = lastInc; j <= i; j++) {
-                    inc[j] = incCount--;
-                };
+                for (int j = lastInc; j <= i; j++) inc[j] = incCount--;
                 incCount = 0;
                 lastInc = i + 1;
             };
@@ -18,9 +16,7 @@ public:
             if (security[i - 1] >= security[i]) {
                 decCount++;
             } else {
-                for (int j = i - 1; j >= lastDec; j--) {
-                    dec[j] = decCount--;
-                };
+                for (int j = i - 1; j >= lastDec; j--) dec[j] = decCount--;
                 decCount = 0;
                 lastDec = i;
             };        

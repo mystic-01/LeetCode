@@ -6,8 +6,8 @@ public:
         if (target >= points[high][0]) return high;
 
         while (low < high) {
-            int mid = (low + high) / 2, midValue = points[mid][0];
-            if (target <= midValue) {
+            int mid = (low + high) / 2;
+            if (target <= points[mid][0]) {
                 high = mid;
             } else {
                 low = mid + 1;

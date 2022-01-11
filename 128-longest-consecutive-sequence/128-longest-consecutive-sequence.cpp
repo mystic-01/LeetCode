@@ -6,16 +6,15 @@ public:
         if (nums.size() == 0) return 0;
          
         map<int, int> m;
-        for (auto i = 0; i < nums.size(); i++) m[nums[i]]++;
         int count = 1, best = 1;
-        auto j = m.begin(); j++;
-        for (auto i = m.begin(); j != m.end(); i++) {
-            if (j->first - i->first != 1) {
-                count = 1;
-            } else {
-                count++;
-            };
+        for (auto &i : nums) m[i]++;
+
+        auto i = m.begin(), j = m.begin(); j++;
+
+        while (j != m.end()) {
             best = max(best, count);
+            count = (j->first - i->first != 1) ? 1 : count + 1;
+            i++;
             j++;
         };
         return max(best, count);

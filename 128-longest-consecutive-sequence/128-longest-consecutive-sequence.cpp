@@ -5,15 +5,28 @@ public:
         std::cin.tie(nullptr);
         if (nums.size() == 0) return 0;
          
-        map<int, int> m;
+//         map<int, int> m;
+//         int count = 1, best = 1;
+//         for (auto &i : nums) m[i]++;
+
+//         auto i = m.begin(), j = m.begin(); j++;
+
+//         while (j != m.end()) {
+//             best = max(best, count);
+//             count = (j->first - i->first != 1) ? 1 : count + 1;
+//             i++;
+//             j++;
+//         };
+//         return max(best, count);
+        set<int> m;
         int count = 1, best = 1;
-        for (auto &i : nums) m[i]++;
+        for (auto &i : nums) m.insert(i);
 
         auto i = m.begin(), j = m.begin(); j++;
 
         while (j != m.end()) {
             best = max(best, count);
-            count = (j->first - i->first != 1) ? 1 : count + 1;
+            count = (*j - *i != 1) ? 1 : count + 1;
             i++;
             j++;
         };

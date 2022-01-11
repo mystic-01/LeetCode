@@ -11,11 +11,11 @@ public:
         auto j = m.begin(); j++;
         for (auto i = m.begin(); j != m.end(); i++) {
             if (j->first - i->first != 1) {
-                best = max(best, count);
                 count = 1;
             } else {
                 count++;
             };
+            best = max(best, count);
             j++;
         };
         return max(best, count);

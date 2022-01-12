@@ -8,16 +8,14 @@ public:
         if (m * n != r * c) return mat;
         vector<vector<int>> ans(r, vector<int>(c));
         
-        for (int i = 0; i < r; i++) {
-            for (int j = 0; j < c; j++) {
+        for (auto i = 0; i < r; i++)
+            for (auto j = 0; j < c; j++) {
                 ans[i][j] = mat[a][b++];
                 if (b == n) {
                     a = a + 1;
                     b = 0;
                 };
             };
-        };
-
         return ans;
     };
 };

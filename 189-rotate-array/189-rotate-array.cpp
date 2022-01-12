@@ -6,7 +6,6 @@ public:
 
         int n = nums.size();
         k %= n;
-        if (k == 0 || n == 1) return;
 
         reverse(nums.begin(), nums.begin() + n - k);
         reverse(nums.begin() + n - k, nums.end());

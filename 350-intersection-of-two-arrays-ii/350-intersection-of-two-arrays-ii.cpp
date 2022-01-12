@@ -3,7 +3,7 @@ public:
     vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {
         std::ios::sync_with_stdio(false);
         std::cin.tie(nullptr);        
-        map<int, int> m;
+        unordered_map<int, int> m;
         vector<int> ans;
         
         for(auto &i : nums1) m[i]++;

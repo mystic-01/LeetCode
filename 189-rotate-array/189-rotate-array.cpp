@@ -6,9 +6,9 @@ public:
 
         int n = nums.size();
         k %= n;
-
-        reverse(nums.begin(), nums.begin() + n - k);
-        reverse(nums.begin() + n - k, nums.end());
-        reverse(nums.begin(), nums.end());
+        auto begin = nums.begin(), end = nums.end();
+        reverse(begin, begin + n - k);
+        reverse(begin + n - k, end);
+        reverse(begin, end);
     };
 };

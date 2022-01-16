@@ -5,8 +5,11 @@ public:
         std::cin.tie(nullptr);     
         if (s.length() != t.length()) return 0;
         map<char, int> m;
-        for (auto &i : s) m[i]++;
-        for (auto &j : t) m[j]--;
+        auto i = 0, j = 0;
+        while (i < s.length()) {
+            m[s[i++]]++;
+            m[t[j++]]--;            
+        };
         for (auto &k : m) if (k.second > 0) return 0;
         return 1;
     };

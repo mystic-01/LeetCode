@@ -4,13 +4,12 @@ public:
         std::ios::sync_with_stdio(false);
         std::cin.tie(nullptr);     
         if (s.length() != t.length()) return 0;
-        map<char, int> m;
-        int i = 0, j = 0;
-        while (i < s.length()) {
-            m[s[i++]]++;
-            m[t[j++]]--;            
+        vector<int> v(26);
+        for (auto i = 0; i < s.length(); i++) {
+            v[s[i] - 'a']++;
+            v[t[i] - 'a']--;            
         };
-        for (auto k : m) if (k.second > 0) return 0;
+        for (auto k : v) if (k != 0) return 0;
         return 1;
     };
 };

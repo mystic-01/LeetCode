@@ -5,7 +5,7 @@ public:
         std::cin.tie(nullptr);
         
         int answer = 0, w1 = words1.size(), w2 = words2.size();
-        map<string, pair<int, int>> m;
+        unordered_map<string, pair<int, int>> m;
         for (auto i = 0; i < w1 || i < w2; i++) {
             if (i < w1) m[words1[i]].first++;     
             if (i < w2) m[words2[i]].second++;

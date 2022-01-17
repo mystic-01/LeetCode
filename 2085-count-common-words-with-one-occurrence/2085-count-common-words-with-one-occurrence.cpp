@@ -5,10 +5,10 @@ public:
         std::cin.tie(nullptr);
         
         int answer = 0;
-        map<string, int> m;
-        for (auto i : words1) m[i]++;
-        for (auto i : words2) if (m[i] == 1) m[i]--; else m[i] = INT_MAX;
-        for (auto i : m) answer += i.second == 0 ? 1 : 0;
+        map<string, pair<int, int>> m;
+        for (auto i : words1) m[i].first++;
+        for (auto i : words2) m[i].second++;
+        for (auto i : m) answer += i.second.first == i.second.second && i.second.second == 1 ? 1 : 0;
         return answer;
     };
 };

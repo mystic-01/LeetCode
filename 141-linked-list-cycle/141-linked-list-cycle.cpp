@@ -9,6 +9,9 @@
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
+       
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
         ListNode* slow = head, * fast = head;
         while (fast != nullptr && fast->next != nullptr) {
             slow = slow->next;            

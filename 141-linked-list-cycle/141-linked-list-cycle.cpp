@@ -15,7 +15,7 @@ public:
             slow = slow->next;            
             if (fast->next == nullptr) return false;
             fast = fast->next->next;  
-            if (slow == nullptr || fast == nullptr) return false;
+            if (fast == nullptr) return false;
             if (slow == fast) return true;
         };
         return false;

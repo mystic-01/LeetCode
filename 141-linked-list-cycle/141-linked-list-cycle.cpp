@@ -10,12 +10,10 @@ class Solution {
 public:
     bool hasCycle(ListNode *head) {
         ListNode* slow = head, * fast = head;
-        if (!head || !head->next) return false;
         while (1) {
+            if (fast == nullptr || fast->next == nullptr) return false;
             slow = slow->next;            
-            if (fast->next == nullptr) return false;
             fast = fast->next->next;  
-            if (fast == nullptr) return false;
             if (slow == fast) return true;
         };
         return false;

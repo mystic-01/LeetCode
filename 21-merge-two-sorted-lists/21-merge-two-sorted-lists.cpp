@@ -11,6 +11,7 @@
 class Solution {
 public:
     ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+       
 
         if (!l1 && !l2) return NULL; 
         else if (!l1) return l2;

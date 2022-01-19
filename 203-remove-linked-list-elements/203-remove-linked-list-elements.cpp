@@ -11,12 +11,13 @@
 class Solution {
 public:
     ListNode* removeElements(ListNode* head, int val) {
+        std::ios::sync_with_stdio(false);
+        std::cin.tie(nullptr);
         ListNode* temp = head;
-        while (temp && temp->next) {
+        while (temp && temp->next)
             if (temp->next->val == val) temp->next = temp->next->next;
             else temp = temp->next;
-        };
-        if (head && head->val == val) return head->next;
-        return head;
+        
+        return (head && head->val == val) ? head->next : head;
     };
 };

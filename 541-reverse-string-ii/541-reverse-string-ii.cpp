@@ -12,7 +12,7 @@ public:
             };
             j++;
         };
-        reverse(s.begin() + pos, (n - pos >= k) ? s.begin() + pos + k : s.end());
+        reverse(s.begin() + pos, (pos + k < n) ? s.begin() + pos + k : s.end());
         return s;
     };
 };

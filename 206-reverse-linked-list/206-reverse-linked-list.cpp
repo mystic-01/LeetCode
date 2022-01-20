@@ -11,15 +11,16 @@
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
-        if (head == NULL) return head;
-        ListNode *prev = NULL, *current = head, *nextNode = current->next;
-        while (current->next != NULL) {
-            nextNode = current->next;
+        std::ios::sync_with_stdio(false);
+        std::cin.tie(nullptr);
+        
+        ListNode* prev = nullptr, * current = head, * next;
+        while (current) {
+            next = current->next;
             current->next = prev;
             prev = current;
-            current = nextNode;
+            current = next;
         };
-        current->next = prev;
-        return current;
+        return prev;
     };
 };

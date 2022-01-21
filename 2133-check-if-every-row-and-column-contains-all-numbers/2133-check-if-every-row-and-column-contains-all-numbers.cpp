@@ -5,8 +5,8 @@ public:
         int n = matrix.size();
         
         for (auto i = 0; i < n; i++) {
-            row = unordered_set<int>(n);
-            col = unordered_set<int>(n);
+            row = unordered_set<int>();
+            col = unordered_set<int>();
             for (auto j = 0; j < n; j++) {
                 row.insert(matrix[i][j]);
                 col.insert(matrix[j][i]);

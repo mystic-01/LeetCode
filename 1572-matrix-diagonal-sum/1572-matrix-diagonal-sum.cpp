@@ -5,11 +5,8 @@ public:
         std::cin.tie(nullptr);
         
         int sum = 0, n = mat.size();
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
-                sum += (i == j || i + j == n - 1) ? mat[i][j] : 0;
-            };
-        };
-        return sum;
+        for (int i = 0; i < n; i++)
+            sum += mat[i][i] + mat[i][n - i - 1];
+        return n % 2 ? sum - mat[n/2][n/2]: sum;
     };
 };

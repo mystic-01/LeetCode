@@ -4,8 +4,8 @@ public:
         std::ios::sync_with_stdio(false);
         std::cin.tie(nullptr);
         
-        if (!l1) return l2;
-        else if (!l2) return l1;
+//         if (!l1) return l2;
+//         else if (!l2) return l1;
 
         ListNode * result = new ListNode(69), * temp = result;
         

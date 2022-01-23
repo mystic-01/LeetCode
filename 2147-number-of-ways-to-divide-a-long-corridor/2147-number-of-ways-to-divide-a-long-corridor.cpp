@@ -2,26 +2,26 @@ class Solution {
 public:
     // SPPSSSSPPS
     int numberOfWays(string corridor) {
-        unordered_map<char, int> m, realCount;
-        long long int plantCount = 1;
-        int curr = 0, mod = 1000000007;
+        int curr = 0, seats = 0, plants = 0;
+        long long int total = 1;
+        
         for (auto i : corridor) {
-            if (m['S'] == 2) {
-                if (i == 'P') curr = (curr + 1) % mod;
+            if (curr == 2) {
+                if (i == 'P') plants = (plants + 1) % 1000000007;
                 else {
-                    m['S'] = 0;
-                    plantCount = (plantCount * (curr + 1)) % mod;
-                    curr = 0;
+                    total = (total * (plants + 1)) % 1000000007;
+                    curr = plants = 0;
                 };
             }; 
-            m[i]++;
-            realCount[i]++;
+            if (i == 'S') {
+                curr++;
+                seats++;
+            };
         };
         
-        // if (realCount['S'] == 2) return 1;
-        if (realCount['S'] < 2 || realCount['S'] % 2 != 0 ) return 0;
+        if (seats < 2 || seats % 2 != 0 ) return 0;
         
-        return (int)plantCount;
+        return (int) total;
         
     };
 };

@@ -18,7 +18,7 @@ public:
             realCount[i]++;
         };
         
-        if (realCount['S'] == 2) return 1;
+        // if (realCount['S'] == 2) return 1;
         if (realCount['S'] < 2 || realCount['S'] % 2 != 0 ) return 0;
         
         return (int)plantCount;

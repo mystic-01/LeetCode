@@ -6,7 +6,7 @@ public:
         
         for (auto i : corridor) {
             if (curr == 2) {
-                if (i == 'P') plants = (plants + 1);
+                if (i == 'P') plants++;
                 else {
                     total = (total * (plants + 1)) % 1000000007;
                     curr = plants = 0;

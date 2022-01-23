@@ -6,7 +6,7 @@ public:
         m[sum]++;
         for (auto i : nums) {
             sum += i;
-            if (m.find(sum - k) != m.end()) count += m[sum - k];
+            count += m[sum - k];
             m[sum]++;  
         }; 
         return count;

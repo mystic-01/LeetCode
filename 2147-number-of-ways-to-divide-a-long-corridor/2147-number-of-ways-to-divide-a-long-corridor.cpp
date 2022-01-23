@@ -17,10 +17,7 @@ public:
                 seats++;
             };
         };
-        
-        if (seats < 2 || seats % 2 != 0 ) return 0;
-        
-        return (int) total;
+        return seats < 2 || seats % 2 != 0 ? 0 : (int) total;
         
     };
 };

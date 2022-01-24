@@ -20,22 +20,23 @@
 class Solution {
 public:
     int maximumUniqueSubarray(vector<int>& nums) {
-        unordered_map<int, int> m;
-        unordered_map<int, int> sums;
-        int n = nums.size(), best = 0, left = 0, prefixSum = 0;
+        
+        unordered_map<int, int> prefix;
+        
+        int n = nums.size(), best = 0, left = 0, sum = 0;
         int sumToBeRemoved = 0;
 
         for (auto right = 0; right < n; right++) {
-            if (m.find(nums[right]) != m.end()) {
-                sumToBeRemoved = max(m[nums[right]], sums[nums[right]]);
-                while (left < n && nums[left] != nums[right]) m.erase(nums[left++]);
-                ++left;
+            if (prefix.find(nums[right]) != prefix.end()) {
+                
+                sumToBeRemoved = prefix[nums[right]];
+                while (left < n && nums[left] != nums[right]) prefix.erase(nums[left++]);
+                left++;
+            
             };
-            prefixSum += nums[right];
-            sums[nums[right]] = prefixSum;
-            m[nums[right]] = prefixSum - sumToBeRemoved;
-
-            best = max(best, m[nums[right]]);
+            sum += nums[right];
+            prefix[nums[right]] = sum;
+            best = max(best, sum - sumToBeRemoved);
         };
         return best;
     };

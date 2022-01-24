@@ -10,7 +10,6 @@ public:
         for (auto j = 0; j < n; j++) {
             m[s[j]]++;
             if (m.find(s[j])->second >= 2) {
-                cout << "OK";
                 best = max(best, count);
                 while (i < n && s[i] != s[j]) m[s[i++]]--;
                 m[s[i++]]--;
@@ -19,7 +18,6 @@ public:
             count++;
         };  
         best = max(best, count);
-
         return best;
     };
 };

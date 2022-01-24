@@ -25,8 +25,8 @@
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
-        // std::ios::sync_with_stdio(false);
-        // std::cin.tie(nullptr);        
+        std::ios::sync_with_stdio(false);
+        std::cin.tie(nullptr);        
         
         int n = s.length(), best = 0, left = 0;
         unordered_map<char, int> m;

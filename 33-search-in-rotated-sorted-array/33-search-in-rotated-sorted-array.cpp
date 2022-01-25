@@ -35,15 +35,22 @@ public:
         
         while (lo <= hi) {
             int mid = lo + (hi - lo) / 2;
-            if (nums[mid] == target) return mid;
-
-            if (nums[lo] <= nums[mid]) {
+            if (nums[mid] == target) {
+                return mid;
+            // If left half is sorted.
+            } else if (nums[lo] <= nums[mid]) {
+                
+                // If target lies in this half.
                 if (nums[lo] <= target && target < nums[mid]) {
                     hi = mid - 1;
                 } else {
                     lo = mid + 1;
                 };
+                
+            // If right half is sorted.                
             } else {
+                
+               // If target lies in this half.
                 if (nums[mid] < target && target <= nums[hi]) {
                     lo = mid + 1;
                 } else {

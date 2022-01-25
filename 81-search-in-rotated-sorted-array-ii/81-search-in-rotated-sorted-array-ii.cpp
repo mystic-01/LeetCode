@@ -6,8 +6,9 @@ public:
             int mid = lo + (hi - lo) / 2;
             if (nums[mid] == target) {
                 return 1;
-            } else if (nums[lo] == nums[hi] && lo != hi) {
-                hi--;
+            } else if (nums[lo] == nums[mid] && lo != hi) {
+                lo++;
+                if (nums[mid] == nums[hi]) hi--;
             } else if (nums[lo] <= nums[mid]) {
                 if (nums[lo] <= target && target < nums[mid]) hi = mid - 1;
                 else lo = mid + 1;

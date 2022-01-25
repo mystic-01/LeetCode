@@ -7,8 +7,7 @@ public:
         for (; i < nums.size(); i++) {
             if (i >= k) {
                 ans.push_back(m.rbegin() ->first);
-                if (m[nums[i - k]] == 1) m.erase(nums[i - k]);
-                else m[nums[i - k]]--;
+                if (--m[nums[i - k]] == 0) m.erase(nums[i - k]);
             };
             m[nums[i]]++;
         };

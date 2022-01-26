@@ -1,18 +1,18 @@
 class Solution {
 public:
-    int minCost(vector<int>& startPos, vector<int>& homePos, vector<int>& rowCosts, vector<int>& colCosts) {
-        int cost = 0, startRow = startPos[0], startCol = startPos[1], homeRow = homePos[0], homeCol = homePos[1];
+    int minCost(vector<int>& start, vector<int>& home, vector<int>& rowCosts, vector<int>& colCosts) {
+        int cost = 0;
         
-        if (startRow > homeRow) {
-            for (int i = homeRow; i < startRow; i++) cost += rowCosts[i];                
+        if (start[0] > home[0]) {
+            for (int i = home[0]; i < start[0]; i++) cost += rowCosts[i];                
         } else {
-            for (int i = startRow; i < homeRow; i++) cost += rowCosts[i + 1];                
+            for (int i = start[0]; i < home[0]; i++) cost += rowCosts[i + 1];                
         };
         
-        if (startCol > homeCol) {
-            for (int i = homeCol; i < startCol; i++) cost += colCosts[i];                
+        if (start[1] > home[1]) {
+            for (int i = home[1]; i < start[1]; i++) cost += colCosts[i];                
         } else {
-            for (int i = startCol; i < homeCol; i++) cost += colCosts[i + 1];                
+            for (int i = start[1]; i < home[1]; i++) cost += colCosts[i + 1];                
         };
         return cost;
     };

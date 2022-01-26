@@ -11,7 +11,6 @@ public:
         int m = grid.size() - 1, n = grid[0].size() - 1, count = 0;
                                           
         vector<vector<int>> dp(m + 1, vector<int>(n + 1, - 1));
-        countPathSum(0, 0, m, n, dp, grid);
-        return dp[0][0];
+        return countPathSum(0, 0, m, n, dp, grid);
     };
 };

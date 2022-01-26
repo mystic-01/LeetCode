@@ -10,8 +10,11 @@ public:
             m[sum % k]++;
         };
         for (int i = 0; i < n; i++) {
-            if ((v[i] == 0) && (i != 0)) return 1;
-            if (i < n - 2 && m[v[i]] > 1 && find(v.begin() + i + 2, v.end(), v[i]) != v.end()) return 1;
+            if (i >= 1) m[v[i - 1]]--;
+            
+            if (v[i] == 0 && i != 0) return 1;
+            if (i + 1 < n && v[i] != v[i+1] && m[v[i]] > 1) return 1;
+            if (i + 1 < n && v[i] == v[i+1] && m[v[i]] > 2) return 1;
         };
         return 0;
     };

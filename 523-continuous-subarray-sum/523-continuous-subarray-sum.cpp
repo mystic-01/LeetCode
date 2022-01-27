@@ -7,12 +7,12 @@ public:
         for (auto &i : v) {
             sum += i;
             i = (sum % k);
-            m[sum % k]++;
+            m[i]++;
         };
         for (int i = 0; i < n; i++) {
-            if (i >= 1) m[v[i - 1]]--;
+            if (i > 0) m[v[i - 1]]--;
             
-            if (v[i] == 0 && i != 0) return 1;
+            if (v[i] == 0 && i > 0) return 1;
             if (i + 1 < n && v[i] != v[i+1] && m[v[i]] > 1) return 1;
             if (i + 1 < n && v[i] == v[i+1] && m[v[i]] > 2) return 1;
         };

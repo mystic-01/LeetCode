@@ -14,11 +14,14 @@
 //     };
 // };
 
+
+// ---> Slower
+
 class Solution {
 public:
     int numberOfSubstrings(string s) {
         int n = s.size(), count = 0, left = 0;
-        map<char, int> m;
+        unordered_map<char, int> m;
         for (auto i = 0; i < s.length(); i++) {
             m[s[i]]++;
             while (m['a'] > 0 && m['b'] > 0 && m['c'] > 0) {

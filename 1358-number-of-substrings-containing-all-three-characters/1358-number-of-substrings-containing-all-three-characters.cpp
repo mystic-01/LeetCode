@@ -13,22 +13,3 @@ public:
         return count;
     };
 };
-
-
-// ---> Slower when done using map.
-
-// class Solution {
-// public:
-//     int numberOfSubstrings(string s) {
-//         int n = s.size(), count = 0, left = 0;
-//         unordered_map<char, int> m;
-//         for (auto i = 0; i < s.length(); i++) {
-//             m[s[i]]++;
-//             while (m['a'] > 0 && m['b'] > 0 && m['c'] > 0) {
-//                 count += (n - i);
-//                 m[s[left++]]--;
-//             };
-//         };
-//         return count;
-//     };
-// };

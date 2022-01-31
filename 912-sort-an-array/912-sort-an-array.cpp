@@ -25,8 +25,9 @@ public:
     };
     
     vector<int> sortArray(vector<int>& nums) {
-        int n = nums.size(), temp[n]; 
-        mergeSort(0, n - 1, nums, temp);        
+        // int n = nums.size(), temp[n]; 
+        // mergeSort(0, n - 1, nums, temp);   
+        sort(nums.begin(),nums.end());
         return nums;
     };
 };

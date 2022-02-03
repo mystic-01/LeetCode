@@ -1,6 +1,6 @@
 class Solution {
 public:
-    void permutator(int idx, vector<int>nums, int n, vector<vector<int>>&ans, unordered_map<int,int>m,vector<int>ds) {
+    void permutator(vector<int>nums, int n, vector<vector<int>>&ans, unordered_map<int,int>m,vector<int>ds) {
         if (ds.size() == n) {
             ans.push_back(ds);
             return;
@@ -9,7 +9,7 @@ public:
             if (m[nums[i]] == 1) continue;
             ds.push_back(nums[i]);
             m[nums[i]]++;
-            permutator(0, nums, n, ans, m, ds);
+            permutator(nums, n, ans, m, ds);
             ds.pop_back();
             m[nums[i]]--;
         };
@@ -20,7 +20,7 @@ public:
         unordered_map<int, int> m;
         vector<vector<int>> ans;
         vector<int> ds;
-        permutator(0, nums, nums.size(), ans, m, ds);    
+        permutator(nums, nums.size(), ans, m, ds);    
         return ans;
     };
 };

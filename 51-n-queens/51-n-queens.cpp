@@ -10,14 +10,12 @@ public:
         for (auto row = 0; row < n; row++) {
             if (!mRow[row] && !mUpperDiagonal[col - row] && !mLowerDiagonal[col + row]) {
                 board[row][col] = 'Q';
-                mRow[row]++;
-                mUpperDiagonal[col - row]++;
-                mLowerDiagonal[col + row]++;
+                mRow[row] = mUpperDiagonal[col - row] = mLowerDiagonal[col + row] = 1;
+                
                 recurseNQueens(col + 1, n, board, ans, mRow, mUpperDiagonal, mLowerDiagonal);
+                
                 board[row][col] = '.';
-                mRow[row]--;
-                mUpperDiagonal[col - row]--;
-                mLowerDiagonal[col + row]--;                
+                mRow[row] = mUpperDiagonal[col - row] = mLowerDiagonal[col + row] = 0;
             };            
         };
     };

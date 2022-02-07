@@ -1,18 +1,46 @@
+// class Solution {
+// public:
+    
+//     void nQueens(int col, int n, vector<vector<string>>& ans, vector<string> board, 
+//     unordered_map<int, int> mRow, unordered_map<int, int> mUpperDiagonal, unordered_map<int, int> mLowerDiagonal) {
+//         if (col == n) {
+//             ans.push_back(board); return; 
+//         };
+//         for (auto row = 0; row < n; row++) {
+//             if (!mRow[row] && !mLowerDiagonal[col + row] && !mUpperDiagonal[col - row]) {
+//                 board[row][col] = 'Q';
+//                 mRow[row] = mLowerDiagonal[col + row] = mUpperDiagonal[col - row] = 1;
+//                 nQueens(col + 1, n, ans, board, mRow, mUpperDiagonal, mLowerDiagonal);
+//                 board[row][col] = '.';
+//                 mRow[row] = mLowerDiagonal[col + row] = mUpperDiagonal[col - row] = 0;
+//             };            
+//         };
+//     };
+
+    
+//     vector<vector<string>> solveNQueens(int n) {
+//         vector<vector<string>> ans;
+//         vector<string> board(n, string(n, '.'));
+//         unordered_map<int, int> mRow, mUpperDiagonal, mLowerDiagonal;
+//         nQueens(0, n, ans, board, mRow, mUpperDiagonal, mLowerDiagonal);
+//         return ans;
+//     };
+// };
+
 class Solution {
 public:
     
-    void nQueens(int col, int n, vector<vector<string>>& ans, vector<string> board, 
-    unordered_map<int, int> mRow, unordered_map<int, int> mUpperDiagonal, unordered_map<int, int> mLowerDiagonal) {
+    void nQueens(int col, int n, vector<vector<string>>& ans, vector<string> board, vector<int> v) {
         if (col == n) {
             ans.push_back(board); return; 
         };
         for (auto row = 0; row < n; row++) {
-            if (!mRow[row] && !mLowerDiagonal[col + row] && !mUpperDiagonal[col - row]) {
+            if (!v[row] && !v[n + col + row] && !v[4 * n + col - row]) {
                 board[row][col] = 'Q';
-                mRow[row] = mLowerDiagonal[col + row] = mUpperDiagonal[col - row] = 1;
-                nQueens(col + 1, n, ans, board, mRow, mUpperDiagonal, mLowerDiagonal);
+                v[row] = v[n + col + row] = v[4 * n + col - row] = 1;
+                nQueens(col + 1, n, ans, board, v);
                 board[row][col] = '.';
-                mRow[row] = mLowerDiagonal[col + row] = mUpperDiagonal[col - row] = 0;
+                v[row] = v[n + col + row] = v[4 * n + col - row] = 0;
             };            
         };
     };
@@ -21,8 +49,8 @@ public:
     vector<vector<string>> solveNQueens(int n) {
         vector<vector<string>> ans;
         vector<string> board(n, string(n, '.'));
-        unordered_map<int, int> mRow, mUpperDiagonal, mLowerDiagonal;
-        nQueens(0, n, ans, board, mRow, mUpperDiagonal, mLowerDiagonal);
+        vector<int> v(5 * n, 0);
+        nQueens(0, n, ans, board, v);
         return ans;
     };
 };

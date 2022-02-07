@@ -10,14 +10,14 @@ public:
         return 1;
     };
     
-    bool solve(vector<vector<char>> & board, int n, int row, int col) {
-        for (auto i = row; i < n; i++)  {
-            for (auto j = col; j < n; j++) {
+    bool solve(vector<vector<char>> & board, int n) {
+        for (auto i = 0; i < n; i++)  {
+            for (auto j = 0; j < n; j++) {
                 if (board[i][j] == '.') {
                     for (auto c = '1'; c <= '9'; c++) {
                         if (isValid(c, i, j, board, n)) {
                             board[i][j] = c;
-                            if (solve(board, n, row, col)) return true;
+                            if (solve(board, n)) return true;
                             board[i][j] = '.'; }; 
                     }; 
                     return false;
@@ -28,6 +28,6 @@ public:
     };
     
     void solveSudoku(vector<vector<char>>& board) {
-        bool ans = solve(board, board.size(), 0 , 0);
+        bool ans = solve(board, board.size());        
     };
 };

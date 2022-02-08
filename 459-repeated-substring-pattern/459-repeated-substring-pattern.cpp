@@ -16,6 +16,7 @@ public:
             for (auto j = i; j <= n - i; j += i) {
                if (s.substr(0, i) != s.substr(j, i)) {
                    flag = 0;
+                   break;
                };
             };
             if (flag) return n - 1;

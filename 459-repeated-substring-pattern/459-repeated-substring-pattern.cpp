@@ -30,12 +30,7 @@ public:
         };
         flag = 1;
         test = s.substr(0, 1);
-        for (auto j = 1; j <= n - 1; j += 1) {
-           if (test != s.substr(j, 1)) {
-               flag = 0;
-               break;
-           };
-        };
+        for (auto j = 1; j <= n - 1; j += 1) if (test != s.substr(j, 1)) flag = 0;
         if (flag) return n - 1;
         return 0;
     };

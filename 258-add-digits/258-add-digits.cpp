@@ -8,7 +8,7 @@ public:
                 ans += num % 10;
                 num /= 10;
             };
-            if (ans < 10) break;
+            if (ans < 10) return ans;
             num = ans;
         };
         return ans;

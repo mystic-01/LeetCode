@@ -13,11 +13,9 @@ public:
 
         for (auto i : factors) {
             bool flag = 1;
-            string test = s.substr(0, i);
             for (auto j = i; j <= n - i; j += i) {
-               if (test != s.substr(j, i)) {
+               if (s.substr(0, i) != s.substr(j, i)) {
                    flag = 0;
-                   break;
                };
             };
             if (flag) return n - 1;

@@ -8,14 +8,12 @@ public:
                 odd++;
                 if (right == -1) right = i;
             };            
-            
             if (odd > k) {
                 left = right;
-                right++;
-                while (right < n && nums[right] % 2 == 0) right++;
+                while (++right < n && nums[right] % 2 == 0);
                 odd--;
-            };
-            if (odd == k) count += right - left;
+                count += right - left;
+            } else if (odd == k) count += right - left;
         };
         return count;
     };

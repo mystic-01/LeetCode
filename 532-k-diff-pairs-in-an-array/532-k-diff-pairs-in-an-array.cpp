@@ -7,16 +7,9 @@ public:
         for (auto i : nums) m[i]++;            
         
         if (k != 0) {
-            for (auto i : m) {
-                if (m.find(i.first - k) != m.end() && m[i.first - k]) count++;
-                if (m.find(i.first + k) != m.end() && m[i.first + k]) count++;
-                m[i.first] = 0;
-            };
+            for (auto i : m) if (m.find(i.first + k) != m.end()) count++;
         } else {
-            for (auto i : m) {
-                if (m[i.first] > 1) count++;                
-                m[i.first] = 0;
-            };
+            for (auto i : m) if (m[i.first] > 1) count++;                
         };
         return count;
     };

@@ -5,14 +5,16 @@ public:
 
         vector<int> left(n + 1, 0), right(n + 1, 0);
         
-        for (auto i = 1; i < n + 1; i++) {
+        int i = 1, j = n - 1;
+        while (i <= k) {
             left[i] += (left[i - 1] + nums[i - 1]);           
-            right[n - i] += (right[n + 1 - i] + nums[n - i]);           
+            right[j] += (right[j + 1] + nums[j]);
+            i++, j--;
         };
        
-        int  lo = k, hi = n;
-        while (lo >= 0) {
-            count = left[lo--] + right[hi--];
+        i = k, j = n;
+        while (i >= 0) {
+            count = left[i--] + right[j--];
             best = max(best, count);
         };
         return best;

@@ -1,21 +1,15 @@
 class Solution {
 public:
     int maxScore(vector<int>& nums, int k) {        
-        int n = nums.size(), m = n + 1, count = 0, best = 0;
+        int n = nums.size(), lSum = 0, rSum = 0, best = 0;
 
-        vector<int> left(k + 1, 0), right(k + 1, 0);
-        
-        int i = 1, j = k - 1;
-        while (i <= k) {
-            left[i] += (left[i - 1] + nums[i - 1]);           
-            right[j] += (right[j + 1] + nums[n - i]);
-            i++, j--;
-        };
-       
-        i = 0;
-        while (i <= k) {
-            count = left[i] + right[i]; i++;
-            best = max(best, count);
+        for (int i = 0; i < k; i++) lSum += nums[i];
+
+        best = lSum;
+        for (int i = 0; i < k; i++) {
+            rSum += nums[n - i - 1];
+            lSum -= nums[k - i - 1];
+            best = max(best, lSum + rSum);
         };
         return best;
     };

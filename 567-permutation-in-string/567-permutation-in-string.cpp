@@ -1,6 +1,7 @@
 class Solution {
 public:
     bool checkInclusion(string s1, string s2) {
+        // window mein count 0 toh true else false.
         int v[26] = {0}, n1 = s1.length(), n2 = s2.length();
         for (auto i : s1) v[i - 'a']++;
         

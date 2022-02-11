@@ -19,6 +19,7 @@ public:
 };
 */
 
+// Solution using O(26) space & O(n) + O (26) time.
 class Solution {
 public:
     int minDeletions(string s) {

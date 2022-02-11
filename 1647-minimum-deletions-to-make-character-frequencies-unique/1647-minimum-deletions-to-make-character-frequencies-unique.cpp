@@ -1,3 +1,6 @@
+
+/*
+// Solution using 2 * O(26) space & O(n) + O (26 * 26) time.
 class Solution {
 public:
     int minDeletions(string s) {
@@ -14,3 +17,39 @@ public:
         return count;
     };
 };
+*/
+
+class Solution {
+public:
+    int minDeletions(string s) {
+        vector<int> v(26, 0);
+
+        for (auto i : s) v[i - 'a']++;
+        sort(v.begin(), v.end(), greater<int>());
+        
+        int count = 0, prev = v[0] + 1; 
+        for (auto i = 0; i < 26; i++) {
+            if (!v[i] || !prev) break;
+            
+            prev = min(v[i], prev - 1);
+            count += prev;
+        };
+        return s.length() - count;
+    };
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

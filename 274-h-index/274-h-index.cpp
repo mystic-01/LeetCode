@@ -12,9 +12,7 @@ public:
             } else if (nums[mid] < n - mid) {
                 lo = mid + 1;
                 h = max(h, nums[mid]);
-            } else {
-                return nums[mid];
-            };            
+            } else return nums[mid];
         };
         return h;
     };

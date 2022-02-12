@@ -1,10 +1,11 @@
 class Solution {
 public:
     int maxFreqOfSmallestchar (string s) {
-        vector<int> v(26);
-        for (auto i : s) v[i - 'a']++;                        
-        for (auto i : v) if (i) return i;
-        return 0;
+        int count = 0;
+        char small = 'z';
+        for (auto i : s) if (i < small) small = i;                        
+        for (auto i : s) if (i == small) count++;
+        return count;
     };
     
     vector<int> numSmallerByFrequency(vector<string>& queries, vector<string>& words) {

@@ -16,7 +16,7 @@ public:
                     };
                 };
             };
-            if (curr) curr += (x + 1);
+            curr += curr ? (x + 1) : 0;
             sum += curr;
         };
         return sum;

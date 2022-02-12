@@ -1,12 +1,20 @@
 class Solution {
 public:
     int hIndex(vector<int>& nums) {
-        int n = nums.size(), curr = 0, h = 0;
+        int n = nums.size(), h = 0, lo = 0, hi = n - 1;
         sort(nums.begin(), nums.end());
         
-        for (auto i = 0; i < n; i++) {
-            curr = min(nums[i], n - i);
-            h = max(curr, h);
+        while(lo <= hi) {
+            int mid = lo + (hi - lo) / 2;
+            if (nums[mid] > n - mid) {
+                hi = mid - 1;
+                h = max(h, n - mid);
+            } else if (nums[mid] < n - mid) {
+                lo = mid + 1;
+                h = max(h, nums[mid]);
+            } else {
+                return nums[mid];
+            };            
         };
         return h;
     };

@@ -19,6 +19,6 @@ public:
             best = max(best, count);
             prev = curr;
         };
-        return max(++best, 1);
+        return ++best;
     };
 };

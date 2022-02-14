@@ -30,7 +30,12 @@ public:
             maxFreq = max(++v[s[i] - 'A'], maxFreq);
             len = i - left + 1;
 
-            if (len - maxFreq > k && left < n) v[s[left++] - 'A']--;
+            while (len - maxFreq > k && left < n) {
+                v[s[left++] - 'A']--;
+                maxFreq = *max_element(v.begin(), v.end());
+                len = i - left + 1; 
+            };
+            cout << i - left + 1 << " ";
             best = max(best, i - left + 1);
         };
         return best;

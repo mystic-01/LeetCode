@@ -7,6 +7,6 @@ public:
             if (i >= k) sum -= nums[i - k];
             if (i >= k - 1) best = max(best, sum);
         };
-        return (double) best / k;
+        return (double)best / k;
     };
 };

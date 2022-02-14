@@ -3,6 +3,7 @@ public:
     int minOperations(vector<int>& nums, int x) {
         int n = nums.size(), sum = 0, totalSum = 0, left = 0, best = INT_MIN;
         for (auto i = 0; i < n; i++) totalSum += nums[i];            
+        
         int k = totalSum - x;
         if (x > totalSum) return -1; 
         for (auto i = 0; i < n; i++) {

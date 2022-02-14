@@ -13,9 +13,7 @@ class Solution {
 public:
     int preOrder(TreeNode* root, int count) {
         if (root == nullptr) return count;
-        int x = preOrder(root->left, count + 1);
-        int y = preOrder(root->right, count + 1);
-        return max(x, y);
+        return max(preOrder(root->left, count + 1), preOrder(root->right, count + 1));
     };
     
     int maxDepth(TreeNode* root) {

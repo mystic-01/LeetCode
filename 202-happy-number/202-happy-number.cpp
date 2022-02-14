@@ -1,7 +1,7 @@
 class Solution {
 public:
     bool isHappy(int n) {
-        unordered_map<int, int> m;
+        unordered_set<int> s;
         while (true) {
             if (n == 1) return 1;
             int num = 0;
@@ -10,7 +10,7 @@ public:
                 n /= 10;
             };
             n = num;
-            if (++m[num] > 1) return 0;
+            if (s.insert(num).second == 0) return 0;
         };
         return 0;
     };

@@ -24,38 +24,17 @@ class Solution {
 public:
     int characterReplacement(string s, int k) {
         int n = s.length(), left = 0, maxCount = 0, charWithMaxFreq = 0, len = 0, best = 0;
-        unordered_map<int, int> m;
+        vector<int> v(26, 0);
         for (auto i = 0; i < n; i++) {
-            maxCount = max(++m[s[i]], maxCount);
+            maxCount = max(++v[s[i] - 'A'], maxCount);
             len = i - left + 1;
             
             if (len - maxCount > k && left < n) {
-                m[s[left++]]--;
+                v[s[left++] - 'A']--;
                 len = i - left + 1;                                
             };
-            cout << i - left + 1 << " ";
             best = max(best, i - left + 1);
         };
         return best;
     };
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

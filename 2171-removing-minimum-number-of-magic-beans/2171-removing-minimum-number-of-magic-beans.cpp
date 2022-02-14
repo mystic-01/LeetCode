@@ -1,16 +1,12 @@
 class Solution {
 public:
     long long minimumRemoval(vector<int>& nums) {
-        int n = nums.size();
-        long long totalSum = 0, curr = LLONG_MAX, best = LLONG_MAX;
+        long long n = nums.size(), totalSum = 0, maxBeansLeft = 0;
         sort(nums.begin(), nums.end());
         
         for (auto i : nums) totalSum += i;
  
-        for (auto i = 0; i < n; i++) {
-            curr = totalSum - ((long long)nums[i] * (n - i));
-            best = min(best, curr);
-        };
-        return best;   
+        for (auto i = 0; i < n; i++) maxBeansLeft = max(maxBeansLeft, nums[i] * (n - i));
+        return totalSum - maxBeansLeft;   
     };
 };

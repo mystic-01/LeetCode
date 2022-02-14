@@ -29,7 +29,7 @@ public:
             maxCount = max(++m[s[i]], maxCount);
             len = i - left + 1;
             
-            while (len - maxCount > k && left < n) {
+            if (len - maxCount > k && left < n) {
                 m[s[left++]]--;
                 len = i - left + 1;                                
             };

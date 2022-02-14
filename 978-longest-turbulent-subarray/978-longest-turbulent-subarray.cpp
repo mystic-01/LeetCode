@@ -12,10 +12,8 @@ public:
                 if (curr > 0) count++;
             } else if (prev == 0) {
                 count = 1;
-                if (curr == 0) {
-                    count = 0;
-                };
             };
+            if (curr == 0) count = 0;
             best = max(best, count);
             prev = curr;
         };

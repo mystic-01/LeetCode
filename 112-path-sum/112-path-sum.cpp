@@ -11,16 +11,9 @@
  */
 class Solution {
 public:
-    bool preOrder(TreeNode* root, int target) {
+    bool hasPathSum(TreeNode* root, int target) {
         if (!root) return 0;
-        if (root && !root->left && !root->right) {
-            return target == root->val ? 1 : 0;
-        };
-        return preOrder(root->left, target - root->val) || preOrder(root->right, target - root->val); 
-    };
-    
-    bool hasPathSum(TreeNode* root, int targetSum) {
-        if (!root) return 0;
-        return preOrder(root, targetSum);
+        if (root && !root->left && !root->right) return target - root->val == 0 ? 1 : 0;
+        return hasPathSum(root->left, target - root->val) || hasPathSum(root->right, target - root->val); 
     };
 };

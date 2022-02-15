@@ -13,9 +13,7 @@ public:
                 curr = "";
             };
         };
-        if (curr.length()) {
-            if (++m[curr] > maxCount) ans = curr;
-        };
+        if (curr.length() && ++m[curr] > maxCount) ans = curr;
         return ans;
     };
 };

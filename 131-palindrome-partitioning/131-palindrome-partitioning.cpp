@@ -13,14 +13,13 @@ public:
         if(idx == n) ans.push_back(ds);
         
         for (auto i = idx; i < n; i++) {
-            string curr = s.substr(idx, i - idx + 1);
-            int k = 0, j = curr.length() - 1, flag = 1;
+            int k = idx, j = i, flag = 1;
             while (k < j) {
-                if (curr[k] != curr[j]) flag = 0;
+                if (s[k] != s[j]) flag = 0;
                 k++, j--;
             };
             if (flag) {
-                ds.push_back(curr);
+                ds.push_back(s.substr(idx, i - idx + 1));
                 solve(i + 1, s, n, ans, ds);
                 ds.pop_back();
             };            

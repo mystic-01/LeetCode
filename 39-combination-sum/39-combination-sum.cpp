@@ -1,9 +1,12 @@
 class Solution {
 public:
     void solve(int idx, vector<int> nums, int n, int target, vector<vector<int>>& ans, vector<int> ds) {
+        if (target == 0) {
+                ans.push_back(ds);
+                return;
+            };
         if (idx == n) {
-            if (target == 0) ans.push_back(ds);
-            return;
+                return;
         };
         
         if (target - nums[idx] >= 0) {

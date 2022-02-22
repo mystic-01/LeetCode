@@ -44,9 +44,8 @@ public:
         
         currPrev->next = currNext;
         currNext->prev = currPrev;
-        // Add after head part.
+
         Node* temp = head->next;
-        
         head->next = curr;
         temp->prev = curr;
         curr->prev = head;
@@ -56,9 +55,8 @@ public:
     int get(int key) {
         if (m.find(key) != m.end()) {
             int res = m[key]->val;
-            // deleteNode(m[key]);
-            // addNode(key, res);
-            replacePosition(m[key]);
+            deleteNode(m[key]);
+            addNode(key, res);
             m[key] = head->next;
             return res;
         };

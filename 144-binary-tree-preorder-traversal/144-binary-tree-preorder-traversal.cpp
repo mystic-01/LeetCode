@@ -8,8 +8,18 @@ public:
     };
     
     vector<int> preorderTraversal(TreeNode* root) {
+        // preOrder(root, ans);
+        if(!root) return {};
         vector<int> ans;
-        preOrder(root, ans);
+        stack<TreeNode*> s;
+        s.push(root);
+        while (!s.empty()) {
+            root = s.top();
+            s.pop();
+            if (root->right) s.push(root->right);
+            if (root->left) s.push(root->left);
+            ans.push_back(root->val);
+        };
         return ans;
     };
 };

@@ -29,9 +29,8 @@ public:
             ans.push_back(ds);
         };
         
-        // int i = 0, j = ans.size() - 1;
-        // while (i < j) swap(ans[i++], ans[j--]);
-        reverse(ans.begin(), ans.end());
+        int i = 0, j = ans.size() - 1;
+        while (i < j) swap(ans[i++], ans[j--]);
         return ans;
     };
 };

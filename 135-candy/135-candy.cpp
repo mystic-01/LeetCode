@@ -12,6 +12,7 @@ public:
             if (nums[i] > nums[i + 1]) candies[i] = max(candies[i], 1 + candies[i + 1]);
             ans += candies[i];
         };
+        
         ans += candies[n - 1];
         return ans;
     };

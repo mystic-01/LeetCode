@@ -11,12 +11,15 @@
  */
 class Solution {
 public:
-    int preOrder(TreeNode* root, int count) {
-        if (root == nullptr) return count;
-        return max(preOrder(root->left, count + 1), preOrder(root->right, count + 1));
+    int dfs(TreeNode* root) {
+        if (!root) return 0;
+        int lh = dfs(root->left);
+        int rh = dfs(root->right);
+        
+        return 1 + max(lh, rh);
     };
     
     int maxDepth(TreeNode* root) {
-      return preOrder(root, 0);
+      return dfs(root);
     };
 };

@@ -5,9 +5,9 @@ public:
         vector<int> candies(n, 1);
         int ans = 0;
         
-        for (int i = 1; i < n; i++) {
+        for (int i = 1; i < n; i++)
             if (nums[i] > nums[i - 1]) candies[i] = 1 + candies[i - 1];
-        };
+
         for (int i = n - 2; i >= 0; i--) {
             if (nums[i] > nums[i + 1]) candies[i] = max(candies[i], 1 + candies[i + 1]);
             ans += candies[i];

@@ -17,11 +17,10 @@ public:
                 };
                 
                 tbr = decodeString(tbr);
-                
                 while (size--) ans += tbr;
-            } else if (isalpha(s[i])) {
-                ans += s[i++];
-            } else i++;
+                
+            } else if (isalpha(s[i])) ans += s[i++];
+            else i++;
         };
         return ans;
     };

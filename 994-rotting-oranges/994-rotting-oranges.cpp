@@ -1,35 +1,46 @@
 class Solution {
 public:
-    int changeOrange(int value, int &flag) {
-        if (value == 1) {
-            flag = 1;
-            return 2;
-        } else {
-            return value;
-        }
-    };
     
     int orangesRotting(vector<vector<int>>& grid) {
-        int flag = 1, count = -1, n = grid.size(), m = grid[0].size();
-        while (flag) {
-            flag = 0;
-            count++;
-            vector<vector<int>> newGrid(grid);
-            for (auto i = 0; i < n; i++) {
-                for (auto j = 0; j < m; j++) {
-                    if (grid[i][j] == 2) {
-                        if (i > 0) newGrid[i - 1][j] = changeOrange(grid[i - 1][j], flag); 
-                        if (j > 0) newGrid[i][j - 1] = changeOrange(grid[i][j - 1], flag); 
-                        if (i < n - 1) newGrid[i + 1][j] = changeOrange(grid[i + 1][j], flag); 
-                        if (j < m - 1) newGrid[i][j + 1] = changeOrange(grid[i][j + 1], flag); 
-                    };
-                };            
+        int count = 0, time = 0, n = grid.size(), m = grid[0].size();
+        
+        queue<pair<int, int>> q;
+        
+        for (auto i = 0; i < n; i++) {
+            for (auto j = 0; j < m; j++) {
+                if (grid[i][j] == 1) count++;
+                if (grid[i][j] == 2) {
+                    q.push({i, j});
+                };
             };
-            swap(newGrid, grid);
         };
-        for (auto i = 0; i < n; i++)
-            for (auto j = 0; j < m; j++)
-                if(grid[i][j] == 1) return -1;
-        return count;
+        
+        if (!count) return 0;
+        
+        while (!q.empty() && count) {
+            int size = q.size();
+            for (auto it = 0; it < size; it++) {
+                int i = q.front().first, j = q.front().second;
+                if (i + 1 < n && grid[i + 1][j] == 1) {
+                    grid[i + 1][j] = 2, count--;
+                    q.push({i + 1, j});
+                };
+                if (i - 1 >= 0 && grid[i - 1][j] == 1) {
+                    grid[i - 1][j] = 2, count--;
+                    q.push({i - 1, j});
+                };
+                if (j + 1 < m && grid[i][j + 1] == 1) {
+                    grid[i][j + 1] = 2, count--;
+                    q.push({i, j + 1});
+                };
+                if (j - 1 >= 0 && grid[i][j - 1] == 1) {
+                    grid[i][j - 1] = 2, count--;
+                    q.push({i, j - 1});
+                };
+                q.pop();
+            };
+            time++;
+        };
+        return (count) ? -1 : time;
     };
 };

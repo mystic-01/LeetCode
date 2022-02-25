@@ -39,14 +39,18 @@ class Solution {
         while (i < n) {
             int j = arr[i].dead - 1;
             while (j >= 0 && v[j]) j--;
-            if (j >= 0 && v[j] == 0) v[j] = 1, profit += arr[i].profit, jobs++;
+            
+            if (j >= 0 && v[j] == 0) {
+                v[j] = 1, profit += arr[i].profit, jobs++;
+            };
             i++;
         }; 
-       
-    
         return {jobs, profit};
     }; 
 };
+// 0---1---2---3---4
+//   1  1   1    1
+
 
 // { Driver Code Starts.
 // Driver program to test methods 

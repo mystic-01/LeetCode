@@ -1,8 +1,8 @@
 class Solution {
 public:
     struct comp {
-        bool operator()(ListNode* l1, ListNode* l2) {
-            return l1->val > l2->val;            
+        bool operator()(ListNode* a, ListNode* b) {
+            return a->val > b->val;
         };
     };
     

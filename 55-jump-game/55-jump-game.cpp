@@ -28,8 +28,8 @@ public:
     bool canJump(vector<int>& nums) {
         int n = nums.size(), reach = 0;
         for (auto i = 0; i < n; i++) {
-            if (i == n - 1) return true;
             reach = max(reach, i + nums[i]);
+            if (i == n - 1 || reach == n - 1) return true;
             if (reach == i) return false;
         };
         return true;

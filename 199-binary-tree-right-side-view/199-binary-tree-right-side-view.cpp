@@ -1,4 +1,4 @@
-// Hey, future self. Hope you're not wasting your time. 
+// Hey, future self. Hope you're utilising your time on this planet well. 
 // So, are you smart enough to do this using dfs now?
 
 class Solution {

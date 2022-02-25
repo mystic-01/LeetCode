@@ -30,16 +30,9 @@ class Solution {
         
         sort(v, v + n, comp);
         for (auto i = 0; i < n; i++) {
-            if (bag >= v[i].weight) {
-                profit += double(v[i].value);
-                bag -= v[i].weight;
-                
-            } else {
-                profit += (double(v[i].value) * (double(bag) / v[i].weight));
-                break; 
-            };
-            
-            if (bag == 0) break;
+            profit += double(v[i].value) * min(1.0, double(bag) / v[i].weight);
+            bag -= v[i].weight;
+            if (bag <= 0) break;
         };
         
         return profit;

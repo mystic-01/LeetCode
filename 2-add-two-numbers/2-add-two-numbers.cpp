@@ -18,8 +18,13 @@ public:
             if (l1) sum += l1->val;
             if (l2) sum += l2->val;
             carry = sum / 10; 
-            ListNode* newNode = new ListNode(sum % 10);
-            temp = temp->next = newNode;
+            if (l1 && l1->next) {
+                l1->val = sum % 10;
+                temp = temp->next = l1;
+            } else {
+                ListNode* newNode = new ListNode(sum % 10);
+                temp = temp->next = newNode;
+            };
             
             if (l1) l1 = l1->next;
             if (l2) l2 = l2->next;

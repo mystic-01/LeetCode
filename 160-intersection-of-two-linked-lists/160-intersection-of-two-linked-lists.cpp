@@ -25,33 +25,46 @@
 //     };
 // };
 
+// class Solution {
+// public:
+//     // O(2n) Solution
+//     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+//         ListNode* tempA = headA, * tempB = headB;
+//         int a = 0, b = 0;
+//         while (tempA || tempB) {
+//             if (tempA) a++, tempA = tempA->next;
+//             if (tempB) b++, tempB = tempB->next;
+//         };
+//         tempA = headA, tempB = headB;
+//         int steps = abs(a - b);
+//         if (a > b) {
+//             while (steps--) tempA = tempA->next;
+//         } else {
+//             while (steps--) tempB = tempB->next;
+//         };
+//         while (tempA) {
+//             if (tempA == tempB) return tempA;
+//             tempA = tempA->next;
+//             tempB = tempB->next;
+//         };
+//         return tempA;
+//     };
+// };
+
+
 class Solution {
 public:
-    // O(2n) Solution
+    // O(n) Solution
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        unordered_set<ListNode*> s;
         ListNode* tempA = headA, * tempB = headB;
-        int a = 0, b = 0;
-        while (tempA || tempB) {
-            if (tempA) a++, tempA = tempA->next;
-            if (tempB) b++, tempB = tempB->next;
-        };
-        tempA = headA, tempB = headB;
-        int steps = abs(a - b);
-        if (a > b) {
-            while (steps--) tempA = tempA->next;
-        } else {
-            while (steps--) tempB = tempB->next;
-        };
-        while (tempA) {
+        while (tempA && tempB) {
             if (tempA == tempB) return tempA;
             tempA = tempA->next;
             tempB = tempB->next;
+            if (!tempA && !tempB) break;
+            else if (!tempA) tempA = headB;
+            else if (!tempB) tempB = headA;
         };
         return tempA;
     };
 };
-
-
-
-

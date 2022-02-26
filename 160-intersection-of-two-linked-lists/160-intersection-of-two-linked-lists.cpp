@@ -6,20 +6,54 @@
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
+// class Solution {
+// public:
+//     // HashSet Solution
+//     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+//         unordered_set<ListNode*> s;
+//         ListNode* temp = headA;
+//         while (temp) {
+//             s.insert(temp);
+//             temp = temp->next;
+//         };
+//         temp = headB;
+//         while (temp) {
+//             if (s.find(temp) != s.end()) return temp;
+//             temp = temp->next;
+//         };
+//         return temp;
+//     };
+// };
+
 class Solution {
 public:
+    // O(2n) Solution
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
         unordered_set<ListNode*> s;
-        ListNode* temp = headA;
-        while (temp) {
-            s.insert(temp);
-            temp = temp->next;
+        ListNode* tempA = headA, * tempB = headB;
+        int a = 0, b = 0;
+        while (tempA || tempB) {
+            if (tempA) a++, tempA = tempA->next;
+            if (tempB) b++, tempB = tempB->next;
         };
-        temp = headB;
-        while (temp) {
-            if (s.find(temp) != s.end()) return temp;
-            temp = temp->next;
+        tempA = headA;
+        tempB = headB;
+        if (a > b) {
+            int steps = a - b;
+            while (steps--) tempA = tempA->next;
+        } else {
+            int steps = b - a;
+            while (steps--) tempB = tempB->next;
         };
-        return temp;
+        while (tempA && tempB) {
+            if (tempA == tempB) return tempA;
+            tempA = tempA->next;
+            tempB = tempB->next;
+        };
+        return tempA;
     };
 };
+
+
+
+

@@ -36,16 +36,14 @@ public:
             if (tempA) a++, tempA = tempA->next;
             if (tempB) b++, tempB = tempB->next;
         };
-        tempA = headA;
-        tempB = headB;
+        tempA = headA, tempB = headB;
+        int steps = abs(a - b);
         if (a > b) {
-            int steps = a - b;
             while (steps--) tempA = tempA->next;
         } else {
-            int steps = b - a;
             while (steps--) tempB = tempB->next;
         };
-        while (tempA && tempB) {
+        while (tempA) {
             if (tempA == tempB) return tempA;
             tempA = tempA->next;
             tempB = tempB->next;

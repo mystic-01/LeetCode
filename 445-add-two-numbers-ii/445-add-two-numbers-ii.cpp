@@ -18,7 +18,7 @@ public:
         ListNode * headA = pairA.first, * headB = pairB.first;
         bool takeFirst = pairA.second > pairB.second;
         
-        ListNode* tempA = headA, * tempB = headB, * dummy = new ListNode(7), * d = dummy;
+        ListNode* tempA = headA, * tempB = headB;
         int carry = 0;
         if (takeFirst) {
             while (tempA) {

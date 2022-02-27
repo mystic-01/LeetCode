@@ -34,14 +34,11 @@ public:
             slow = slow->next;
             fast = fast->next->next;
         };
-        if (!fast) {
-            // Even list
-            dummySlow = slow;
-        } else {
-            // Odd list
-            dummySlow = slow;
-            slow = slow->next;
-        };
+        dummySlow = slow;
+        
+        // Odd list
+        if (fast) slow = slow->next;
+        
         fast = head;
         slow = reverse(slow);
         while (fast != dummySlow) {

@@ -16,17 +16,16 @@ public:
         queue<TreeNode*> q;
         q.push(root);
         
-        int globalNullptrs = 0;
+        int nullptrs = 0;
         while (!q.empty()) {
-            int size =  q.size(), nullptrs = 0;
+            int size =  q.size();
             for (auto i = 0; i < size; i++) {
                 if (q.front()) {
-                    if (globalNullptrs) return false;
+                    if (nullptrs) return false;
                     q.push(q.front()->left);  
                     q.push(q.front()->right);  
                 } else {
-                    // nullptrs++, 
-                    globalNullptrs++;
+                    nullptrs++;
                 };
                 q.pop();
             };

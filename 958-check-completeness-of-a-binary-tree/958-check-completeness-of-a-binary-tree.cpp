@@ -21,11 +21,12 @@ public:
             int size =  q.size(), nullptrs = 0;
             for (auto i = 0; i < size; i++) {
                 if (q.front()) {
-                    if (nullptrs || globalNullptrs) return false;
+                    if (globalNullptrs) return false;
                     q.push(q.front()->left);  
                     q.push(q.front()->right);  
                 } else {
-                    nullptrs++, globalNullptrs++;
+                    // nullptrs++, 
+                    globalNullptrs++;
                 };
                 q.pop();
             };

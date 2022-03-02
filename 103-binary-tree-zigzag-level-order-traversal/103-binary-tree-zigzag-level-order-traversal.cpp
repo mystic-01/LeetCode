@@ -17,18 +17,20 @@ public:
         queue<TreeNode*> q;
         q.push(root);
         bool isReverse = false;
+        int level = 0;
         while (!q.empty()) {
-            vector<int> ds;
             int size = q.size();
+            vector<int> ds(size);
             for (auto i = 0; i < size; i++) {
                 if (q.front()->left) q.push(q.front()->left);
                 if (q.front()->right) q.push(q.front()->right);
-                ds.push_back(q.front()->val);
+                
+                ds[level % 2 ? size - i - 1 : i] = (q.front()->val);
                 q.pop();
             };
-            if (isReverse) reverse(ds.begin(), ds.end());
             ans.push_back(ds);
             isReverse = !isReverse;
+            level++;
         };
         return ans;
     };

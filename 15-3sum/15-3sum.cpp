@@ -1,8 +1,6 @@
 class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
-        std::ios::sync_with_stdio(false);
-        std::cin.tie(nullptr);
         sort(nums.begin(), nums.end());
         vector<vector<int>> threesome;
         

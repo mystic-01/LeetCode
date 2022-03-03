@@ -17,8 +17,7 @@ public:
         int lh = dfs(root->left, depth + 1);
         int rh = dfs(root->right, depth + 1);
         
-        if (lh == -1 || rh == -1) return -1; 
-        if (abs(lh - rh) > 1) return -1;
+        if (lh == -1 || rh == -1 || abs(lh - rh) > 1) return -1;
         return max(lh, rh);
     };
     

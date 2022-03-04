@@ -9,6 +9,7 @@ public:
         while (!q.empty()) {
             int size = q.size();
             int left = q.front().second, right = q.back().second;
+            width = max(width, right - left + 1);
             
             for (auto i = 0; i < size; i++) {
                 TreeNode *front = q.front().first;
@@ -18,11 +19,7 @@ public:
                 if (front->right) q.push({front->right, (long long)2 * idx + 2}); 
                 q.pop();
             };
-            width = max(width, right - left + 1);
         };
         return width;
     };
 };
-
-// [1,3,2,5,null,null,9,6,null,null,7]
-// [1,1,1,1,1,1,1,null,null,null,1,null,null,null,null,2,2,2,2,2,2,2,null,2,null,null,2,null,2]

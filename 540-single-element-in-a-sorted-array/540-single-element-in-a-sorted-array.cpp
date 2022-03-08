@@ -6,11 +6,11 @@ public:
             int mid = lo + (hi - lo) / 2;
             if (mid > 0 && nums[mid - 1] == nums[mid]) {
                 int len = mid - lo +  1;
-                if (len % 2) hi = mid;
+                if (len % 2) hi = mid - 2;
                 else lo = mid + 1;
             } else if (mid < n - 1 && nums[mid] == nums[mid + 1]) {
                 int len = hi - mid + 1;
-                if (len % 2) lo = mid;
+                if (len % 2) lo = mid + 2;
                 else hi = mid - 1;
             } else {
                 return nums[mid];    

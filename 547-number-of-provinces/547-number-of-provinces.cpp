@@ -12,8 +12,9 @@ public:
                 while(!q.empty()) {
                     int node = q.front(); q.pop();
                     for (auto x = 0; x < n; x++) {
-                        if (isConnected[x][node] && !visited[x]) 
+                        if (isConnected[x][node] && !visited[x]) {
                             q.push(x), visited[x] = 1;    
+                        };
                     };
                 };
             };

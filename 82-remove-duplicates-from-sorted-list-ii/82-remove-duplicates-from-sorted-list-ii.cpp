@@ -13,20 +13,19 @@ public:
     ListNode* deleteDuplicates(ListNode* head) {
         if (!head) return head;
         
-        ListNode * temp = head;
-        unordered_set<int> s;
-        while (temp && temp->next) {
-            if (temp->val == temp->next->val) {
-                temp->next = temp->next->next;
-                s.insert(temp->val);
-            } else temp = temp->next;
+        ListNode * dummy = new ListNode(961), * prev = dummy, * temp = head;
+        prev->next = temp;
+        
+        while (temp) {
+            if (temp->next && temp->val == temp->next->val) {
+                int val = temp->val;
+                while (temp && temp->val == val) temp = temp->next;
+            } else {
+                prev = prev->next = temp;
+                temp = temp->next;
+            };
         };
-        temp = head;
-        while (temp && temp->next) {
-            if (s.count(temp->next->val)) temp->next = temp->next->next;
-            else temp = temp->next;
-        };
-        if (s.count(head->val)) return head->next;
-        return head;
+        prev = prev->next = temp;
+        return dummy->next;
     };
 };

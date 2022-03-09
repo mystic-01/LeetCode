@@ -23,10 +23,10 @@ public:
         };
         temp = head;
         while (temp && temp->next) {
-            if (find(s.begin(), s.end(), temp->next->val) != s.end()) temp->next = temp->next->next;
+            if (s.count(temp->next->val)) temp->next = temp->next->next;
             else temp = temp->next;
         };
-        if (find(s.begin(), s.end(), head->val) != s.end()) return head->next;
+        if (s.count(head->val)) return head->next;
         return head;
     };
 };

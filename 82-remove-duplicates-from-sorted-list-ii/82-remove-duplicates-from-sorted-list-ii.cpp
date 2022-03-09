@@ -18,8 +18,8 @@ public:
         
         while (temp) {
             if (temp->next && temp->val == temp->next->val) {
-                int val = temp->val;
-                while (temp && temp->val == val) temp = temp->next;
+                int duplicate = temp->val;
+                while (temp && temp->val == duplicate) temp = temp->next;
             } else {
                 prev = prev->next = temp;
                 temp = temp->next;

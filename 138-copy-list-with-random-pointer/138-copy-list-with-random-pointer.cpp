@@ -18,7 +18,7 @@ class Solution {
 public:
     Node* copyRandomList(Node* head) {
         if (!head) return head;
-        Node* temp = head;
+        Node* temp = head, * oldNode, * ans;
         while (temp) {
             Node* newNode = new Node(temp->val);
             newNode->next = temp->next;
@@ -33,12 +33,12 @@ public:
         };
         
         temp = head;
-        Node* newHead = head->next;
+        ans = head->next;
         while (temp) {
-            Node* oldNode = temp->next->next;
+            oldNode = temp->next->next;
             temp->next->next = temp->next->next ? temp->next->next->next : nullptr;
             temp = temp->next = oldNode;
         };
-        return newHead;    
+        return ans;    
     };
 };

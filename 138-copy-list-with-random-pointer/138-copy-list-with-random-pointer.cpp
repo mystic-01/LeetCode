@@ -16,14 +16,6 @@ public:
 
 class Solution {
 public:
-    void printList(Node* head) {
-        Node* temp = head;
-        while (temp) {
-            cout << temp->val << " ";
-            temp = temp->next;
-        };
-    };
-    
     Node* copyRandomList(Node* head) {
         if (!head) return head;
         Node* temp = head;

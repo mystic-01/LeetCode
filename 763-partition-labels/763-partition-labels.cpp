@@ -4,11 +4,8 @@ public:
         vector<pair<int, int>> v(26, {-1, -1});
         int n = s.length();
         for (auto i = 0; i < n; i++) {
-            if (v[s[i] - 'a'].first != -1) {
-                v[s[i] - 'a'].second = i;
-            } else{ 
-                v[s[i] - 'a'].first = v[s[i] - 'a'].second = i;
-            };
+            if (v[s[i] - 'a'].first != -1) v[s[i] - 'a'].second = i;
+            else v[s[i] - 'a'].first = v[s[i] - 'a'].second = i;
         };
         sort(v.begin(), v.end());
         vector<int> ans;

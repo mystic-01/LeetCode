@@ -2,11 +2,8 @@ class Solution {
 public:
     int brokenCalc(int start, int target) {
         int steps = 0;
-        while (target > start) {
-            steps++;
-            if (target % 2 == 0) target /= 2;
-            else target++;
-        };
+        while (target > start)
+            steps++, target = (target % 2 == 0) ? target / 2 : target + 1;
         return steps += (start - target);
 //     int brokenCalc(int start, int target) {
 //         queue<int> q;

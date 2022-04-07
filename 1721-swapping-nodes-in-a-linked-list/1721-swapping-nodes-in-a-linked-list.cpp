@@ -1,115 +1,54 @@
-
 class Solution {
 public:
     ListNode* swapNodes(ListNode* head, int k) {
-        int count = 0, l;
-        struct ListNode* temp = head;
-        while (temp != NULL) {
-            temp = temp->next;
-            count++;
-        };
-
-        l = count - k + 1;
+        int n = 0, idx = 1;
+        ListNode* temp = head;
+        while (temp) temp = temp->next, n++;
+        n = n - k + 1;
+        // Same Node
+        if (n == k) return head;
+        if (n < k) swap(n, k);
         temp = head;
-        if (k > l) {
-            k = k+l;
-            l = k-l;
-            k = k-l;
-        }
-        if (count == 1 || k == l) return head;
-        if (count == 2) {
-            struct ListNode * temp1, * temp2, * middle;
-            temp1 = head;
-            temp2 = head->next;
-            temp2->next = temp1;
-            temp1->next = NULL;
-            return temp2;
-        }
         
-        struct ListNode * prev1, * temp1, * next1, * prev2, * temp2, * next2;
-        struct ListNode * PREV = temp, * NEXT = temp;
-
-        int flag1 = 0, flag2 = 0;
-        count = 0;
+        ListNode* kPrev, * kNext, * kNode, * nPrev, * nNext, * nNode;
+        while (temp) {
+            if (idx == k - 1) kPrev = temp; 
+            if (idx == k + 1) kNext = temp; 
+            if (idx == k) kNode = temp; 
+            if (idx == n - 1) nPrev = temp; 
+            if (idx == n + 1) nNext = temp;        
+            if (idx == n) nNode = temp; 
+            temp = temp->next, idx++;
+        };
+        
+        // Adjacent Node
+        if (n - k == 1) {
+            if (k == 1) {
+                nNode->next = kNode;
+                kNode->next = nullptr;
+                return nNode; 
+            };
+            kPrev->next = nNode;
+            nNode->next = kNode;
+            kNode->next = nNext;
+        }
         
         // Head/Tail Node
-        if (k == 1) {
-            prev1 = PREV;
-            temp1 = temp;
-            next1 = temp->next;
-            while (temp != NULL) {
-                count++;
-                if (count == l && flag2 == 0) {
-                    flag2 = 1;
-                    prev2 = PREV;
-                    temp2 = temp;
-                    next2 = temp->next;
-                    break;
-                }
-                PREV = temp;
-                temp = temp->next;
-                NEXT = temp->next;
-            };
-        } else if (l == 1) {
-            prev1 = PREV;
-            temp1 = temp;
-            next1 = temp->next;
-            while (temp != NULL) {
-                count++;
-                if (count == k && flag2 == 0) {
-                    flag2 = 1;
-                    prev2 = PREV;
-                    temp2 = temp;
-                    next2 = temp->next;
-                    break;
-                }
-                PREV = temp;
-                temp = temp->next;
-                NEXT = temp->next;
-            };
+        else if (k == 1) {
+            nPrev->next = kNode;
+            kNode->next = nullptr;
+            nNode->next = kNext;
+            return nNode;
         }
         
-        if (k == 1 || l == 1) {
-            prev2->next = temp1;
-            prev2->next->next = NULL;
-            temp1 = temp2;
-            temp1->next = next1;
-            return temp1;
-        }
-        
-        // General Case         
-        while (temp != NULL) {
-            count++;
-            if (count == k && flag1 == 0) {
-                flag1 = 1;
-                prev1 = PREV;
-                temp1 = temp;
-                next1 = temp->next;
-            } else if (count == l && flag2 == 0) {
-                flag2 = 1;
-                prev2 = PREV;
-                temp2 = temp;
-                next2 = temp->next;
-            }
-            if (flag1 && flag2) break;
-            PREV = temp;
-            temp = temp->next;
-            NEXT = temp->next;
+        // General Case
+        else {
+            cout << "beep";
+            kPrev->next = nNode;
+            nNode->next = kNext;
+            nPrev->next = kNode;
+            kNode->next = nNext;
         };
-        
-        // Adjacent Case         
-        if (k - l == 1 || l - k == 1) {
-            prev1->next = temp2;
-            prev1->next->next = temp1;
-            prev1->next->next->next = next2;
-            return head;
-        } 
-        
-        prev1->next = temp2;
-        prev1->next->next = next1;
-        
-        prev2->next = temp1;
-        prev2->next->next = next2;
         return head;
     };
 };

@@ -33,16 +33,15 @@ public:
             kNode->next = nNext;
         }
         
-        // Head/Tail Node
         else if (k == 1) {
+            // Head/Tail Node
             nPrev->next = kNode;
             kNode->next = nullptr;
             nNode->next = kNext;
             return nNode;
-        }
-        
-        // General Case
+        } 
         else {
+            // General Case
             cout << "beep";
             kPrev->next = nNode;
             nNode->next = kNext;

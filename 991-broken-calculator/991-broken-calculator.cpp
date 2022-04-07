@@ -1,16 +1,30 @@
 class Solution {
 public:
-    int brokenCalc(int startValue, int target) {
-        int result=0;
-        while(target>startValue)
-        {
-            result++;
-            if(target%2==0)
-                target=target/2;
-            else
-                target+=1;
-        }
-        result=result+(startValue-target);
-        return result;
-    }
+    int brokenCalc(int start, int target) {
+        int steps = 0;
+        while (target > start) {
+            steps++;
+            if (target % 2 == 0) target /= 2;
+            else target++;
+        };
+        return steps += (start - target);
+//     int brokenCalc(int start, int target) {
+//         queue<int> q;
+//         set<int> visited;
+//         q.push(start);
+//         int steps = 0;
+//         while (!q.empty()) {
+//             int size = q.size();
+//             for (auto i = 0; i < size; i++) {
+//                 int curr = q.front(); 
+//                 q.pop();
+//                 visited.insert(curr);
+//                 if (curr == target) return steps;
+//                 if (curr - 1 && !visited.count(curr - 1)) q.push(curr - 1);
+//                 if (curr * 2LL <= INT_MAX && !visited.count(curr * 2)) q.push(curr * 2);
+//             };
+//             steps++;
+//         };
+//         return steps;
+    };
 };

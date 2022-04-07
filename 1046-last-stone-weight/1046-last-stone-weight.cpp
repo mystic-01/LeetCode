@@ -2,7 +2,6 @@ class Solution {
 public:
     int lastStoneWeight(vector<int>& nums) {
         int n = nums.size();
-        if (n == 1) return nums[0];
         
         priority_queue<int, vector<int>> pq;
         for (auto i = 0; i < n; i++) {

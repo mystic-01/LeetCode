@@ -12,6 +12,7 @@
 class Solution {
 public:
     void addVal(TreeNode* root, int& parentVal) {
+        // right root left
         if (!root) return;
         addVal(root->right, parentVal);
         root->val += parentVal;
@@ -20,7 +21,6 @@ public:
     };
     
     TreeNode* convertBST(TreeNode* root) {
-        // right root left
         int parentVal = 0;
         addVal(root, parentVal);
         return root;

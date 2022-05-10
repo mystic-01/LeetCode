@@ -25,9 +25,6 @@ public:
     }
     
     int getRandom() {
-        // srand(time(nullptr));
-        // int idx = ; 
-        // cout << rand() << " ";
         return v[rand() % v.size()];
     }
 };

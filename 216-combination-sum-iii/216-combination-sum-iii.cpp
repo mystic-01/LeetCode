@@ -4,6 +4,11 @@ public:
         if (t == 0 && ds.size() == k) ans.push_back(ds);
        
         if (i == 10 || i > t || ds.size() > k) return;
+         
+        // Here i is the current value ranging from 1 to 9 and  
+        // if reaches 10, then it is similar to idx reaching nums.size(), so we return.
+        // And if i becomes more than the current target that is left, then also we return.        
+        // Lastly, if we have more elements in ds than k, we return.
         
         ds.push_back(i);
         findCombination(i + 1, t - i, k, ans, ds);

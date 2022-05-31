@@ -8,7 +8,7 @@ public:
     
     int countNumbersWithUniqueDigits(int n) {
         if (!n) return 1;
-        vector<int> dp(11, 0);
+        vector<int> dp(9, 0);
         dp[1] = 10, dp[2] = 81;
         recurse(n, dp);
         return accumulate(dp.begin(), dp.begin() + n + 1, 0);

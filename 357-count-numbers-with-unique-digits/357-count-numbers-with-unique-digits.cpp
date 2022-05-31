@@ -11,8 +11,6 @@ public:
         vector<int> dp(11, 0);
         dp[1] = 10, dp[2] = 81;
         recurse(n, dp);
-        int sum = 0;
-        for (auto i = 0; i <= n; i++) sum += dp[i];
-        return sum;
+        return accumulate(dp.begin(), dp.begin() + n + 1, 0);
     };
 };

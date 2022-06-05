@@ -8,7 +8,9 @@ public:
         for (auto row = 0; row < n; row++) {
             if (!mRow[row] && !mUpperDiagonal[col - row] && !mLowerDiagonal[col + row]) {
                 mRow[row] = mUpperDiagonal[col - row] = mLowerDiagonal[col + row] = 1;
+                
                 count += recurseNQueens(col + 1, n, mRow, mUpperDiagonal, mLowerDiagonal);  
+                
                 mRow[row] = mUpperDiagonal[col - row] = mLowerDiagonal[col + row] = 0;
             };            
         };

@@ -14,11 +14,11 @@ struct Node {
 
 class Trie {
 private:
-    Node* root;
+    Node* root = new Node();
     
 public:
     Trie() {
-        root = new Node();
+        
     };
     
     void insert(string word) {

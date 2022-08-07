@@ -24,9 +24,7 @@ public:
     void insert(string word) {
         Node* temp = root;
         for (auto i = 0; i < word.length(); i++) {
-            if (!temp->contains(word[i])) {
-                temp->put(word[i]);
-            };
+            if (!temp->contains(word[i])) temp->put(word[i]);
             temp = temp->links[word[i] - 'a'];
         };
         temp->flag = true;
@@ -35,9 +33,7 @@ public:
     bool finder(string word, string fun) {
        Node* temp = root;
         for (auto i = 0; i < word.length(); i++) {
-            if (!temp->contains(word[i])) {
-                return false;
-            };
+            if (!temp->contains(word[i])) return false;
             temp = temp->links[word[i] - 'a'];
         };
         return fun == "search" ? temp->flag : true;

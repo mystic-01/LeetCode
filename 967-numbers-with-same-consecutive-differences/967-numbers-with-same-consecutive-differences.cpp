@@ -33,10 +33,14 @@ public:
             if (ds >= bar) ans.push_back(ds);
             return;
         };
-        int add = ds + (pow(10, power) * (last + diff));
-        int subtract = ds + (pow(10, power) * (last - diff));
-        if (last + diff < 10) findValidNumbers(last + diff, ans, diff, power + 1, add, n, bar);    
-        if (last - diff > -1 && diff != 0) findValidNumbers(last - diff, ans, diff, power + 1, subtract, n, bar);
+        if (last + diff < 10) {
+            int add = ds + (pow(10, power) * (last + diff));
+            findValidNumbers(last + diff, ans, diff, power + 1, add, n, bar);    
+        };
+        if (last - diff > -1 && diff != 0) {
+            int subtract = ds + (pow(10, power) * (last - diff));
+            findValidNumbers(last - diff, ans, diff, power + 1, subtract, n, bar);
+        };
         return;
     };
     

@@ -1,41 +1,37 @@
-
-struct triplet {
-    int vertical, level;
-    TreeNode* node;
-    triplet (int x, int y, TreeNode* _node) {
-         vertical = y, level = x,  node = _node;
-    };
-};
-
 class Solution {
 public:
+//     struct triplet {
+//         TreeNode* node;
+//         int x;
+//         int y;
+//     };
+    
     vector<vector<int>> verticalTraversal(TreeNode* root) {
-        vector<vector<int>> ans;
-        map<int, map<int, multiset<int>>> points;
-        if (!root) return ans;
-        queue<triplet> q;
-        q.push(triplet(0, 0, root));
         
+        // y, x, val
+        map<int, map<int, multiset<int>>> m;
+        queue<pair<TreeNode*, pair<int, int>>> q;
+        q.push({root, {0, 0}});
+            
         while (!q.empty()) {
             int size = q.size();
-            for (auto i = 0; i < size; i++) {
-                int y = q.front().vertical, x = q.front().level;
-                
-                TreeNode* node = q.front().node;
-                points[y][x].insert(node->val);
-
+            for (auto i =  0; i < size; i++) {
+                TreeNode* curr = q.front().first;     
+                int y = q.front().second.first, x = q.front().second.second;  
                 q.pop();
-                if (node->left) q.push(triplet(x + 1, y - 1, node->left));
-                if (node->right) q.push(triplet(x + 1, y + 1, node->right));
+                if (curr->left) q.push({curr->left, {y - 1, x + 1}});
+                if (curr->right) q.push({curr->right, {y + 1, x + 1}});
+                m[y][x].insert(curr->val);
             };
         };
         
-        for (auto &vertical : points) {
+        vector<vector<int>> ans;
+        for (auto &y : m) {
             vector<int> ds;
-            for (auto &level : vertical.second) {
-                for (auto &i : level.second) {
-                    ds.push_back(i);
-                };
+            for (auto &x : y.second) {
+                for (auto &num : x.second) {
+                    ds.push_back(num);    
+                };                
             };
             ans.push_back(ds);
         };

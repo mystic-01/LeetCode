@@ -11,7 +11,7 @@
  */
 class CBTInserter {
 private:
-    TreeNode* northStar;
+    TreeNode* northStar, * nextParent = nullptr;
     
 public:
     CBTInserter(TreeNode* root) {
@@ -19,6 +19,12 @@ public:
     };
     
     int insert(int val) {
+        if (nextParent) {
+            nextParent->right = new TreeNode(val);
+            int ans = nextParent->val;
+            nextParent = nullptr;
+            return ans;
+        };
         queue<TreeNode*> q;
         q.push(northStar);
         
@@ -30,6 +36,7 @@ public:
                 if (curr->left) q.push(curr->left);
                 else {
                     curr->left = new TreeNode(val);
+                    nextParent = curr;
                     return curr->val;
                 };
                 if (curr->right) q.push(curr->right);

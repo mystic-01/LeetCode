@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int bagOfTokensScore(vector<int>& tokens, int power) {
+    int bagOfTokensScore(vector<int>& tokens, int &power) {
         int n = tokens.size(), score = 0, i = 0, j = n - 1;
         
         sort(tokens.begin(), tokens.end());

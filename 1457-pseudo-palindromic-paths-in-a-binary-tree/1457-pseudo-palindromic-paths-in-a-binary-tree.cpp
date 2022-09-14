@@ -12,22 +12,22 @@
 class Solution {
 public:
     
-    void dfs(TreeNode* root, int &ans, unordered_map<int, int> &m) {
-        m[root->val]++;
+    void dfs(TreeNode* root, int &ans, vector<int> &v) {
+        v[root->val - 1]++;
         if (!root->left && !root->right) {
             int odd = 0;
-            for (auto &num : m) odd += (num.second % 2);
+            for (auto &num : v) odd += (num % 2);
             ans += odd <= 1;
         };
-        if (root->left) dfs(root->left, ans, m);
-        if (root->right) dfs(root->right, ans, m);
-        m[root->val]--;
+        if (root->left) dfs(root->left, ans, v);
+        if (root->right) dfs(root->right, ans, v);
+        v[root->val - 1]--;
     };
     
     int pseudoPalindromicPaths (TreeNode* root) {
         int ans = 0;
-        unordered_map<int, int> m;
-        dfs(root, ans, m);
+        vector<int> v(9, 0);
+        dfs(root, ans, v);
         return ans;
     };
 };

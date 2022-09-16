@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-    TreeNode* dfs(int start, int end, map<int, int>::iterator begin, map<int, int>::iterator it, vector<int> &nums) {
+    TreeNode* dfs(int start, int end, map<int, int>::iterator begin, map<int, int>::iterator it) {
         
         if (start > end) return nullptr;
 
@@ -23,8 +23,8 @@ public:
         int val = it->first, idx = it->second;
         
         TreeNode* node = new TreeNode(val);        
-        node->left = dfs(start, idx - 1, begin, it, nums);
-        node->right = dfs(idx + 1, end, begin, it, nums);
+        node->left = dfs(start, idx - 1, begin, it--);
+        node->right = dfs(idx + 1, end, begin, ++it);
         
         return node;
     };
@@ -37,6 +37,6 @@ public:
         auto it = m.end(), begin = m.begin();
         it--, begin--;
 
-        return dfs(0, n, begin, it, nums);
+        return dfs(0, n, begin, it);
     };
 };

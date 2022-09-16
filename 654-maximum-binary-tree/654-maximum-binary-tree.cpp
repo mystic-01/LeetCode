@@ -24,7 +24,7 @@ public:
         
         TreeNode* node = new TreeNode(val);        
         node->left = dfs(start, idx - 1, begin, it--);
-        node->right = dfs(idx + 1, end, begin, ++it);
+        node->right = dfs(idx + 1, end, begin, it);
         
         return node;
     };
@@ -35,8 +35,8 @@ public:
         
         for (auto i = 0; i < n; i++) m[nums[i]] = i;
         auto it = m.end(), begin = m.begin();
-        it--, begin--;
-
+        begin--, it--;
+        
         return dfs(0, n, begin, it);
     };
 };

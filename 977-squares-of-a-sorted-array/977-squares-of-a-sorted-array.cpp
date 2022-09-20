@@ -13,11 +13,12 @@ public:
         while (n >= 0 && p <= size) 
             ans[k++] = (pow((-1 * nums[n] > nums[p]) ? nums[p++] : nums[n--], 2));
         
-        while (n >= 0)
-            ans[k++] = (pow(nums[n--], 2));
 
         while (p <= size) 
             ans[k++] = (pow(nums[p++], 2));
+        
+        while (n >= 0)
+            ans[k++] = (pow(nums[n--], 2));
 
         return ans;
     };

@@ -1,10 +1,10 @@
 class Solution {
 public:
     bool canBeEqual(vector<int>& target, vector<int>& arr) {
-        unordered_map<int, int> m;
-        for (auto &i : target) m[i]++;
-        for (auto &j : arr) m[j]--;
-        for (auto &k : m) if (k.second != 0) return false;
+        vector<int> v(1001, 0);
+        for (auto &i : target) v[i]++;
+        for (auto &j : arr) v[j]--;
+        for (auto &k : v) if (k != 0) return false;
         return true;
     };
 };

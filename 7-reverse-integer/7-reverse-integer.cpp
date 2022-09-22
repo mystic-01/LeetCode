@@ -3,13 +3,11 @@ public:
     int reverse(int x) {
         
         bool isNegative = x < 0;
-        long num =  x, digits = 0, ans = 0;
+        long num = x, ans = 0;        
         
-        while (num) digits++, num /= 10;
-
         num = isNegative ? -1L * x : x;
         
-        while (digits--) ans += (pow(10, digits) * (num % 10)), num /= 10;
+        while (num) ans = (ans * 10) + (num % 10), num /= 10;
 
         ans = isNegative ? -1L * ans : ans;
         

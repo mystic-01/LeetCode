@@ -16,9 +16,8 @@ public:
         int n = nums.size(), zero = 0, nonZero = 0;
         while (nonZero < n) {
             while (zero < n && nums[zero] != 0) zero++;                         
-            while (nonZero < n && (nums[nonZero] == 0 || nonZero <= zero)) nonZero++;     
-            if (nonZero >= n) return;
-            swap(nums[zero], nums[nonZero]);    
+            while (nonZero < n && (nonZero <= zero || nums[nonZero] == 0)) nonZero++;     
+            if (nonZero < n) swap(nums[zero], nums[nonZero]);    
         };
     };
     

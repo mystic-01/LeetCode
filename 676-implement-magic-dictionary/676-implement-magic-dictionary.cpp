@@ -3,6 +3,10 @@ private:
     vector<string> dict;
     
 public:
+    MagicDictionary() {
+        
+    };
+    
     void buildDict(vector<string> dictionary) {
         dict = dictionary;
     };

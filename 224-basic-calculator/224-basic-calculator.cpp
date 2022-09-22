@@ -42,14 +42,6 @@ public:
         };
         
         ans = eval(temp);
-        
-        while (!st.empty()) {
-            int num = st.top().first;
-            char sign = st.top().second;
-            st.pop();
-            ans = (sign == '-') ? num - ans : num + ans;
-        };
-        
         return ans;
     };
 };

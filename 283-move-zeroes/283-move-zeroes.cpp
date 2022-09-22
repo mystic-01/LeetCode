@@ -12,21 +12,14 @@ public:
 //             while (one <= n && nums[one] == 0) one++;
 //         };
 //     };
-        void moveZeroes(vector<int>& nums) {
-        std::ios::sync_with_stdio(false);
-        std::cin.tie(nullptr);
-        int zeros = 0, i = 0, n = nums.size() - 1;
-        vector<int> ans;
-        while (i <= n) {
-            if (nums[i] != 0){
-                ans.push_back(nums[i]);
-            } else {
-                zeros++;
-            };
-            i++;
+    void moveZeroes(vector<int>& nums) {
+        int n = nums.size(), zero = 0, nonZero = 0;
+        while (nonZero < n) {
+            while (zero < n && nums[zero] != 0) zero++;                         
+            while (nonZero < n && (nums[nonZero] == 0 || nonZero <= zero)) nonZero++;     
+            if (nonZero >= n) return;
+            swap(nums[zero], nums[nonZero]);    
         };
-        while(zeros--) ans.push_back(0);
-        nums = ans;
     };
     
 };

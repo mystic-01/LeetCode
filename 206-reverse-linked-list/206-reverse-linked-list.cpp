@@ -10,17 +10,38 @@
  */
 class Solution {
 public:
-    ListNode* reverseList(ListNode* head) {
-        std::ios::sync_with_stdio(false);
-        std::cin.tie(nullptr);
+    ListNode* reverse(ListNode* head, ListNode* prev) {
+        if(!head->next) {
+            prev->next = head;
+            return head;
+        };
         
-        ListNode* prev = nullptr, * current = head, * next;
-        while (current) {
-            next = current->next;
-            current->next = prev;
-            prev = current;
-            current = next;
+        ListNode* temp = reverse(head->next, prev);
+        temp->next = head;
+        return head;
+    };
+
+    
+    ListNode* reverseList(ListNode* head) {
+        
+//         ListNode* prev = new ListNode(69), * current = head, * next;
+// //         while (current) {
+// //             next = current->next;
+// //             current->next = prev;
+          
+// //             prev = current;
+// //             current = next;
+// //         };
+//         ListNode* ans = reverse(head, prev);
+//         return prev;
+        ListNode *prev = nullptr, *curr = head, *newNode;
+        while (curr) {
+            newNode = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = newNode;
         };
         return prev;
+        
     };
 };

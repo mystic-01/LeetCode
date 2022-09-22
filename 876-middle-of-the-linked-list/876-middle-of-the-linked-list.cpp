@@ -24,7 +24,7 @@ class Solution {
         ListNode *slow = head, *fast = head;
         while (fast && fast->next) {
             slow = slow->next;
-            if (fast->next) fast = fast->next->next;
+            fast = fast->next->next;
         };
         return slow;
     };

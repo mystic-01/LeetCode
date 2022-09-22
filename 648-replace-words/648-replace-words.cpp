@@ -1,8 +1,8 @@
 class Solution {
 public:
     string replaceWords(vector<string> &dictionary, string &sentence) {
-        unordered_map<string, bool> m;
-        for (auto &str : dictionary) m[str] = true;
+        unordered_map<string, char> m;
+        for (auto &str : dictionary) m[str] = '0';
         
         int n = sentence.size(), i = 0;
         string ans = "", temp = "";

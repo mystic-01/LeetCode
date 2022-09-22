@@ -1,16 +1,16 @@
 class Solution {
 public:
     string replaceWords(vector<string> &dictionary, string &sentence) {
-        unordered_map<string, char> m;
-        for (auto &str : dictionary) m[str] = '0';
+        unordered_set<string> s;
+        for (auto &str : dictionary) s.insert(str);
         
         int n = sentence.size(), i = 0;
         string ans = "", temp = "";
         while (i < n) {
             temp += sentence[i];
-            if (m.find(temp) != m.end()) {
+            if (s.find(temp) != s.end()) {
                 
-                ans += m.find(temp)->first, temp = "";
+                ans += *s.find(temp), temp = "";
                 while (i < n && sentence[i] != ' ') i++;
                 if (i < n) ans += " ";
                 

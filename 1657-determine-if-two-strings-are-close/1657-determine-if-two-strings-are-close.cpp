@@ -5,15 +5,19 @@ public:
         
         if (n1 != n2) return false;
         
-        vector<int> v1(26, 0), v2(26, 0);
+        int v1[26] = {0}, v2[26] = {0};
 
+        // To map all the characters of both the words.
         for (auto i = 0; i < n1; i++) v1[word1[i] - 'a']++, v2[word2[i] - 'a']++;            
-        
+
+        // To check whether the two words contain the "same set of characters" or not.
         for (auto i = 0; i < 26; i++) if ((v1[i] && !v2[i]) || (!v1[i] && v2[i])) return false;
 
-        sort(v1.begin(), v1.end());
-        sort(v2.begin(), v2.end());
+        // To get all the non zero frequencies sorted in the end.        
+        sort(v1, v1 + 26);
+        sort(v2, v2 + 26);
 
+        // To check whether the two words contain the "same set of frequencies" or not.
         for (auto i = 0; i < 26; i++) if (v1[i] != v2[i]) return false;
         
         return true;

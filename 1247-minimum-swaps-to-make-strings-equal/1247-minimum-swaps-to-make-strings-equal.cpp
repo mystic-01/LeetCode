@@ -13,7 +13,7 @@ public:
         swaps += (xy / 2 + yx / 2);
         xy %= 2, yx %= 2;
 
-        if ((xy && yx) || (!xy && !yx)) swaps += (xy + yx);
+        if (xy == yx) swaps += (xy + yx);
         else return -1;;
         
         return swaps;

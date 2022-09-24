@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-    void findSum (TreeNode* root, int targetSum, vector<vector<int>> &ans, vector<int> &ds) {
+    void findSum (TreeNode* root, int &targetSum, vector<vector<int>> &ans, vector<int> &ds) {
         targetSum -= root->val;
         ds.push_back(root->val);
         if (!root->left && !root->right && !targetSum) ans.push_back(ds);                             

@@ -26,7 +26,7 @@ public:
                 if (curr->left) q.push(curr->left);
                 if (curr->right) q.push(curr->right);
             };
-            if (ds.size()) ans.push_back(ds);
+            ans.push_back(ds);
         };
         return ans;
     };

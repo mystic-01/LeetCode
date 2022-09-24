@@ -11,23 +11,22 @@
  */
 class Solution {
 private:
-    int lcaDepth = 0, startDepth = 0, endDepth = 0;
-    string ans = "";
+    int start, end, depth = 0, lcaDepth = 0, startDepth = 0, endDepth = 0;
+    string ds = "", ans = "";
     
 public:
-    TreeNode* lca(TreeNode* root, int &start, int &end, int &depth, string &ds) {
-        
+    TreeNode* lca(TreeNode* root) {
         if (!root) return root;
         if (root->val == start) startDepth = depth;    
-        if (root->val == end) endDepth = depth, ans = ds;
+        else if (root->val == end) endDepth = depth, ans = ds;
 
         depth++;
         ds += 'L';
-        TreeNode* left = lca(root->left, start, end, depth, ds);
+        TreeNode* left = lca(root->left);
         ds.pop_back();
 
         ds += 'R';
-        TreeNode* right = lca(root->right, start, end, depth, ds);
+        TreeNode* right = lca(root->right);
         ds.pop_back();        
         depth--;        
 
@@ -44,11 +43,9 @@ public:
         };
     };
     
-    string getDirections(TreeNode* root, int start, int end) {
-        int depth = 0;
-        string ds = "";
-        
-        TreeNode* newRoot = lca(root, start, end, depth, ds);   
+    string getDirections(TreeNode* root, int &startVal, int &endVal) {
+        start = startVal, end = endVal;
+        lca(root);
         
         ans = ans.substr(lcaDepth, endDepth - lcaDepth + 1);
         while (startDepth-- > lcaDepth) ans = "U" + ans;

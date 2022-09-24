@@ -11,41 +11,45 @@
  */
 class Solution {
 public:
-    void dfs(TreeNode* root, int &start, int &end, int &depth, int &startDepth, string &ds, string &ans) {
-        if (root->val == start) startDepth = depth;         
-        if (root->val == end) ans = ds;
-        if (startDepth > -1 && ans.size() > 0) return;
+    
+    TreeNode* lca(TreeNode* root, int &start, int &end, int &depth, 
+        int &lcaDepth, int &startDepth, int &endDepth, string &ds, string &ans) {
         
+        if (!root) return root;
+        if (root->val == start) startDepth = depth;    
+        if (root->val == end) endDepth = depth, ans = ds;
+
         depth++;
         ds += 'L';
-        if (root->left) dfs(root->left, start, end, depth, startDepth, ds, ans);        
+        TreeNode* left = lca(root->left, start, end, depth, lcaDepth, startDepth, endDepth, ds, ans);
         ds.pop_back();
+
         ds += 'R';
-        if (root->right) dfs(root->right, start, end, depth, startDepth, ds, ans);        
+        TreeNode* right = lca(root->right, start, end, depth, lcaDepth, startDepth, endDepth, ds, ans);
         ds.pop_back();        
         depth--;        
-    };
-    
-    TreeNode* lca(TreeNode* root, int &start, int &end) {
-        if (!root) return root;
-        if (root->val == start || root->val == end) return root;
-        
-        TreeNode* left = lca(root->left, start, end);
-        TreeNode* right = lca(root->right, start, end);
-        
+
+        if ((root->val == start || root->val == end)) {
+            if (left || right) lcaDepth = depth;
+            return root;
+        };
+       
         if (!left) return right;
         else if (!right) return left;
-        else return root;
+        else {
+            lcaDepth = depth;
+            return root;
+        };
     };
     
     string getDirections(TreeNode* root, int start, int end) {
-        int depth = 0, startDepth = -1;
+        int depth = 0, lcaDepth = 0, startDepth = 0, endDepth = 0;
         string ds = "", ans = "";
         
-        TreeNode* newRoot = lca(root, start, end);
-        dfs(newRoot, start, end, depth, startDepth, ds, ans);        
+        TreeNode* newRoot = lca(root, start, end, depth, lcaDepth, startDepth, endDepth, ds, ans);   
         
-        while (startDepth--) ans = "U" + ans;
+        ans = ans.substr(lcaDepth, endDepth - lcaDepth + 1);
+        while (startDepth-- > lcaDepth) ans = "U" + ans;
         
         return ans;
     };

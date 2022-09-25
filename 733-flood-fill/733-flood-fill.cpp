@@ -1,10 +1,12 @@
 class Solution {
+private:
+    int offset[4][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+    queue<pair<int, int>> q;
+    set<pair<int, int>> visited;
+
 public:
-    vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
-        queue<pair<int, int>> q;
+    vector<vector<int>> floodFill(vector<vector<int>>& image, int &sr, int &sc, int &color) {
         q.push({sr, sc});
-        set<pair<int, int>> visited;
-        int offset[4][2] = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
         
         int rowSize = image.size(), colSize = image[0].size(), srcColor = image[sr][sc];
         while (!q.empty()) {

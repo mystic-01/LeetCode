@@ -18,7 +18,7 @@ public:
                 for (auto &duo : offset) {
                     int row = r + duo[0], col = c + duo[1];
                     if (row > - 1 && row < rowSize && col > - 1 && col < colSize 
-                        && image[row][col] == srcColor && !visited.count({row, col})) 
+                        && image[row][col] != color && image[row][col] == srcColor && !visited.count({row, col})) 
                         q.push({row, col});
                 };
             };

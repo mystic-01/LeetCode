@@ -13,14 +13,10 @@ public:
         for (auto i = n - 1; i >= 0; i--) {
             if (dominos[i] == 'R') effect = 0;     
             else if (dominos[i] == 'L') effect = 1;     
-            else {
-                if (effect) {
-                    effect++;
-                    if (!right[i]) dominos[i] = 'L';
-                    else if (effect < right[i]) dominos[i] = 'L';
-                    else if (effect > right[i]) dominos[i] = 'R';
-                } else if (right[i]) dominos[i] = 'R';
-            };
+            else if (effect) {
+                if (++effect < right[i] || right[i] == 0) dominos[i] = 'L';
+                else if (effect > right[i]) dominos[i] = 'R';
+            } else if (right[i]) dominos[i] = 'R';
         };
         
         return dominos;

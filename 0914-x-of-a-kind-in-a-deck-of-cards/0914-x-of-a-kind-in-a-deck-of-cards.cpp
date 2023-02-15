@@ -5,10 +5,7 @@ public:
         for (auto &i : deck) m[i]++;
 
         int partitionSize = m[deck[0]];
-        for (auto &iter : m) {
-            partitionSize = gcd(iter.second, partitionSize);
-            if (partitionSize == 1) return false;
-        };
+        for (auto &iter : m) if ((partitionSize = gcd(iter.second, partitionSize)) == 1) return false;
         return true; 
     };
 };

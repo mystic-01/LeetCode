@@ -8,13 +8,13 @@ public:
         };
         
         if (k + carry) {
-            reverse(nums.begin(), nums.end());
+            // reverse(nums.begin(), nums.end());
             while (k + carry) {
                 int num = (k % 10) + carry;
                 k /= 10, carry = num / 10;
-                nums.push_back(num % 10);
+                nums.insert(nums.begin(), num % 10);
             };
-            reverse(nums.begin(), nums.end());
+            // reverse(nums.begin(), nums.end());
         };
         
         return nums;

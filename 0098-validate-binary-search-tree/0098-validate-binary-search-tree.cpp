@@ -10,20 +10,27 @@
  * };
  */
 class Solution {
+    
 public:
-    void dfs(TreeNode* root, vector<int> &tree) {
-        if (!root) return;
+    TreeNode* prev;    
+    bool isValidNode(TreeNode* root) {
+        if (!root) return true;
         
-        dfs(root->left, tree);
-        tree.push_back(root->val);
-        dfs(root->right, tree);
-        
+        bool left = isValidNode(root->left);
+
+        if (prev && (root->val <= prev->val)) return false;
+        prev = root;
+
+        bool right = isValidNode(root->right);
+        return left && right;
     };
     
     bool isValidBST(TreeNode* root) {
-        vector<int> tree;
-        dfs(root, tree);
-        for (auto i = 1; i < tree.size(); i++) if (tree[i] <= tree[i - 1]) return false;
-        return true;
+        return isValidNode(root);
     };
 };
+
+
+
+
+

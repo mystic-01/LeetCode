@@ -64,7 +64,6 @@ public:
     
     Node* construct(vector<vector<int>>& grid) {
         int start = 0, end = grid.size();
-        cout << "<<<<<<<<<<<<<<<<<<<<<\n";
         return constructNode(start, end, start, end, grid);
     };
 };

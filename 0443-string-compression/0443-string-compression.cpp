@@ -9,10 +9,8 @@ public:
                 while (hi < n && chars[lo] == chars[hi]) lo++, hi++, count++;
                 
                 chars[toBeMod++] = curr;
-                
-                string mod = to_string(count);                
-                for (auto &c : mod) chars[toBeMod++] = c;
-                
+                                
+                for (auto &c : to_string(count)) chars[toBeMod++] = c;
             } else chars[toBeMod++] = curr;
             
             lo++, hi++, count = 1;     

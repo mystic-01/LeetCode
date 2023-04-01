@@ -1,10 +1,6 @@
 class Solution {
 public:
-    void evalStack(stack<string> &st) {
-        
-    };
-    
-    int evalRPN(vector<string>& tokens) {
+   int evalRPN(vector<string>& tokens) {
         stack<string> st;
         int n = tokens.size();
         

@@ -15,18 +15,14 @@ public:
         if (!root) return 0;
         
         int left = checkDepth(root->left);
-        left = left == -1 ? -1 : left + 1;
-
         int right = checkDepth(root->right);
-        right = right == -1 ? -1 : right + 1;
         
         if (left == -1 || right == -1 || abs(left - right) > 1) return -1;
-        return max(left, right);
+        return 1 + max(left, right);
     };
 
     
     bool isBalanced(TreeNode* root) {
-        if (checkDepth(root) == -1) return false;
-        return true;
+        return checkDepth(root) != -1;
     };
 };

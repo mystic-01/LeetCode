@@ -27,9 +27,7 @@ public:
                 int a = x + offsets[k][0], b = y + offsets[k][1];
                 while (a < row && a >= 0 && b < col && b >= 0) {
                     if (grid[a][b] == 2) break;
-                    else if (grid[a][b] == 0) {
-                        grid[a][b] = 1, unguarded--;
-                    };
+                    else if (grid[a][b] == 0) grid[a][b] = 1, unguarded--;
                     a += offsets[k][0], b += offsets[k][1];
                 };    
             };

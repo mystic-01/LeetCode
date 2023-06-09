@@ -2,9 +2,7 @@ class Solution {
 private:
     bool isSubstr(string &str, string &sub) {
         int i = 0;        
-        
         while (i < str.size() && i < sub.size() && str[i] == sub[i]) i++;
-        
         return i == sub.size();
     };
     

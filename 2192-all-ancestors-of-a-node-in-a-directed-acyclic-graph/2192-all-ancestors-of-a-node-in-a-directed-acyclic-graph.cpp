@@ -2,13 +2,12 @@ class Solution {
 // We can get rid of sorting by pushing starting "parentVal" in ascending order 
 // and pushing it into the ans of whichever nodes it can visit!!! 
 private:
-    void dfs(int curr, int parentVal, vector<vector<int>> &adjList, vector<vector<int>> &ans, bool *visited) {
-        visited[curr] = 1;
+    void dfs(int curr, int parentVal, vector<vector<int>> &adjList, vector<vector<int>> &ans) {
         
         for (auto &child : adjList[curr]) {
-            if (!visited[child]) {
+            if (ans[child].empty() || ans[child].back() != parentVal) {
                 ans[child].push_back(parentVal);
-                dfs(child, parentVal, adjList, ans, visited);            
+                dfs(child, parentVal, adjList, ans);            
             };            
         };
     };
@@ -22,9 +21,7 @@ public:
         };
         
         for (auto i = 0; i < n; i++) {
-            bool visited[n];
-            for (auto i = 0; i < n; i++) visited[i] = 0;
-            dfs(i, i, adjList, ans, visited);
+            dfs(i, i, adjList, ans);
         };
 
         return ans;

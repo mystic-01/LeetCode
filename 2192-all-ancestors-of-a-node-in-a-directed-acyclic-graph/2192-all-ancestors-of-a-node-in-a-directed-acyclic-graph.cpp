@@ -1,4 +1,42 @@
 class Solution {  
+// We can get rid of sorting by pushing starting "parentVal" in ascending order 
+// and pushing it into the ans of whichever nodes it can visit!!! 
+private:
+    void dfs(int curr, int parentVal, vector<vector<int>> &adjList, vector<vector<int>> &ans, bool *visited) {
+        visited[curr] = 1;
+        
+        for (auto &child : adjList[curr]) {
+            if (!visited[child]) {
+                ans[child].push_back(parentVal);
+                dfs(child, parentVal, adjList, ans, visited);            
+            };            
+        };
+    };
+    
+public:
+    vector<vector<int>> getAncestors(int n, vector<vector<int>>& edges) {
+        vector<vector<int>> ans(n), adjList(n);
+        
+        for (auto &edge : edges) {
+            adjList[edge[0]].push_back(edge[1]);
+        };
+        
+        for (auto i = 0; i < n; i++) {
+            bool visited[n];
+            for (auto i = 0; i < n; i++) visited[i] = 0;
+            dfs(i, i, adjList, ans, visited);
+        };
+
+        return ans;
+    };
+};
+
+
+
+/*
+// Opposite adjList + DFS + Sorting
+
+class Solution {  
 private:
     void dfs(int idx, vector<vector<int>> &adjList, vector<int> &visited, vector<int> &curr) {
         visited[idx] = 1;
@@ -31,17 +69,14 @@ public:
         return ans;
     };
 };
-
-
-
-
+*/
 
 
 
 
 
 /*
-Use Indegree ^ BFS
+Use Indegree + BFS + Set
 
 class Solution {  
 public:

@@ -1,11 +1,11 @@
 class Solution {  
 private:
-    void dfs(int idx, vector<vector<int>> &adjList, vector<int> &visited, vector<int> &curr) {
+    void dfs(int idx, vector<vector<int>> &adjList, vector<int> &visited, set<int> &curr) {
         visited[idx] = 1;
         
         for (auto &child : adjList[idx]) {
             if (!visited[child]) {
-                curr.push_back(child);
+                curr.insert(child);
                 dfs(child, adjList, visited, curr);            
             };            
         };
@@ -21,12 +21,11 @@ public:
         
         for (auto i = 0; i < n; i++) {
             vector<int> visited(n, 0);
-            vector<int> curr;
+            set<int> curr;
             
             dfs(i, adjList, visited, curr);
 
-            sort(curr.begin(), curr.end());
-            ans[i] = curr;
+            for (auto &x : curr) ans[i].push_back(x);
         };
 
         return ans;

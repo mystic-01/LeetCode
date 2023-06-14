@@ -19,7 +19,6 @@ private:
     
 public:
     vector<int> maximumBeauty(vector<vector<int>>& items, vector<int>& queries) {
-        vector<int> ans;
         sort(items.begin(), items.end(), comp);
         
         int last = -1;
@@ -30,9 +29,9 @@ public:
 
         for (auto &q : queries) {
             int idx = lowerBound(q, items);
-            ans.push_back(idx < 0 ? 0 : items[idx][1]);            
+            q = idx < 0 ? 0 : items[idx][1];            
         };
         
-        return ans;
+        return queries;
     };
 };

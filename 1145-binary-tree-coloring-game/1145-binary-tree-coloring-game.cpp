@@ -11,7 +11,7 @@
  */
 class Solution {
 private:
-    void getParent(TreeNode* root, map<TreeNode*, TreeNode*> &parent) {
+    void getParent(TreeNode* &root, map<TreeNode*, TreeNode*> &parent) {
         if (!root) return;
         if (root->left) {
             parent[root->left] = root;
@@ -23,7 +23,7 @@ private:
         };
     };
 
-    TreeNode* getNode(TreeNode* root, int &target) {
+    TreeNode* getNode(TreeNode* &root, int &target) {
         if (!root) return nullptr;
         if (root->val == target) return root;
         
@@ -36,7 +36,7 @@ private:
         return nullptr;
     };
     
-    int countNodesBfs(TreeNode* root, map<TreeNode*, TreeNode*> &parent, set<TreeNode*> &visited) {
+    int countNodesBfs(TreeNode* &root, map<TreeNode*, TreeNode*> &parent, set<TreeNode*> &visited) {
         int nodes = 0;
         queue<TreeNode*> q;
         if (root) q.push(root);

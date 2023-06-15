@@ -36,27 +36,29 @@ private:
         return nullptr;
     };
     
-    int countNodesBfs(TreeNode* &root, map<TreeNode*, TreeNode*> &parent, set<TreeNode*> &visited) {
+    int countNodesBfs(TreeNode* &root, map<TreeNode*, TreeNode*> &parent, bool *visited) {
         int nodes = 0;
         queue<TreeNode*> q;
-        if (root) q.push(root);
-        visited.insert(root);
+        if (root) {
+            q.push(root);
+            visited[root->val] = 1;
+        };
         
         while (!q.empty()) {
             TreeNode* node = q.front();
             q.pop();
             nodes++;
-            if (node->left && !visited.count(node->left)) {
+            if (node->left && !visited[node->left->val]) {
                 q.push(node->left); 
-                visited.insert(node->left);
+                visited[node->left->val] = 1;
             };
-            if (node->right && !visited.count(node->right)) {
+            if (node->right && !visited[node->right->val]) {
                 q.push(node->right); 
-                visited.insert(node->right);
+                visited[node->right->val] = 1;
             };
-            if (parent[node] && !visited.count(parent[node])) {
+            if (parent[node] && !visited[parent[node]->val]) {
                 q.push(parent[node]); 
-                visited.insert(parent[node]);
+                visited[parent[node]->val] = 1;
             };
         };
         
@@ -70,8 +72,8 @@ public:
         map<TreeNode*, TreeNode*> parent;
         getParent(root, parent);
         
-        set<TreeNode*> visited;
-        visited.insert(node);
+        bool visited[101] = {0};
+        visited[node->val] = 1;
         
         int a = countNodesBfs(node->left, parent, visited);
         int b = countNodesBfs(node->right, parent, visited);

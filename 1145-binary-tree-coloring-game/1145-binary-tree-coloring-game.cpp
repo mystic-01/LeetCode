@@ -36,30 +36,17 @@ private:
         return nullptr;
     };
     
-    int countNodesBfs(TreeNode* &root, map<TreeNode*, TreeNode*> &parent, bool *visited) {
+    int countNodesBfs(TreeNode* &root) {
         int nodes = 0;
         queue<TreeNode*> q;
-        if (root) {
-            q.push(root);
-            visited[root->val] = 1;
-        };
+        if (root) q.push(root);
         
         while (!q.empty()) {
             TreeNode* node = q.front();
             q.pop();
             nodes++;
-            if (node->left && !visited[node->left->val]) {
-                q.push(node->left); 
-                visited[node->left->val] = 1;
-            };
-            if (node->right && !visited[node->right->val]) {
-                q.push(node->right); 
-                visited[node->right->val] = 1;
-            };
-            if (parent[node] && !visited[parent[node]->val]) {
-                q.push(parent[node]); 
-                visited[parent[node]->val] = 1;
-            };
+            if (node->left) q.push(node->left); 
+            if (node->right)q.push(node->right); 
         };
         
         return nodes;        
@@ -69,15 +56,10 @@ public:
     bool btreeGameWinningMove(TreeNode* root, int n, int x) {
         TreeNode* node = getNode(root, x);
         
-        map<TreeNode*, TreeNode*> parent;
-        getParent(root, parent);
+        int a = countNodesBfs(node->left);
+        int b = countNodesBfs(node->right);
         
-        bool visited[101] = {0};
-        visited[node->val] = 1;
-        
-        int a = countNodesBfs(node->left, parent, visited);
-        int b = countNodesBfs(node->right, parent, visited);
-        int c = countNodesBfs(parent[node], parent, visited);
+        int c = countNodesBfs(root) - a - b - 1;
 
         return a > b + c || b > a + c || c > a + b;
     };

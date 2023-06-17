@@ -1,12 +1,10 @@
 class Solution {
 public:
     int findNonMinOrMax(vector<int>& nums) {
-        int n = nums.size(), minE = nums[0], maxE = nums[0];
-
         set<int> s;
         
-        for (auto i = 0; i < n; i++) {
-            if (s.size() < 3) s.insert(nums[i]);
+        for (auto &i : nums) {
+            if (s.size() < 3) s.insert(i);
             else break;
         };
         auto it = s.begin();

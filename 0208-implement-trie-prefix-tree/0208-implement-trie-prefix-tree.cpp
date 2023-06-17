@@ -1,38 +1,39 @@
-class TrieNode {
-public:
-    TrieNode *child[26];
-    bool isWord;
-    TrieNode() {
-        isWord = false;
-        for (auto &a : child) a = nullptr;
-    }
+struct TrieNode {
+    TrieNode *child[26] = {nullptr};
+    bool isWord = false;
 };
+
 class Trie {
-    TrieNode* root;
+
+private:
+    TrieNode* root = new TrieNode();
+
 public:
     Trie() {
-        root = new TrieNode();
-    }
+
+    };
+    
     void insert(string s) {
         TrieNode *p = root;
         for (auto &a : s) {
             int i = a - 'a';
             if (!p->child[i]) p->child[i] = new TrieNode();
             p = p->child[i];
-        }
+        };
         p->isWord = true;
-    }
-    bool search(string key, bool prefix=false) {
+    };
+    
+    bool search(string key, bool prefix = false) {
         TrieNode *p = root;
         for (auto &a : key) {
             int i = a - 'a';
             if (!p->child[i]) return false;
             p = p->child[i];
-        }
-        if (prefix==false) return p->isWord;
-        return true;
-    }
+        };
+        return (!prefix) ? p->isWord : true;
+    };
+    
     bool startsWith(string prefix) {
         return search(prefix, true);
-    }
+    };
 };

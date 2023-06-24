@@ -5,12 +5,12 @@ public:
         if (arr[xLeft][yLeft][zLeft][prev] != -1) return arr[xLeft][yLeft][zLeft][prev];
         
         if (prev == 0) {
-            takeX = 1 + recurse(xLeft - 1, yLeft, zLeft, 1, arr);
-            takeY = 1 + recurse(xLeft, yLeft - 1, zLeft, 2, arr);
-            takeZ = 1 + recurse(xLeft, yLeft, zLeft - 1, 3, arr);
+            takeX = (xLeft == 0 ? 0 : 1 + recurse(xLeft - 1, yLeft, zLeft, 1, arr));
+            takeY = (yLeft == 0 ? 0 : 1 + recurse(xLeft, yLeft - 1, zLeft, 2, arr));
+            takeZ = (zLeft == 0 ? 0 : 1 + recurse(xLeft, yLeft, zLeft - 1, 3, arr));
         } else if (prev == 1) {
             takeY = (yLeft == 0 ? 0 : 1 + recurse(xLeft, yLeft - 1, zLeft, 2, arr));
-        } else  {
+        } else {
             takeX = (xLeft == 0 ? 0 : 1 + recurse(xLeft - 1, yLeft, zLeft, 1, arr));
             takeZ = (zLeft == 0 ? 0 : 1 + recurse(xLeft, yLeft, zLeft - 1, 3, arr));            
         };

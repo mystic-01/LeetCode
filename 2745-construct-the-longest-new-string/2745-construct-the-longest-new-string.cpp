@@ -8,15 +8,14 @@ public:
             takeX = 1 + recurse(xLeft - 1, yLeft, zLeft, 1, arr);
             takeY = 1 + recurse(xLeft, yLeft - 1, zLeft, 2, arr);
             takeZ = 1 + recurse(xLeft, yLeft, zLeft - 1, 3, arr);
-            return  arr[xLeft][yLeft][zLeft][prev] = max(takeY, max(takeX, takeZ));            
         } else if (prev == 1) {
             takeY = (yLeft == 0 ? 0 : 1 + recurse(xLeft, yLeft - 1, zLeft, 2, arr));
-            return arr[xLeft][yLeft][zLeft][prev] = takeY;
         } else  {
             takeX = (xLeft == 0 ? 0 : 1 + recurse(xLeft - 1, yLeft, zLeft, 1, arr));
             takeZ = (zLeft == 0 ? 0 : 1 + recurse(xLeft, yLeft, zLeft - 1, 3, arr));            
-            return arr[xLeft][yLeft][zLeft][prev] =  max(takeX, takeZ);
         };
+        
+        return arr[xLeft][yLeft][zLeft][prev] = max(takeY, max(takeX, takeZ));            
     };
     
     int longestString(int x, int y, int z) {

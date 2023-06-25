@@ -1,6 +1,8 @@
 class Solution {
 public:
-    int recurse(int start, int &end, int fuel, int &mod, vector<int> &loc, int (*dp)[201]) {
+    // learn tabulation, was unable to write this in tabulation
+    
+    int recurse(int &start, int &end, int fuel, int &mod, vector<int> &loc, int (*dp)[201]) {
         if (fuel < 0) return 0;
         int ans = (start == end);
         

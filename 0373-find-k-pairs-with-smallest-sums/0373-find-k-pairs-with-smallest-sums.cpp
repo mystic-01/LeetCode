@@ -11,8 +11,8 @@ public:
         
         priority_queue<vector<int>, vector<vector<int>>, comp> pq;
         
-        for (auto &x : nums1) {
-            for (auto &y : nums2) {
+        for (int &x : nums1) {
+            for (int &y : nums2) {
                 if (pq.size() < k) pq.push({x, y});
                 else if (x + y < pq.top()[0] + pq.top()[1]) {
                     pq.push({x, y});

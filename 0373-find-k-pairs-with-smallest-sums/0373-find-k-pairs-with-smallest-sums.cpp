@@ -15,8 +15,8 @@ public:
             for (int &y : nums2) {
                 if (pq.size() < k) pq.push({x, y});
                 else if (x + y < pq.top().first + pq.top().second) {
-                    pq.push({x, y});
                     pq.pop();
+                    pq.push({x, y});
                 } else break;
             };        
         };

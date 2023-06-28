@@ -6,11 +6,11 @@ public:
         int n1 = nums1.size(), n2 = nums2.size();
         vector<vector<int>> ans;
         
-        auto comp = [&nums1, &nums2](pair<int, int> &v1, pair<int, int> &v2) {
+        auto comp = [&nums1, &nums2](pair<short, short> &v1, pair<short, short> &v2) {
             return nums1[v1.first] + nums2[v1.second] > nums1[v2.first] + nums2[v2.second];                     
         };
         
-        priority_queue<pair<int, int>, vector<pair<int, int>>, decltype(comp)> pq(comp);
+        priority_queue<pair<short, short>, vector<pair<short, short>>, decltype(comp)> pq(comp);
         pq.emplace(0, 0);
         
         while (k-- && pq.size()) {

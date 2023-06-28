@@ -36,9 +36,6 @@ public:
                 };
             };
         };
-        
-        for (auto i = 0; i < n; i++) cout << dist[i] << " ";        
-        
         return dist[end];
     };
 };

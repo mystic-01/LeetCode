@@ -23,14 +23,14 @@ public:
             return n1.distance > n2.distance;             
         };
         
-        // priority_queue<node, vector<node>, decltype(comp)> pq(comp);
-        queue<node> pq;
+        priority_queue<node, vector<node>, decltype(comp)> pq(comp);
+        
         
         dist[0][0] = 0, dist[0][1] = 0;
         pq.emplace(node(0, 0, -1));
         
         while (!pq.empty()) {
-            int idx = pq.front().idx, distance = pq.front().distance, color = pq.front().color;
+            int idx = pq.top().idx, distance = pq.top().distance, color = pq.top().color;
             pq.pop();
             
             for (auto &[first, second] : adjList[idx]) {

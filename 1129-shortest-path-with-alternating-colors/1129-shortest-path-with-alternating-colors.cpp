@@ -23,16 +23,18 @@ public:
             return n1.distance > n2.distance;             
         };
         
-        priority_queue<node, vector<node>, decltype(comp)> pq(comp);
+        // priority_queue<node, vector<node>, decltype(comp)> pq(comp);
+        queue<node> pq;
         
         dist[0][0] = 0, dist[0][1] = 0;
         pq.emplace(node(0, 0, -1));
         
         while (!pq.empty()) {
-            int idx = pq.top().idx, distance = pq.top().distance, color = pq.top().color;
+            int idx = pq.front().idx, distance = pq.front().distance, color = pq.front().color;
             pq.pop();
             
             for (auto &[first, second] : adjList[idx]) {
+                cout << idx << " : " << first << " - " << distance + 1 << " " << dist[first][second] << " - " << color << " " << second << "\n";
                 if (distance + 1 < dist[first][second] && (color == -1 || second == !color)) {
                     dist[first][second] = distance + 1;
                     pq.emplace(node(first, distance + 1, second));

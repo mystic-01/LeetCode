@@ -34,7 +34,6 @@ public:
             pq.pop();
             
             for (auto &[first, second] : adjList[idx]) {
-                cout << idx << " : " << first << " - " << distance + 1 << " " << dist[first][second] << " - " << color << " " << second << "\n";
                 if (distance + 1 < dist[first][second] && (color == -1 || second == !color)) {
                     dist[first][second] = distance + 1;
                     pq.emplace(node(first, distance + 1, second));

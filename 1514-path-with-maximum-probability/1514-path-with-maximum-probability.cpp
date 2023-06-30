@@ -9,9 +9,10 @@ public:
         };
         
         double dist[n];
-        bool vis[n];
+        // bool vis[n];
         
-        for (auto i = 0; i < n; i++) dist[i] = 0, vis[i] = 0;
+        for (auto i = 0; i < n; i++) dist[i] = 0;
+        // , vis[i] = 0;
         dist[start] = 1.0;
 
         auto comp = [](pair<double, int> &p1, pair<double, int> &p2) {
@@ -26,15 +27,15 @@ public:
             double wt = pq.top().first;
             int idx = pq.top().second;
             pq.pop();
-            if (!vis[idx]) {
-                vis[idx] = 1;
+            // if (!vis[idx]) {
+                // vis[idx] = 1;
                 for (auto &[first, second] : adjList[idx]) {
                     if (first * wt > dist[second]) {
                         dist[second] = first * wt;
                         pq.push({dist[second], second});                    
                     };                
                 };
-            };
+            // };
         };
         return dist[end];
     };

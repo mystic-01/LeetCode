@@ -23,20 +23,20 @@ public:
             return n1.distance > n2.distance;             
         };
         
-        priority_queue<node, vector<node>, decltype(comp)> pq(comp);
+        queue<node> q;
         
         
         dist[0][0] = 0, dist[0][1] = 0;
-        pq.emplace(node(0, 0, -1));
+        q.emplace(node(0, 0, -1));
         
-        while (!pq.empty()) {
-            int idx = pq.top().idx, distance = pq.top().distance, color = pq.top().color;
-            pq.pop();
+        while (!q.empty()) {
+            int idx = q.front().idx, distance = q.front().distance, color = q.front().color;
+            q.pop();
             
             for (auto &[first, second] : adjList[idx]) {
                 if (distance + 1 < dist[first][second] && (color == -1 || second == !color)) {
                     dist[first][second] = distance + 1;
-                    pq.emplace(node(first, distance + 1, second));
+                    q.emplace(node(first, distance + 1, second));
                 };
             };
         };

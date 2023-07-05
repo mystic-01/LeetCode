@@ -6,7 +6,6 @@ public:
             return;
         };
         int lastNum = ds.back() - '0';
-        
         for (int i = 1; i <= 9; i++, lastNum += (pattern[idx] == 'I' ? 1 : -1)) {
             if (lastNum >= 1 && lastNum <= 9 && !vis[lastNum]) {
                 vis[lastNum] = 1;            

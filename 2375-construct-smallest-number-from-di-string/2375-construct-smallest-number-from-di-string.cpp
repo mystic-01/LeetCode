@@ -22,6 +22,7 @@ public:
         string ans = "", ds = "";
         bool vis[10] = {0};
         for (int i = 1; i <= 9; i++) {
+            if (ans.size()) return ans;
             vis[i] = 1;
             ds += to_string(i);
             recurse(0, pattern, ans, ds, vis);

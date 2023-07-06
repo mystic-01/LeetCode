@@ -10,8 +10,15 @@ public:
             m[senders[i]] += count;
             
             if (m[senders[i]] > maxCount) ans = senders[i], maxCount = m[senders[i]];
-            else if (m[senders[i]] == maxCount && senders[i] > ans) {
-                ans = senders[i], maxCount = m[senders[i]];
+            else if (m[senders[i]] == maxCount) {
+                int isSwapNeeded = -1;
+                for (int j = 0; j < senders[i].size() && j < ans.size(); j++) {
+                    if (senders[i][j] != ans[j]) {
+                        isSwapNeeded = (senders[i][j] > ans[j]);
+                        break;
+                    };
+                };    
+                if ((isSwapNeeded == -1 && senders[i].size() > ans.size()) || (isSwapNeeded == 1)) ans = senders[i];
             };
         };
         return ans;

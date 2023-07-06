@@ -12,22 +12,12 @@ public:
             else if (m[senders[i]] == maxCount) {
                 int isSwapNeeded = -1;
                 for (int j = 0; j < senders[i].size() && j < ans.size(); j++) {
-                    if (senders[i][j] > ans[j]) {
-                        isSwapNeeded = 1;
-                        break;
-                    } else if (ans[j] > senders[i][j]) {
-                        isSwapNeeded = 0;
+                    if (senders[i][j] != ans[j]) {
+                        isSwapNeeded = (senders[i][j] > ans[j]);
                         break;
                     };
                 };    
-                switch (isSwapNeeded) {
-                    case -1:
-                        if (senders[i].size() > ans.size()) ans = senders[i];
-                        break;
-                    case 1:
-                        ans = senders[i];
-                        break;
-                };
+                if ((isSwapNeeded == -1 && senders[i].size() > ans.size()) || (isSwapNeeded == 1)) ans = senders[i];
             };
         };
         return ans;

@@ -8,6 +8,7 @@ public:
             int count = 1;
             for (char &x : messages[i]) if (x == ' ') count++;
             m[senders[i]] += count;
+            
             if (m[senders[i]] > maxCount) ans = senders[i], maxCount = m[senders[i]];
             else if (m[senders[i]] == maxCount) {
                 int isSwapNeeded = -1;

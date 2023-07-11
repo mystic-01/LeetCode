@@ -27,35 +27,35 @@ public:
         getParent(root, m);
         m[root] = nullptr;
         
-        queue<pair<TreeNode*, int>> q;
-        q.push({target, 0});
+        queue<TreeNode*> q;
+        q.push(target);
         visited.insert(target);
         
-        while (!q.empty()) {
+        while (!q.empty() && k--) {
             int size = q.size();
             for (auto i = 0; i < size; i++) {
-                TreeNode* node = q.front().first;
-                int dist = q.front().second;
+                TreeNode* node = q.front();
                 q.pop();
                 
-                if (dist == k) {
-                    ans.push_back(node->val);
-                    continue;
-                };
                 if (node->left && !visited.count(node->left)) {
-                    q.push({node->left, dist + 1});
+                    q.push(node->left);
                     visited.insert(node->left);
                 };
                 if (node->right && !visited.count(node->right)) {
-                    q.push({node->right, dist + 1});
+                    q.push(node->right);
                     visited.insert(node->right);
                 };
                 if (m[node] && !visited.count(m[node])) {
-                    q.push({m[node], dist + 1});
+                    q.push(m[node]);
                     visited.insert(m[node]);
                 };
             };
         };
+        
+        while (!q.empty()) {
+            ans.push_back(q.front()->val); 
+            q.pop();
+        };        
         return ans;
     };
 };

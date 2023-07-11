@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-    void getParent(TreeNode *root, map<TreeNode*, TreeNode*> &m) {
+    void getParent(TreeNode * &root, map<TreeNode*, TreeNode*> &m) {
         if (root->left) {
             m[root->left] = root;
             getParent(root->left, m);
@@ -22,7 +22,7 @@ public:
         };        
     };
     
-    TreeNode *findNode(TreeNode *root, int &start) {
+    TreeNode *findNode(TreeNode * &root, int &start) {
         if (!root) return nullptr;
         if (root->val == start) return root;
         TreeNode *left = findNode(root->left, start);

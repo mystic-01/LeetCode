@@ -11,14 +11,12 @@ public:
         
         for (auto i = qSize - 1; i >= 0; i--) {
             bool isRow = q[i][0];
-            int idx = q[i][1], wt = q[i][2], count = n;
+            int idx = q[i][1], wt = q[i][2], count = 0;
             
             if (isRow) {
-                if (row[idx] != 0) count = 0;
-                else count = freeColCount, freeRowCount--, row[idx] = wt;
+                if (row[idx] == 0) count = freeColCount, freeRowCount--, row[idx] = wt;
             } else {
-                if (col[idx] != 0) count = 0;
-                else count = freeRowCount, freeColCount--, col[idx] = wt;
+                if (col[idx] == 0) count = freeRowCount, freeColCount--, col[idx] = wt;
             };
             ans += (count * wt);
         }; 

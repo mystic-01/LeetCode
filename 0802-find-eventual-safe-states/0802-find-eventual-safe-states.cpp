@@ -4,8 +4,8 @@ public:
         visited[node] = -1;
         
         for (int &child : graph[node]) {
-            if (visited[child] == -1) return false;
-            else if (visited[child] == 1) continue;
+            if (visited[child] == 1) continue;
+            else if (visited[child] == -1) return false;
             else {
                 if (!checkIfParentFound(child, graph, visited)) return false;
             };

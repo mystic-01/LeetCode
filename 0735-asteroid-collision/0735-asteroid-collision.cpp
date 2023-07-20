@@ -1,21 +1,19 @@
 class Solution {
 public:
+    // Using only a vector, no stack needed!!!
     vector<int> asteroidCollision(vector<int>& asteroids) {
-        stack<int> st;
+        vector<int> ans;
         for (int &x : asteroids) {
             if (x < 0) {
-                if (st.empty() || st.top() < 0) st.push(x);
+                if (!ans.size() || ans.back() < 0) ans.push_back(x);
                 else {
                     int neg = x * -1; 
-                    while (!st.empty() && st.top() > 0 && neg > st.top()) st.pop();
-                    if (st.empty() || neg > st.top()) st.push(x);
-                    else if (neg == st.top()) st.pop();
+                    while (ans.size() && ans.back() > 0 && neg > ans.back()) ans.pop_back();
+                    if (!ans.size() || neg > ans.back()) ans.push_back(x);
+                    else if (neg == ans.back()) ans.pop_back();
                 };
-            } else st.push(x);    
+            } else ans.push_back(x);    
         };
-
-        vector<int> ans(st.size());
-        for (int i = st.size() - 1; i >= 0; i--) ans[i] = st.top(), st.pop();
         return ans;
     };
 };

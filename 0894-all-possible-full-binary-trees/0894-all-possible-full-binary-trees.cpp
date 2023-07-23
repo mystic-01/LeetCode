@@ -1,22 +1,14 @@
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
+/*
+DIY!!
+*/
 class Solution {
 public:
-      TreeNode* clone(TreeNode* root) {
-    TreeNode* new_root = new TreeNode(0);
-    new_root->left = (root->left) ? clone(root->left) : nullptr;
-    new_root->right = (root->right) ? clone(root->right) : nullptr; 
-    return new_root;
-  } 
+    TreeNode* clone(TreeNode* root) {
+        TreeNode* new_root = new TreeNode(0);
+        new_root->left = (root->left) ? clone(root->left) : nullptr;
+        new_root->right = (root->right) ? clone(root->right) : nullptr; 
+        return new_root;
+    } 
 
   vector<TreeNode*> allPossibleFBT(int N) {
     std::vector<TreeNode*> ret;

@@ -1,8 +1,8 @@
 class Solution {
 public:
     int superPow(int num, vector<int>& b) {
+        long long ans = 1, a = num;
         int mod = 1337, i = 0, n = b.size();        
-        long long ans = 1, a = num % mod;
         while (i < n) {
             if (b.back() % 2) ans = (ans * a) % mod, b.back() -= 1;
             else {

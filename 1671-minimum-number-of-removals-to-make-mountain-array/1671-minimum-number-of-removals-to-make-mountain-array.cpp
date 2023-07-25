@@ -4,8 +4,12 @@ public:
     
     int minimumMountainRemovals(vector<int>& nums) {
         int n = nums.size(), best = 0;
-        vector<int> left(n, 0), right(n, 0);
+        int left[n], right[n];
         
+        for (int i = 0; i < n; i++) left[i] = 0, right[i] = 0;
+
+            
+        // Find max no of increasing elements (more formally, lis subsequence) on the 'left' of the element. 
         for (int i = 0; i < n; i++) {
             for (int j = i - 1; j >= 0; j--) {
                 if (nums[i] > nums[j]) {
@@ -14,6 +18,7 @@ public:
             };        
         };
         
+        // Find max no of increasing elements on the 'right' of the element. 
         for (int i = n - 1; i >= 0; i--) {
             for (int j = i + 1; j < n; j++) {
                 if (nums[i] > nums[j]) {

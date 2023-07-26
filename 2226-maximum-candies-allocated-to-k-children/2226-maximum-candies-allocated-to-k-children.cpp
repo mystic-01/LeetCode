@@ -4,10 +4,12 @@ public:
         int n = nums.size(), ans = 0, lo = 0, hi = 1e7;
         
         while (lo <= hi) {
-            int mid = (hi - lo) / 2 + lo, i = 0;
+            int mid = (hi - lo) / 2 + lo;
             long long kDupe = k;
             if (mid) {
-                while (kDupe > 0 && i < n) kDupe -= (nums[i] / mid), i++;
+                for (int i = 0; kDupe > 0 && i < n; i++) {
+                    kDupe -= (nums[i] / mid);
+                };
             };
             if (kDupe <= 0) ans = mid, lo = mid + 1;
             else hi = mid - 1;

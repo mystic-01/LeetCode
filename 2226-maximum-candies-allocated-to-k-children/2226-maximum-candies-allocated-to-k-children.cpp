@@ -6,10 +6,8 @@ public:
         while (lo <= hi) {
             int mid = (hi - lo) / 2 + lo, i = 0;
             long long kDupe = k;
-            
-            while (kDupe > 0 && i < n) {
-                if (nums[i] >= mid && mid) kDupe -= (nums[i] / mid);
-                i++;
+            if (mid) {
+                while (kDupe > 0 && i < n) kDupe -= (nums[i] / mid), i++;
             };
             if (kDupe <= 0) ans = mid, lo = mid + 1;
             else hi = mid - 1;

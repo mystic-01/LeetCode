@@ -1,3 +1,35 @@
+/*
+Approach 1: 
+
+By comparing bits of curr & target
+TC - O(n * logn)
+SC - O(1)
+
+*/
+    
+class Solution {
+public:
+    vector<int> findArray(vector<int>& pref) {
+        int n = pref.size(), curr = pref[0];
+        
+        for (int i = 1; i < n; i++) {
+            int x = 0;
+            // We know, curr ^ x = pref[i] => x = curr ^ pref[i];
+            x = curr ^ pref[i];
+            curr = pref[i], pref[i] = x;
+        };
+        return pref;
+    };
+};
+
+/*
+
+Approach 1: 
+
+By comparing bits of curr & target
+TC - O(n * logn)
+SC - O(1)
+
 class Solution {
 public:
     vector<int> findArray(vector<int>& pref) {

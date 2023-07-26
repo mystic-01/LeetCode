@@ -1,18 +1,17 @@
 class Solution {
 public:
     vector<int> findArray(vector<int>& pref) {
-        int n = pref.size(), prev = pref[0];
+        int n = pref.size(), curr = pref[0];
         
         for (int i = 1; i < n; i++) {
-            int curr = prev, target = pref[i], num = 0, bit = 0;
+            int target = pref[i], num = 0, bit = 0;
             while (curr || target) {
                 if ((curr & 1) != (target & 1)) {
                     num = num | (1 << bit);
                 };
                 curr /= 2, target /= 2, bit++;
             };
-            prev = pref[i];
-            pref[i] = num;  
+            curr = pref[i], pref[i] = num;  
         };
         return pref;
     };

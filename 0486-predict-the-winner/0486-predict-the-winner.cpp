@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int recursePlayerOneScore(int left, int right, vector<int>& nums, vector<vector<int>>& dp) {
+    int recursePlayerOneScore(int left, int right, vector<int>& nums, int (*dp)[20]) {
         if (left > right) return 0;
         
         if (dp[left][right] != -1) return dp[left][right];
@@ -14,7 +14,14 @@ public:
     };
     
     bool PredictTheWinner(vector<int>& nums) {
-        vector<vector<int>> dp(21, vector<int>(21, -1));        
+        int dp[20][20];
+        
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 20; j++) {
+                dp[i][j] = -1;
+            };        
+        };        
+        
         int sum = accumulate(nums.begin(), nums.end(), 0);
         int firstScore = recursePlayerOneScore(0, nums.size() - 1, nums, dp);
         

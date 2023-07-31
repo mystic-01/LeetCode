@@ -12,7 +12,6 @@ public:
         int notTake1 = recurse(idx1 + 1, idx2, s1, s2, dp);
         int notTake2 = recurse(idx1, idx2 + 1, s1, s2, dp);
 
-            
         return dp[idx1][idx2] = max(take, max(notTake1, notTake2));
     };
     

@@ -1,3 +1,5 @@
+int dp[1001][1001];
+
 class Solution {
 public:
     // longest (heaviest) common subsequence
@@ -15,14 +17,12 @@ public:
         return dp[idx1][idx2] = max(take, max(notTake1, notTake2));
     };
     
-    int minimumDeleteSum(string s1, string s2) {
+    int minimumDeleteSum(string &s1, string &s2) {
         int n1 = s1.size(), n2 = s2.size(), sum = 0;
         
         for (char &ch1 : s1) sum += int(ch1);
         for (char &ch2 : s2) sum += int(ch2);
-        
-        int dp[1001][1001];
-        
+                
         for (int i = 0; i < 1001; i++) {
             for (int j = 0; j < 1001; j++) {
                 dp[i][j] = -1;

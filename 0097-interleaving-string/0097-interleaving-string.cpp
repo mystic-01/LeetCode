@@ -6,9 +6,9 @@ public:
         // cout << idx1 << " " << idx2 << " " << idx3 << " " << s3.size() << "\n";
         if (idx1 == s1.size() && idx2 == s2.size() && idx3 == s3.size()) {
             // cout << "reached s3\n";
-            return 1;
+            return dp[idx1][idx2][idx3] = 1;
         };
-        if (idx1 >= s1.size() && idx2 >= s2.size()) return 0;
+        if (idx1 >= s1.size() && idx2 >= s2.size()) return dp[idx1][idx2][idx3] = 0;
     
         if (dp[idx1][idx2][idx3] != -1) return dp[idx1][idx2][idx3];
         

@@ -1,7 +1,7 @@
 class Solution {
 public:
     // longest (heaviest) common subsequence
-    int recurse(int idx1, int idx2, string &s1, string &s2, vector<vector<int>> &dp) {
+    int recurse(int idx1, int idx2, string &s1, string &s2, int (*dp)[1001]) {
         if (idx1 == s1.size() || idx2 == s2.size()) return 0;
         
         if (dp[idx1][idx2] != -1) return dp[idx1][idx2];            
@@ -19,12 +19,16 @@ public:
     int minimumDeleteSum(string s1, string s2) {
         int n1 = s1.size(), n2 = s2.size(), sum = 0;
         
-        for (auto &ch1 : s1) sum += int(ch1);
-        for (auto &ch2 : s2) sum += int(ch2);
+        for (char &ch1 : s1) sum += int(ch1);
+        for (char &ch2 : s2) sum += int(ch2);
         
-        vector<vector<int>> dp(n1, vector<int>(n2, -1));
-        // cout << sum << " " << 2 * recurse(0, 0, s1, s2, dp) << "\n";
-        // 115 116 97 97 202 -> 627 - 396
+        int dp[1001][1001];
+        
+        for (int i = 0; i < 1001; i++) {
+            for (int j = 0; j < 1001; j++) {
+                dp[i][j] = -1;
+            };        
+        };
         
         return sum - 2 * recurse(0, 0, s1, s2, dp);
     };

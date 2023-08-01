@@ -5,12 +5,11 @@ public:
             ans.push_back(ds);
             return;
         };
-        if (idx > n) return;
         
         ds.push_back(idx);
-        recurse(idx + 1, n, k, ans, ds);
+        if (idx <= n) recurse(idx + 1, n, k, ans, ds);
         ds.pop_back();
-        recurse(idx + 1, n, k, ans, ds);        
+        if (idx <= n) recurse(idx + 1, n, k, ans, ds);        
     };
     
     

@@ -24,8 +24,7 @@ public:
         
         for (int idx1 = s1.size() - 1; idx1 >= 0; idx1--) {
             for (int idx2 = s2.size() - 1; idx2 >= 0; idx2--) {
-                int take = 0;
-                if (s1[idx1] == s2[idx2]) take = 1 + dp[idx1 + 1][idx2 + 1];
+                int take = (s1[idx1] == s2[idx2]) ? take = 1 + dp[idx1 + 1][idx2 + 1] : 0;
                 int notTake1 = dp[idx1 + 1][idx2];
                 int notTake2 = dp[idx1][idx2 + 1];
                 

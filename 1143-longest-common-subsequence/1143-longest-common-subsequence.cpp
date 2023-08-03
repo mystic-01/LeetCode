@@ -14,23 +14,18 @@ public:
 //     };
     
     int longestCommonSubsequence(string &s1, string &s2) {
-        int dp[1001][1001];
-        
-        for (int i = 0; i < 1001; i++) {
-            for (int j = 0; j < 1001; j++) {
-                dp[i][j] = 0;
-            };
-        };
+        int dp[1001] = {0}, prev[1001] = {0};
         
         for (int idx1 = s1.size() - 1; idx1 >= 0; idx1--) {
             for (int idx2 = s2.size() - 1; idx2 >= 0; idx2--) {
-                int take = (s1[idx1] == s2[idx2]) ? take = 1 + dp[idx1 + 1][idx2 + 1] : 0;
-                int notTake1 = dp[idx1 + 1][idx2];
-                int notTake2 = dp[idx1][idx2 + 1];
+                int take = (s1[idx1] == s2[idx2]) ? take = 1 + prev[idx2 + 1] : 0;
+                int notTake1 = prev[idx2];
+                int notTake2 = dp[idx2 + 1];
                 
-                dp[idx1][idx2] = max(take, max(notTake1, notTake2));
+                dp[idx2] = max(take, max(notTake1, notTake2));
             };        
+            for (int i = 0; i < 1001; i++) prev[i] = dp[i];
         };
-        return dp[0][0];
+        return dp[0];
     };
 };

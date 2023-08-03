@@ -9,9 +9,9 @@ public:
     void recurse(int hIdx, int mIdx, int turnedOn, int *hours, int *minutes, set<string> &ans, pair<int, int> &ds, int (*dp)[64]) {
         if (turnedOn == 0) {
             if (!dp[ds.first][ds.second] && isValidTime(ds)) {
-                count++;
                 string hour = to_string(ds.first), minutes = to_string(ds.second);
                 string curr = hour + ":" + (minutes.size() == 1 ? "0" : "") + minutes; 
+                
                 ans.insert(curr);
                 dp[ds.first][ds.second] = 1;
             };
@@ -46,12 +46,8 @@ public:
             };
         };
         
-        // count = 0;
         recurse(0, 0, turnedOn, hours, minutes, ansSet, ds, dp);
-        
         for (auto &it : ansSet) ans.push_back(it);
-        
-        cout << count << "\n";
         return ans;
     };
 };

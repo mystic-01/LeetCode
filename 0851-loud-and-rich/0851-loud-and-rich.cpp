@@ -19,7 +19,7 @@ public:
         
         for (auto &vec : richer) adjList[vec[1]].push_back(vec[0]);
         
-        for (int i = 0; i < n; i++) dfs(i, adjList, ans, quiet);
+        for (int i = 0; i < n; i++) if (ans[i] == -1) dfs(i, adjList, ans, quiet);
                 
         return ans;
     };

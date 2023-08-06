@@ -28,7 +28,7 @@ public:
                     q.push(doublet(i, j));
                     grid[i][j] = 0;
                 } else {
-                    grid[i][j] = 2147364847;
+                    grid[i][j] = 1e5;
                 };                 
             };
         };

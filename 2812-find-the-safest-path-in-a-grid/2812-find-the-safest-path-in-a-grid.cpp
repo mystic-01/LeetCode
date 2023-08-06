@@ -1,92 +1,65 @@
+struct triplet {
+    int dist, x, y;
+    
+    triplet(int _dist, int _x, int _y) {
+        dist = _dist, x = _x,  y = _y;        
+    };
+};
+
 class Solution {
 public:
     int maximumSafenessFactor(vector<vector<int>>& grid) {
-        int row = grid.size(), col = grid[0].size(), ans = INT_MIN;
+        int n = grid.size();
         int offsets[4][2] = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
-        int offsetsMove[2][2] = {{0, 1}, {1, 0}};
-        vector<vector<int>> distFromThief(row, vector<int>(col, INT_MAX));
 
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < col; j++) {
+        queue<triplet> q;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
                 if (grid[i][j] == 1) {
-                    queue<vector<int>> q;
-                    q.push({i, j, 0});
+                    q.push(triplet(0, i, j));
                     grid[i][j] = -1;
-                    distFromThief[i][j] = 0;
-                    
-                    while (!q.empty()) {
-                        int x = q.front()[0], y = q.front()[1], dist = q.front()[2];
-                        q.pop();
-                        for (int k = 0; k < 4; k++) {
-                            int a = x + offsets[k][0], b = y + offsets[k][1];    
-                            if (a < row && a >= 0 && b < col && b >= 0 && distFromThief[a][b] > dist + 1) {
-                                if (grid[a][b] == 1) {
-                                    q.push({a, b, 0});
-                                    grid[a][b] = -1;
-                                    distFromThief[a][b] = 0;
-                                } else {
-                                    q.push({a, b, dist + 1});
-                                    grid[a][b] = -1;
-                                    distFromThief[a][b] = dist + 1;
-                                };    
-                            };
-                        };
+                    grid[i][j] = 0;
+                } else {
+                    grid[i][j] = 2147364847;
+                };                 
+            };
+        };
+        
+        while (!q.empty()) {
+            int x = q.front().x, y = q.front().y, dist = q.front().dist;
+            q.pop();
+            for (int k = 0; k < 4; k++) {
+                int a = x + offsets[k][0], b = y + offsets[k][1];    
+                if (a < n && a >= 0 && b < n && b >= 0 && grid[a][b] > dist + 1) {
+                    q.push(triplet(dist + 1, a, b));
+                    grid[a][b] = dist + 1;
+                };
+            };
+        };
+
+        auto comp = [](const triplet &t1, const triplet &t2) {
+            return t1.dist < t2.dist;            
+        };
+        
+        priority_queue<triplet, vector<triplet>, decltype(comp)> pq;
+        pq.push(triplet(grid[0][0], 0, 0));
+        
+        while (!pq.empty()) {
+            int x = pq.top().x, y = pq.top().y, dist = pq.top().dist;
+            pq.pop();
+            if (x == n - 1 && y == n - 1) return dist;
+            else {
+                for (int k = 0; k < 4; k++) {
+                    int a = x + offsets[k][0], b = y + offsets[k][1];    
+                    if (a >= 0 && b >= 0 && a < n && b < n && grid[a][b] != -1) {
+                        pq.push(triplet(min(dist, grid[a][b]), a, b));
+                        grid[a][b] = -1;
                     };
                 };
             };
         };
         
-        priority_queue<pair<int, pair<int, int>>> q;
-        q.push({distFromThief[0][0], {0, 0}});
-        while (!q.empty()) {
-            int x = q.top().second.first, y = q.top().second.second, dist = q.top().first;
-                q.pop();
-                        
-                if (x == row - 1 && y == col - 1) {
-                    ans = max(ans, dist);
-                    break;
-                } else {
-                    for (int k = 0; k < 4; k++) {
-                        int a = x + offsets[k][0], b = y + offsets[k][1];    
-                        if (a >= 0 && b >= 0 && a < row && b < col && distFromThief[a][b] != -1) {
-                            q.push({min(dist, distFromThief[a][b]), {a, b}});
-                            distFromThief[a][b] = -1;
-                        };
-                    };
-
-                };
-            };
-        
-        return ans;
+        return -1;
     };
 };
-
-/*
-[[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1]
-,[0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0]
-,[0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0]
-,[0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0]
-,[0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0]
-,[0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0]
-,[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-,[0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-,[0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,1,0,0]
-,[0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,1,0,0,0,0]
-,[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-,[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-,[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-,[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0]
-,[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0]
-,[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0]
-,[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-,[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0]
-,[0,0,1,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0]
-,[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0]
-,[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-,[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-,[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-,[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-,[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0]
-,[0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0]]
-
-*/

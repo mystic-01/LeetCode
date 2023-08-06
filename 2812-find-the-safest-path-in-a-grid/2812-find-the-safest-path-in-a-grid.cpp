@@ -1,3 +1,11 @@
+struct doublet {
+    int x, y;
+    
+    doublet(int _x, int _y) {
+        x = _x,  y = _y;        
+    };
+};
+
 struct triplet {
     int dist, x, y;
     
@@ -12,13 +20,12 @@ public:
         int n = grid.size();
         int offsets[4][2] = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
 
-        queue<triplet> q;
+        queue<doublet> q;
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 if (grid[i][j] == 1) {
-                    q.push(triplet(0, i, j));
-                    grid[i][j] = -1;
+                    q.push(doublet(i, j));
                     grid[i][j] = 0;
                 } else {
                     grid[i][j] = 2147364847;
@@ -27,12 +34,12 @@ public:
         };
         
         while (!q.empty()) {
-            int x = q.front().x, y = q.front().y, dist = q.front().dist;
+            int x = q.front().x, y = q.front().y, dist = grid[x][y];
             q.pop();
             for (int k = 0; k < 4; k++) {
                 int a = x + offsets[k][0], b = y + offsets[k][1];    
                 if (a < n && a >= 0 && b < n && b >= 0 && grid[a][b] > dist + 1) {
-                    q.push(triplet(dist + 1, a, b));
+                    q.push(doublet(a, b));
                     grid[a][b] = dist + 1;
                 };
             };

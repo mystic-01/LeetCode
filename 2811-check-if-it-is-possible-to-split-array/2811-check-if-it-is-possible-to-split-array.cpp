@@ -28,9 +28,6 @@ public:
                 dp[j][k] = -1;
             };
         };
-        
-        // vector<vector<vector<int>>> dp(totSum + 1, vector<vector<int>>(101, vector<int>(101, -1)));
         return recurse(0, n - 1, pre, nums, m, dp);
-        return 0;
     };
 };

@@ -1,7 +1,8 @@
 class Solution {
 public:
     bool kLengthApart(vector<int>& nums, int k) {
-        int dist = 0, gotOne = 0;
+        int dist = 0;
+        bool gotOne = 0;
         for (int &x : nums) {
             if (gotOne) {
                 if (x == 1) {

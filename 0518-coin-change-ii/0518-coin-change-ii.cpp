@@ -1,26 +1,24 @@
 class Solution {
 public:
-    int recurse(int idx, int amountLeft, vector<int>& coins, vector<vector<int>> &dp) {
-        if (amountLeft == 0) return dp[idx][amountLeft] = 1;
-        if (idx == coins.size()) return dp[idx][amountLeft] = 0;
-        
-        if (dp[idx][amountLeft] != -1) return dp[idx][amountLeft];
-        
-        int take = 0;
-        if (amountLeft - coins[idx] >= 0) take = recurse(idx, amountLeft - coins[idx], coins, dp);
-        
-        int notTake = recurse(idx + 1, amountLeft, coins, dp);
-        return dp[idx][amountLeft] = take + notTake;
-    };
-    
     int change(int amount, vector<int>& coins) {
-        // coins should not have dupes
-        // sort(coins.begin(), coind.end());
+        int n = coins.size();
+        vector<vector<int>> dp(n + 1, vector<int>(amount + 1, 0));
         
-        vector<vector<int>> dp(coins.size() + 1, vector<int>(amount + 1, -1));
+        for (int i = 0; i < n + 1; i++) dp[i][0] = 1;            
         
-        
-        
-        return recurse(0, amount, coins, dp);
+        for (int idx = n - 1; idx >= 0; idx--) {
+            for (int amountLeft = 0; amountLeft <= amount; amountLeft++) {
+                int take = 0;
+                if (amountLeft - coins[idx] >= 0) take = dp[idx][amountLeft - coins[idx]];
+                
+                int notTake = dp[idx + 1][amountLeft];
+                
+                dp[idx][amountLeft] = take + notTake;                                
+            };                    
+        };
+        return dp[0][amount];
     };
 };
+
+
+

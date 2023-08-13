@@ -1,17 +1,27 @@
 class Solution {
 public:
-    int countPaths(int i, int j, int m, int n, vector<vector<int>> &dp, vector<vector<int>>& obst) {
-        if (i >= (m) || j >= (n)) return 0;
-        if (obst[i][j] == 1) return 0;
-        if (i == (m-1) && j == (n-1)) return 1;
-        if (dp[i][j] !=-1) return dp[i][j];
-        return dp[i][j] = countPaths(i + 1, j, m, n, dp, obst) + countPaths(i, j + 1, m, n, dp, obst);
-    };
-    int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
-        int m = obstacleGrid.size(), n = obstacleGrid[0].size();
-        vector<vector<int>> dp(m + 1, vector<int>(n + 1, -1));
+    int recurse(int i, int j, int &m, int &n, vector<vector<int>> &grid, int (*dp)[102]) {
+        if (i > m || j > n) return dp[i][j] = 0;
+        if (i < m && j < n && grid[i][j] == 1) return dp[i][j] = 0;
+        if (i == m - 1 && j == n - 1) return dp[i][j] = 1;
+
+        if (dp[i][j] != -1) return dp[i][j]; 
         
-        int nums = countPaths(0, 0, m, n, dp, obstacleGrid);
-        return obstacleGrid[0][0] == 1 || m * n == 1 ? nums : dp[0][0];
+        int right = recurse(i + 1, j, m, n, grid, dp);
+        int down = recurse(i, j + 1, m, n, grid, dp);
+
+        return dp[i][j] = right + down;
+    };
+    
+    int uniquePathsWithObstacles(vector<vector<int>>& grid) {
+        int m = grid.size(), n = grid[0].size(), dp[102][102];
+        
+        for (int i = 0; i < 102; i++) {
+            for (int j = 0; j < 102; j++) {
+                dp[i][j] = -1;
+            };
+        };
+        
+        return recurse(0, 0, m, n, grid, dp);
     };
 };

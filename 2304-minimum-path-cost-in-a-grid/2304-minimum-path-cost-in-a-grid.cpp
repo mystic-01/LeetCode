@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int recurse(int i, int j, int &row, int &col, vector<vector<int>>& grid, vector<vector<int>>& moveCost, int (*dp)[52]) {
+    int recurse(int i, int j, int &row, int &col, vector<vector<int>>& grid, vector<vector<int>>& moveCost, int (*dp)[51]) {
         if (i == row - 1) return grid[i][j];
         
         if (dp[i][j] != -1) return dp[i][j];
@@ -16,10 +16,10 @@ public:
     
     
     int minPathCost(vector<vector<int>>& grid, vector<vector<int>>& moveCost) {
-        int row = grid.size(),  col = grid[0].size(), ans = 1e7, dp[52][52];
+        int row = grid.size(),  col = grid[0].size(), ans = 1e7, dp[51][51];
         
-        for (int i = 0; i < 52; i++) {
-            for (int j = 0; j < 52; j++) {
+        for (int i = 0; i < 51; i++) {
+            for (int j = 0; j < 51; j++) {
                 dp[i][j] = -1;
             };
         };

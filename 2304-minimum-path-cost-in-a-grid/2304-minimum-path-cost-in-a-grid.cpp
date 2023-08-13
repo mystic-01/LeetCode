@@ -28,11 +28,6 @@ public:
             ans = min(ans, recurse(0, j, row, col, grid, moveCost, dp));
         };        
         
-        // for (int i = 0; i < 52; i++) {
-        //     for (int j = 0; j < 52; j++) {
-        //         if (dp[i][j] != -1) cout << i << " " << j << " " << dp[i][j] << "\n";
-        //     };
-        // };        
         return ans;
     };
 };

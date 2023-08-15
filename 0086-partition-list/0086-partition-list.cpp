@@ -11,8 +11,7 @@
 class Solution {
 public:
     ListNode* partition(ListNode* head, int x) {
-        ListNode *dummy = new ListNode(69), *prev, *lastSmall, *curr = head;
-        dummy->next = head, lastSmall = dummy, prev = dummy;
+        ListNode *dummy = new ListNode(69, head), *prev = dummy, *lastSmall = dummy, *curr = head;
         
         while (curr) {
             if (curr->val < x) {

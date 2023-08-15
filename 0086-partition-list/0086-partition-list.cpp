@@ -1,19 +1,37 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
 class Solution {
 public:
     ListNode* partition(ListNode* head, int x) {
-        ListNode* newHead = new ListNode(69), * prev = new ListNode(69);
-        ListNode * curr = head, * newCurr = newHead, * newPrev = prev;
-        prev->next = head;
+        ListNode *dummy = new ListNode(69), *prev, *lastSmall, *curr = head;
+        dummy->next = head, lastSmall = dummy, prev = dummy;
+        
         while (curr) {
             if (curr->val < x) {
-                newCurr = newCurr->next = curr;
-                newPrev->next = curr->next;
-            } else {
-                newPrev = curr;
-            };
-            curr = curr->next;
+                if (lastSmall->next == curr) {
+                    lastSmall = prev = curr, curr = curr->next;
+                } else {
+                    // Detach curr and join prev with curr's next
+                    prev->next = curr->next;                
+
+                    // Attach curr's next to last small's next; Then attach last small's next to curr and move lastSmall forward 
+                    curr->next = lastSmall->next;
+                    lastSmall = lastSmall->next = curr;
+
+                    // Move Curr forward
+                    curr = curr->next;
+                };
+            } else prev = curr, curr = curr->next;                        
         };
-        newCurr->next = prev->next;
-        return newHead->next;
+        
+        return dummy->next;
     };
 };

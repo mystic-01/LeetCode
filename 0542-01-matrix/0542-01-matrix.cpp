@@ -1,3 +1,5 @@
+// From such a brute-ish solution to such a simple yet effective one!
+
 class Solution {
 public:
     vector<vector<int>> updateMatrix(vector<vector<int>>& mat) {
@@ -18,7 +20,6 @@ public:
         
         while (!q.empty()) {
             int x = q.front().first, y = q.front().second;    
-            // cout << x << " " << y << " " << "\n";
             q.pop();
             for (int i = 0; i < 4; i++) {
                 int a = x + offsets[i][0], b = y + offsets[i][1];                

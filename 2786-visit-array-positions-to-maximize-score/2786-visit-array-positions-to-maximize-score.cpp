@@ -1,6 +1,6 @@
 class Solution {
 public:
-    long long recurse(int idx, bool parity, int &n, int &x, vector<int> &nums, vector<vector<long long>> &dp) {
+    long long recurse(int idx, bool parity, int &n, int &x, vector<int> &nums, long long (*dp)[2]) {
         if (idx == n) return 0;
         
         if (dp[idx][parity] != -1) return dp[idx][parity];
@@ -17,9 +17,10 @@ public:
     
     long long maxScore(vector<int>& nums, int x) {
         int n = nums.size();
-        long long ans = nums[0];
         bool parity = nums[0] % 2;
-        vector<vector<long long>> dp(n, vector<long long>(2, -1));
+        long long ans = nums[0], dp[n][2];
+        
+        for (int i = 0; i < n; i++) dp[i][0] = dp[i][1] = -1; 
         
         ans += recurse(1, parity, n, x, nums, dp);
         

@@ -11,14 +11,14 @@ public:
         
         bool take1 = 0;
         if (idx1 < s1.size() && s1[idx1] == s3[idx3]) take1 = recurse(idx1 + 1, idx2, idx3 + 1, s1, s2, s3, dp);
-        // if (take1) return dp[idx1][idx2][idx3] = take1;
+        if (take1) return dp[idx1][idx2][idx3] = take1;
         
         bool take2 = 0;
         if (idx2 < s2.size() && s2[idx2] == s3[idx3]) take2 = recurse(idx1, idx2 + 1, idx3 + 1, s1, s2, s3, dp);
-        // if (take2) return dp[idx1][idx2][idx3] = take2;
+        if (take2) return dp[idx1][idx2][idx3] = take2;
         
         bool notTake = recurse(idx1 + 1, idx2 + 1, idx3, s1, s2, s3, dp);
-        // if (notTake) return dp[idx1][idx2][idx3] = notTake;
+        if (notTake) return dp[idx1][idx2][idx3] = notTake;
             
         return dp[idx1][idx2][idx3] = take1 || take2 || notTake;
     };

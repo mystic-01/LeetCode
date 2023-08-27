@@ -1,6 +1,6 @@
 class Solution {
 public:
-    bool canJump(int idx, int j, int n, vector<int> nums, vector<vector<int>>& dp) {
+    bool canJump(int idx, int j, int &n, vector<int> &nums, vector<vector<int>>& dp) {
         if (idx == n - 1) return true;
         if (dp[idx][j] != -1) return dp[idx][j];
         

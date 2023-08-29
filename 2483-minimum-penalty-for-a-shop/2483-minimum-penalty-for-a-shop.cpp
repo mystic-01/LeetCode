@@ -11,11 +11,7 @@ public:
             if (customers[i] == 'Y') penalty--;
             else penalty++;
             if (penalty < minPenalty) minIdx = i + 1, minPenalty = penalty;
-            // cout << penalty << " ";
         };
-        
-        // cout << "\n";
-        
         return minIdx;
     };
 };

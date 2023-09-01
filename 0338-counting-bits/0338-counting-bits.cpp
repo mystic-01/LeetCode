@@ -5,11 +5,7 @@ public:
         int i = 0;
         
         while (i <= n) {
-            int ones = 0, dupe = i;
-            
-            while (dupe) ones += (dupe % 2), dupe /= 2;
-            ans[i] = ones;
-            
+            ans[i] = ans[i / 2] + i % 2;
             i++;
         };
         

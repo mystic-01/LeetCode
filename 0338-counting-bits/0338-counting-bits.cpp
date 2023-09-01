@@ -1,7 +1,7 @@
 class Solution {
 public:
     vector<int> countBits(int n) {
-        vector<int> ans(n + 1);
+        vector<int> ans(n + 1, 0);
         int i = 0;
         
         while (i <= n) {

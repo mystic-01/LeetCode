@@ -4,27 +4,24 @@ public:
     
     long combinatrics(int &n, int &r) {
         long res = 1;
-        
-        for (int i = 1; i <= r; i++) {
-            res = ((res * (n - r + i)) / i) % mod;     
-        };
-        
+        for (int i = 1; i <= r; i++) res = ((res * (n - r + i)) / i) % mod;     
         return res;
     };
     
     int countKSubsequencesWithMaxBeauty(string s, int k) {
         long ans = 1;
-        vector<int> freq(26, 0);
-        set<char> st;
+        int freq[26] = {0}, unique = 0;
         
-        for (int i = 0; i < s.size(); i++) freq[s[i] - 'a']++, st.insert(s[i]);
-        if (k > st.size()) return 0; 
+        for (int i = 0; i < s.size(); i++) {
+            if (++freq[s[i] - 'a'] == 1) unique++;
+        };
+        
+        if (k > unique) return 0; 
             
-    	sort(freq.begin(), freq.end(), greater<int>());        
+    	sort(freq, freq + 26, greater<int>());
 
-        int i = 0;
-        while (i < k) {
-            ans = (ans * freq[i++]) % mod;
+        for (int i = 0; i < k; i++) {
+            ans = (ans * freq[i]) % mod;
         };
         
         int n = 0, r = 0;
@@ -56,8 +53,7 @@ public:
 4
 4
 4
-4
-
+4'
 
 5 4 3   2 1
 3 2 1 * 2 1

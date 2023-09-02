@@ -2,15 +2,16 @@ class Solution {
 public:
     int mod = 1e9 + 7;
     
-    long combinatrics(int &n, int &r) {
-        long res = 1;
-        for (int i = 1; i <= r; i++) res = ((res * (n - r + i)) / i) % mod;     
+    int combinatrics(int &n, int &r) {
+        int res = 1;
+        for (int i = 1; i <= r; i++) {
+            res = ((res * (n - r + i)) / i) % mod;     
+        };
         return res;
     };
     
     int countKSubsequencesWithMaxBeauty(string s, int k) {
-        long ans = 1;
-        int freq[26] = {0}, unique = 0;
+        int ans = 1, freq[26] = {0}, unique = 0;
         
         for (int i = 0; i < s.size(); i++) {
             if (++freq[s[i] - 'a'] == 1) unique++;
@@ -21,7 +22,7 @@ public:
     	sort(freq, freq + 26, greater<int>());
 
         for (int i = 0; i < k; i++) {
-            ans = (ans * freq[i]) % mod;
+            ans = ((long)ans * freq[i]) % mod;
         };
         
         int n = 0, r = 0;

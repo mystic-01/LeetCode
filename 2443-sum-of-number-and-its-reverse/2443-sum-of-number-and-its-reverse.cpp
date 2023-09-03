@@ -1,5 +1,16 @@
+// Solution 2 : Reverse Values Cached
+
 class Solution {
+private:
+    int rev[100001] = {0};
 public:
+    Solution() {
+        for (int i = 0; i <= 1e5; i++) {
+            if (rev[i] == 0) rev[i] = reverse(i);
+            if (rev[rev[i]] == 0) rev[rev[i]] = i;
+        }; 
+    };
+    
     int reverse(int num) {
         int ans = 0, digits = 0, mul = 1;
         
@@ -15,9 +26,8 @@ public:
     
     bool sumOfNumberAndReverse(int num) {
         for (int i = 0; i <= 1e5; i++) {
-            int rev = reverse(i);
-            // cout << i << " " << rev << "\n";
-            if (i + rev == num) return true;            
+            // cout << i << " " << rev[i] << "\n";
+            if (i + rev[i] == num) return true;            
         };                
         return false;
     };

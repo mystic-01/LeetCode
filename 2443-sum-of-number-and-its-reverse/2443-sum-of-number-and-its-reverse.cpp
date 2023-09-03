@@ -2,12 +2,9 @@
 
 class Solution {
 public:
-    int reverse(int num) {
-        int ans = 0, digits = 0, mul = 1;
+    int reverse(int num, int digits) {
+        int ans = 0, mul = 1;
         
-        while (num / mul > 0) {
-            mul *= 10, digits++;
-        };
         while (num) {
             ans += ((num % 10) * pow(10, digits - 1)), num /= 10, digits--;
         };
@@ -16,9 +13,10 @@ public:
     };
     
     bool sumOfNumberAndReverse(int num) {
-
+        int digits = 1;
         for (int i = 0; i <= num; i++) {
-            if (i + reverse(i) == num) return true;            
+            if (i == 10 || i == 100 || i == 1000 || i == 10000 || i == 100000) digits++; 
+            if (i + reverse(i, digits) == num) return true;            
         };                
         return false;
     };

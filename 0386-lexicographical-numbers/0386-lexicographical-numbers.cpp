@@ -1,10 +1,8 @@
+vector<int> cache;
+int maxSize = 50000;
 
 class Solution {
-private:
-    vector<int> cache;
-    int maxSize = 50000;
 public:
-    
     Solution() {
         recurse(1, maxSize, cache);        
     };

@@ -1,15 +1,26 @@
+
 class Solution {
+private:
+    vector<int> cache;
+    int maxSize = 50000;
 public:
-    void recurse(int i, int &n, vector<int> &ans) {
+    
+    Solution() {
+        recurse(1, maxSize, cache);        
+    };
+    
+    void recurse(int i, int &n, vector<int> &cache) {
         if (i > n) return;
-        ans.push_back(i);
-        recurse(i * 10, n, ans);
-        if (i % 10 != 9) recurse(i + 1, n, ans);
+        cache.push_back(i);
+        recurse(i * 10, n, cache);
+        if (i % 10 != 9) recurse(i + 1, n, cache);
     };
     
     vector<int> lexicalOrder(int n) {
-        vector<int> ans;
-        recurse(1, n, ans);
+        vector<int> ans(n);
+        for (int i = 0, j = 0; j < n; i++) {
+            if (cache[i] <= n) ans[j++] = cache[i];
+        };
         return ans;
     };
 };

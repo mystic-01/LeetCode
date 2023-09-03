@@ -16,15 +16,9 @@ public:
     };
     
     bool sumOfNumberAndReverse(int num) {
-        int rev[num + 1];
-        for (int i = 0; i <= num; i++) rev[i] = 0;
 
         for (int i = 0; i <= num; i++) {
-            // if (rev[i] == 0) 
-                rev[i] = reverse(i);
-            // if (rev[rev[i]] == 0) rev[rev[i]] = i;
-
-            if (i + rev[i] == num) return true;            
+            if (i + reverse(i) == num) return true;            
         };                
         return false;
     };

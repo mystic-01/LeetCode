@@ -21,10 +21,10 @@ public:
             int itemSize = ceil(size / (double)k);
             size -= itemSize;
 
-            ListNode* itemHead = temp, *prev = nullptr;
-            ans[i] = itemHead;
+            ListNode *prev = temp;
+            ans[i] = temp;
             
-            while (itemSize--) prev = itemHead, itemHead = itemHead->next, temp = temp->next; 
+            while (itemSize--) prev = itemSize == 0 ? prev : prev->next, temp = temp->next; 
             if (prev) prev->next = nullptr;
         };
         

@@ -1,6 +1,6 @@
 class Solution {
 public:
-    bool dfs(int source, int &dest, vector<vector<int>>& adjList, bool *vis) {
+    bool dfs(int &source, int &dest, vector<vector<int>>& adjList, bool *vis) {
         if (source == dest) return true;
         vis[source] = true;
         

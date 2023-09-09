@@ -11,15 +11,15 @@
  */
 class Solution {
 public:
-    bool check(TreeNode* root, TreeNode* subRoot) {
+    bool isSame(TreeNode* root, TreeNode* subRoot) {
         if (!root && !subRoot) return true;
-        if ((root && !subRoot) || (!root && subRoot)) return false;
-        return root->val == subRoot->val && check(root->left, subRoot->left) && check(root->right, subRoot->right);
+        if (!root || !subRoot) return false;
+        return root->val == subRoot->val && isSame(root->left, subRoot->left) && isSame(root->right, subRoot->right);
     };
 
     bool isSubtree(TreeNode* root, TreeNode* subRoot) {
         if (!root && !subRoot) return true;
-        if ((root && !subRoot) || (!root && subRoot)) return false;
-        return (root->val == subRoot->val && check(root, subRoot)) || isSubtree(root->left, subRoot) || isSubtree(root->right, subRoot);
+        if (!root || !subRoot) return false;
+        return (root->val == subRoot->val && isSame(root, subRoot)) || isSubtree(root->left, subRoot) || isSubtree(root->right, subRoot);
     };
 };

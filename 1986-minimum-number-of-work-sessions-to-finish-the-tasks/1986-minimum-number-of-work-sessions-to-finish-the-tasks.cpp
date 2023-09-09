@@ -1,7 +1,6 @@
 class Solution {
 public:
     int recurse(int tasks, int timeLeft, int &sessionTime, int &n, vector<int>& nums, int (*dp)[16]) {
-        // cout << tasks << "\n";
         if (tasks == pow(2, n) - 1) return 1;
         
         if (dp[tasks][timeLeft] != -1) return dp[tasks][timeLeft];

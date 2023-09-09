@@ -18,13 +18,11 @@ public:
     
     int combinationSum4(vector<int>& nums, int target) {
         int n = nums.size(), dp[n + 1][1001];
-        
         for (int i = 0; i < n + 1; i++) {
             for (int j = 0; j < 1001; j++) {
                 dp[i][j] = -1;    
             };
         };
-        
         return recurse(0, target, n, nums, dp);    
     };
 };

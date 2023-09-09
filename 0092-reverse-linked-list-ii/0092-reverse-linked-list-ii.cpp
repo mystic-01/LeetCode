@@ -10,49 +10,31 @@
  */
 class Solution {
 public:
+    ListNode* reverse(ListNode *start, ListNode *end) {
+        ListNode *curr = start, *prev = end->next, *limit = end->next, *nextNode = nullptr;
+        while (curr != limit) {
+            nextNode = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = nextNode;
+        };
+        return prev;
+    };
+    
     ListNode* reverseBetween(ListNode* head, int left, int right) {
-        if (left == right) return head;
-        int count = 0;
-        ListNode * temp = head, * prev = head, * nextNode, * rightPointer, * rightNext;
+        ListNode *dummy = new ListNode(69),  *prevOfLeft = dummy, *start = nullptr, *temp = head;
+        dummy->next = head;
         
-        while (temp != NULL) {
-            count++;
-            if (count == right) {
-                rightPointer = temp;
-                rightNext = temp->next;
-                break;
-            }
+        while (right) {
+            left--, right--;
+
+            if (left == 0) start = temp;
+            else if (left > 0) prevOfLeft = prevOfLeft->next;
+            
+            if (right == 0) prevOfLeft->next = reverse(start, temp);
             temp = temp->next;
         };
-        temp = head;
-        count = 0;
         
-        while (temp != NULL) {
-            count++;
-            if (count == left) {
-                ListNode * leftPointer = temp;
-                nextNode = temp->next;
-                prev->next = rightPointer;
-                prev = temp;
-                temp = nextNode;
-                count++;
-                while (count <= right && temp != NULL) {
-                    nextNode = temp->next;
-                    temp->next = prev;
-                    prev = temp;
-                    temp = nextNode;
-                    count++;
-                }
-                leftPointer->next = rightNext;
-                if (left == 1) {
-                    return rightPointer;
-                }
-                break;
-            }
-            nextNode = temp->next;
-            prev = temp;
-            temp = nextNode;
-        };
-        return head;
+        return dummy->next;
     };
 };

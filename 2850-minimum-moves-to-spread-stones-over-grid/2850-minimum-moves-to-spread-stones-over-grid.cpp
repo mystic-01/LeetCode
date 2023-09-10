@@ -36,8 +36,7 @@ public:
         int ans = 2147483647;
         for (int i = 0; i < grid.size(); i++) {
             for (int j = 0; j < grid[0].size(); j++) {
-                vector<vector<int>> dupe = grid;
-                if (grid[i][j] == 0) ans = min(ans, recurse(i, j, dupe));
+                if (grid[i][j] == 0) ans = min(ans, recurse(i, j, grid));
             };        
         };
         return ans == 2147483647 ? 0 : ans;

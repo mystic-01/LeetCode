@@ -13,7 +13,7 @@ public:
                 int curr = q.front();
                 q.pop();
                 if (curr == goal) return steps;
-                if (curr < 0 || curr > 1000 || visited[curr]) continue;
+                else if (curr < 0 || curr > 1000 || visited[curr]) continue;
                 for (int j = 0; j < n; j++) {
                     for (int child : {curr + nums[j], curr - nums[j], curr ^ nums[j]}) {
                         q.push(child);

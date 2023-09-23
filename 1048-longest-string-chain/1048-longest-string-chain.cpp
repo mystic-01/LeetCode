@@ -1,12 +1,14 @@
 class Solution {
 public:
+    
+    // Learning - When to use DP and when to use BFS.
+    // Learning 2 - If you're adding letters to generate and find all possible combos, 
+    // you may be able to do the same by deleting one character from a larger string.
     int longestStrChain(vector<string>& words) {
         int n = words.size(), best = 0;
-        
-        auto comp = [](const string &str1, const string &str2) {
+        sort(words.begin(), words.end(), [](const string &str1, const string &str2) {
             return str1.size() > str2.size();    
-        };
-        sort(words.begin(), words.end(), comp);
+        });
         
         unordered_map<string, bool> dict;
         queue<string> q;

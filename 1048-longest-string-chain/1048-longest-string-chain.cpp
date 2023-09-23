@@ -3,8 +3,8 @@ public:
     int longestStrChain(vector<string>& words) {
         int n = words.size(), best = 0;
         
-        auto comp = [](const string &string1, const string &string2) {
-            return string1.size() < string2.size();    
+        auto comp = [](const string &str1, const string &str2) {
+            return str1.size() > str2.size();    
         };
         sort(words.begin(), words.end(), comp);
         
@@ -25,13 +25,11 @@ public:
                 for (int i = 0; i < size; ++i) {
                     string curr = q.front();
                     q.pop();
-                    for (int j = 0; j <= curr.size(); ++j) {
-                        for (char c = 'a'; c <= 'z'; ++c) {
-                            string dupe = curr.substr(0, j) + c + curr.substr(j);
-                            if (dict.find(dupe) != dict.end() && dict[dupe] == 0) {
-                                q.push(dupe);
-                                dict[dupe] = 1;
-                            };
+                    for (int j = 0; j < curr.size(); ++j) {
+                        string dupe = curr.substr(0, j) + curr.substr(j + 1);
+                        if (dict.find(dupe) != dict.end() && dict[dupe] == 0) {
+                            q.push(dupe);
+                            dict[dupe] = 1;
                         };
                     };
                     dict[curr] = 1;

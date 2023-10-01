@@ -18,11 +18,8 @@
 class Solution {
 public:
     string reverseWords(string s) {
-        std::ios::sync_with_stdio(false);
-        std::cin.tie(nullptr);
-
-        int j = 0;
-        for (auto i = 0; i < s.length(); i++) {
+        int j = 0, n = s.size();
+        for (auto i = 0; i < n; ++i) {
             if (s[i] == ' ') {
                 reverse(s.begin() + j, s.begin() + i);
                 j = i + 1;

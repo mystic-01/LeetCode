@@ -1,15 +1,17 @@
 class Solution {
 public:
-    bool winnerOfGame(string colors) {
-        int n = colors.size(), removeableA = 0, removeableB = 0;
+    bool winnerOfGame(string nums) {
+        int n = nums.size(), removeableA = 0, removeableB = 0;
         for (int i = 1; i < n - 1; ++i) {
-            if (colors[i] == 'A') {
-                if (colors[i - 1] == 'A' && colors[i + 1] == 'A') {
-                    ++removeableA, colors[i - 1] = '*';                                    
+            if (nums[i] == 'A') {
+                if (nums[i - 1] == 'A' && nums[i + 1] == 'A') {
+                    ++removeableA;
+                    // nums[i - 1] = '*'
                 };
-            } else if (colors[i] == 'B') {
-                if (colors[i - 1] == 'B' && colors[i + 1] == 'B') {
-                    ++removeableB, colors[i - 1] = '*';                                    
+            } else if (nums[i] == 'B') {
+                if (nums[i - 1] == 'B' && nums[i + 1] == 'B') {
+                    ++removeableB;
+                    // nums[i - 1] = '*'
                 };
             };
         };

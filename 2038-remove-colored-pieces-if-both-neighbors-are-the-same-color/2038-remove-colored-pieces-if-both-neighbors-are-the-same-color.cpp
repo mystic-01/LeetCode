@@ -1,21 +1,13 @@
 class Solution {
 public:
     bool winnerOfGame(string nums) {
-        int n = nums.size(), removeableA = 0, removeableB = 0;
+        int n = nums.size(), diffBetweenAliceAndBob = 0;
         for (int i = 1; i < n - 1; ++i) {
-            if (nums[i] == 'A') {
-                if (nums[i - 1] == 'A' && nums[i + 1] == 'A') {
-                    ++removeableA;
-                    // nums[i - 1] = '*'
-                };
-            } else if (nums[i] == 'B') {
-                if (nums[i - 1] == 'B' && nums[i + 1] == 'B') {
-                    ++removeableB;
-                    // nums[i - 1] = '*'
-                };
+            if (nums[i] == nums[i - 1] && nums[i] == nums[i + 1]) {
+                diffBetweenAliceAndBob += (nums[i] == 'A' ? 1 : -1);
             };
         };
-        return removeableA > removeableB;
+        return diffBetweenAliceAndBob > 0;
     };
 };
 

@@ -16,10 +16,6 @@ public:
             } else {
                 count1--, count2--;    
             };
-            
-            if (cd2 > cd1) {
-                swap(cd2, cd1), swap(count2, count1);
-            };
         };
         count1 = 0, count2 = 0;
         vector<int> ans;

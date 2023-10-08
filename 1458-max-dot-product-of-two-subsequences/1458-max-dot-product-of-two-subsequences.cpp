@@ -23,10 +23,10 @@ public:
         int max1 = *max_element(begin(nums1), end(nums1));
         int min2 = *min_element(begin(nums2), end(nums2));
         int max2 = *max_element(begin(nums2), end(nums2));
-            
         int ans = max({max2 * max1, min2 * min1, max2 * min1, min2 * max1});
-        int dp[501][501];
-        for (int i = 0; i < 501; ++i) {
+
+        int dp[nums1.size()][501];
+        for (int i = 0; i < nums1.size(); ++i) {
             for (int j = 0; j < 501; ++j) {
                 dp[i][j] = -1;
             };        

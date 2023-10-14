@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int unmasker = 501;
+    const int unmasker = 501;
     
     int recurse(int mask, vector<int>& cost, vector<int>& time, int *dp) {
         int idx = mask % unmasker, walls = mask / unmasker;

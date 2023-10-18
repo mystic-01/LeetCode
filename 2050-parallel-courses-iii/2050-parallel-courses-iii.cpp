@@ -10,7 +10,6 @@ public:
         st.push(node);
     };
 
-    
     int minimumTime(int n, vector<vector<int>>& relations, vector<int>& time) {
         vector<vector<int>> adjList(n + 1);
         for (auto &v : relations) {
@@ -29,8 +28,11 @@ public:
         };
         
         time.insert(time.begin(), 0);
-        int maxTime = time[1];
-        vector<int> ans = time;        
+        int maxTime = time[1], ans[n + 1];
+        for (int i = 1; i < n + 1; ++i) {
+            ans[i] = time[i];
+        };
+        
         while (!st.empty()) {
             int node = st.top();
             st.pop();

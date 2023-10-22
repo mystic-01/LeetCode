@@ -11,7 +11,7 @@ public:
             minSize = min(minSize, (int)it.second);
         };
         
-        for (int mid = 1; mid <= minSize; ++mid) {
+        for (int mid = minSize; mid >= 1; --mid) {
             int midPlusOne = mid + 1, ans = 0;
             for (auto &it : m) {
                 int size = it.second, curr = 0;
@@ -30,7 +30,8 @@ public:
                 };
             };
             if (ans != INT_MAX) {
-                best = min(best, ans);
+                return ans;
+                // best = min(best, ans);
             };
         };
         return best;

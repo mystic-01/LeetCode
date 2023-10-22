@@ -1,7 +1,7 @@
 class Solution {
 public:
     int minGroupsForValidAssignment(vector<int>& nums) {
-        int n = nums.size(), minSize = INT_MAX, size = 1;
+        int n = nums.size(), minSize = INT_MAX, size = 1, count = 0;
         sort(begin(nums), end(nums));
         multiset<int> ms;
         for (int i = 1; i < n; ++i) {
@@ -23,6 +23,7 @@ public:
                     for (int j = 0; !curr && midPlusOne * j <= size; ++j) {
                         if (mid * i + midPlusOne * j == size) {
                             curr = i + j;
+                            ++count;
                         }; 
                     };                
                 };
@@ -34,6 +35,7 @@ public:
                 };
             };
             if (ans != INT_MAX) {
+                cout << count << " " << size << "\n";
                 return ans;
             };
         };

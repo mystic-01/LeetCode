@@ -28,8 +28,8 @@ public:
         for (auto &x : arr) {
             dp[x] = 0;
         };
-        for (auto &num : dp) {
-            ans = (ans + recurse(num.first, dp)) % mod;         
+        for (auto it = dp.rbegin(); it != dp.rend(); ++it) {
+            ans = (ans + recurse(it->first, dp)) % mod;         
         };
         return ans;        
     };

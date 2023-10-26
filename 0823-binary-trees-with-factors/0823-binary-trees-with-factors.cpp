@@ -2,7 +2,7 @@ class Solution {
 public:
     int mod = 1e9 + 7;
     
-    long recurse(int num, map<int, long> &dp) {
+    long recurse(int num, unordered_map<int, long> &dp) {
         if (dp[num] != 0) {
             return dp[num];    
         };
@@ -23,13 +23,13 @@ public:
     };
     
     int numFactoredBinaryTrees(vector<int>& arr) {
-        map<int, long> dp;     
+        unordered_map<int, long> dp;     
         long ans = 0;
         for (auto &x : arr) {
             dp[x] = 0;
         };
-        for (auto it = dp.rbegin(); it != dp.rend(); ++it) {
-            ans = (ans + recurse(it->first, dp)) % mod;         
+        for (auto &it : dp) {
+            ans = (ans + recurse(it.first, dp)) % mod;         
         };
         return ans;        
     };

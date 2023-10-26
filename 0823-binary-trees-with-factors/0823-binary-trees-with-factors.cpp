@@ -2,19 +2,19 @@ class Solution {
 public:
     int mod = 1e9 + 7;
     
-    long recurse(int num, set<int> &values, map<int, long> &dp) {
-        if (dp.find(num) != dp.end()) {
+    long recurse(int num, map<int, long> &dp) {
+        if (dp[num] != 0) {
             return dp[num];    
         };
         
         long ans = 1, squareRoot = sqrt(num);
         for (int i = 2; i <= squareRoot; ++i) {
             if (num % i == 0) {
-                if (values.find(i) != values.end() && values.find(num / i) != values.end()) {
+                if (dp.find(i) != dp.end() && dp.find(num / i) != dp.end()) {
                     if (i != num / i) {
-                        ans = (ans + recurse(i, values, dp) * recurse(num / i, values, dp) * 2) % mod;         
+                        ans = (ans + recurse(i, dp) * recurse(num / i, dp) * 2) % mod;         
                     } else {
-                        ans = (ans + recurse(i, values, dp) * recurse(i, values, dp)) % mod;         
+                        ans = (ans + recurse(i, dp) * recurse(i, dp)) % mod;         
                     };
                 };    
             };                
@@ -23,11 +23,13 @@ public:
     };
     
     int numFactoredBinaryTrees(vector<int>& arr) {
-        set<int> values(begin(arr), end(arr));
         map<int, long> dp;     
         long ans = 0;
-        for (auto &num : values) {
-            ans = (ans + recurse(num, values, dp)) % mod;         
+        for (auto &x : arr) {
+            dp[x] = 0;
+        };
+        for (auto &num : dp) {
+            ans = (ans + recurse(num.first, dp)) % mod;         
         };
         return ans;        
     };

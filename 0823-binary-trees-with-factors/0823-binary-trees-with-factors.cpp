@@ -2,17 +2,18 @@ class Solution {
 public:
     int mod = 1e9 + 7;
     
-    long recurse(int num, map<int, long> &dp) {
+    long recurse(int &num, map<int, long> &dp) {
         if (dp[num] != 0) {
             return dp[num];    
         };
         
         long ans = 1, squareRoot = sqrt(num);
         for (int i = 2; i <= squareRoot; ++i) {
-            if (num % i == 0) {
-                if (dp.find(i) != dp.end() && dp.find(num / i) != dp.end()) {
+            auto [quot, rem] = div(num, i);
+            if (rem == 0) {
+                if (dp.find(i) != dp.end() && dp.find(quot) != dp.end()) {
                     if (i != num / i) {
-                        ans = (ans + recurse(i, dp) * recurse(num / i, dp) * 2) % mod;         
+                        ans = (ans + recurse(i, dp) * recurse(quot, dp) * 2) % mod;         
                     } else {
                         ans = (ans + recurse(i, dp) * recurse(i, dp)) % mod;         
                     };
@@ -29,7 +30,8 @@ public:
             dp[x] = 0;
         };
         for (auto it = dp.rbegin(); it != dp.rend(); ++it) {
-            ans = (ans + recurse(it->first, dp)) % mod;         
+            int num =it->first;
+            ans = (ans + recurse(num, dp)) % mod;         
         };
         return ans;        
     };

@@ -1,13 +1,12 @@
 class Solution {
 public:
     vector<int> maxSubsequence(vector<int>& nums, int k) {
-        multiset<int> ans(begin(nums), end(nums));
-        vector<int> finalAns;
-        auto itPlusK =  begin(ans);
-        while ((int)nums.size() - k++ > 0) ++itPlusK;
-        ans = multiset<int>(itPlusK, end(ans));
+        vector<int> ans = nums, finalAns;
+        sort(ans.begin(), ans.end());
+        ans = vector<int>(ans.begin() + ans.size() - k, ans.end());
+        
         for (int i = 0; i < nums.size(); ++i) {
-            auto it = ans.find(nums[i]);
+            auto it = find(begin(ans), end(ans), nums[i]);
             if (it != ans.end()) {
                 finalAns.push_back(*it);
                 ans.erase(it);

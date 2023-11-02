@@ -12,10 +12,6 @@ public:
             int j = i, k = i + 1;
             updateStartAndEnd(j, k, s, n, start, end);
         };   
-        if (i - 1 >= 0 && s[i] == s[i - 1]) {
-            int j = i - 1, k = i;
-            updateStartAndEnd(j, k, s, n, start, end);            
-        };   
         if (i - 1 >= 0 && i + 1 < n && s[i - 1] == s[i + 1]) {
             int j = i - 1, k = i + 1;
             updateStartAndEnd(j, k, s, n, start, end);

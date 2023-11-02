@@ -28,7 +28,6 @@ public:
         for (int i = 0; i < n; ++i) {
             getMaxPalindromeLen(i, s, n, start, end);
         };
-        if (!start && !end) return s.substr(0, 1);
-        return s.substr(start + 1, (end - 1) - (start + 1) + 1);
+        return !start && !end ? s.substr(0, 1) : s.substr(start + 1, (end - 1) - (start + 1) + 1);
     };
 };

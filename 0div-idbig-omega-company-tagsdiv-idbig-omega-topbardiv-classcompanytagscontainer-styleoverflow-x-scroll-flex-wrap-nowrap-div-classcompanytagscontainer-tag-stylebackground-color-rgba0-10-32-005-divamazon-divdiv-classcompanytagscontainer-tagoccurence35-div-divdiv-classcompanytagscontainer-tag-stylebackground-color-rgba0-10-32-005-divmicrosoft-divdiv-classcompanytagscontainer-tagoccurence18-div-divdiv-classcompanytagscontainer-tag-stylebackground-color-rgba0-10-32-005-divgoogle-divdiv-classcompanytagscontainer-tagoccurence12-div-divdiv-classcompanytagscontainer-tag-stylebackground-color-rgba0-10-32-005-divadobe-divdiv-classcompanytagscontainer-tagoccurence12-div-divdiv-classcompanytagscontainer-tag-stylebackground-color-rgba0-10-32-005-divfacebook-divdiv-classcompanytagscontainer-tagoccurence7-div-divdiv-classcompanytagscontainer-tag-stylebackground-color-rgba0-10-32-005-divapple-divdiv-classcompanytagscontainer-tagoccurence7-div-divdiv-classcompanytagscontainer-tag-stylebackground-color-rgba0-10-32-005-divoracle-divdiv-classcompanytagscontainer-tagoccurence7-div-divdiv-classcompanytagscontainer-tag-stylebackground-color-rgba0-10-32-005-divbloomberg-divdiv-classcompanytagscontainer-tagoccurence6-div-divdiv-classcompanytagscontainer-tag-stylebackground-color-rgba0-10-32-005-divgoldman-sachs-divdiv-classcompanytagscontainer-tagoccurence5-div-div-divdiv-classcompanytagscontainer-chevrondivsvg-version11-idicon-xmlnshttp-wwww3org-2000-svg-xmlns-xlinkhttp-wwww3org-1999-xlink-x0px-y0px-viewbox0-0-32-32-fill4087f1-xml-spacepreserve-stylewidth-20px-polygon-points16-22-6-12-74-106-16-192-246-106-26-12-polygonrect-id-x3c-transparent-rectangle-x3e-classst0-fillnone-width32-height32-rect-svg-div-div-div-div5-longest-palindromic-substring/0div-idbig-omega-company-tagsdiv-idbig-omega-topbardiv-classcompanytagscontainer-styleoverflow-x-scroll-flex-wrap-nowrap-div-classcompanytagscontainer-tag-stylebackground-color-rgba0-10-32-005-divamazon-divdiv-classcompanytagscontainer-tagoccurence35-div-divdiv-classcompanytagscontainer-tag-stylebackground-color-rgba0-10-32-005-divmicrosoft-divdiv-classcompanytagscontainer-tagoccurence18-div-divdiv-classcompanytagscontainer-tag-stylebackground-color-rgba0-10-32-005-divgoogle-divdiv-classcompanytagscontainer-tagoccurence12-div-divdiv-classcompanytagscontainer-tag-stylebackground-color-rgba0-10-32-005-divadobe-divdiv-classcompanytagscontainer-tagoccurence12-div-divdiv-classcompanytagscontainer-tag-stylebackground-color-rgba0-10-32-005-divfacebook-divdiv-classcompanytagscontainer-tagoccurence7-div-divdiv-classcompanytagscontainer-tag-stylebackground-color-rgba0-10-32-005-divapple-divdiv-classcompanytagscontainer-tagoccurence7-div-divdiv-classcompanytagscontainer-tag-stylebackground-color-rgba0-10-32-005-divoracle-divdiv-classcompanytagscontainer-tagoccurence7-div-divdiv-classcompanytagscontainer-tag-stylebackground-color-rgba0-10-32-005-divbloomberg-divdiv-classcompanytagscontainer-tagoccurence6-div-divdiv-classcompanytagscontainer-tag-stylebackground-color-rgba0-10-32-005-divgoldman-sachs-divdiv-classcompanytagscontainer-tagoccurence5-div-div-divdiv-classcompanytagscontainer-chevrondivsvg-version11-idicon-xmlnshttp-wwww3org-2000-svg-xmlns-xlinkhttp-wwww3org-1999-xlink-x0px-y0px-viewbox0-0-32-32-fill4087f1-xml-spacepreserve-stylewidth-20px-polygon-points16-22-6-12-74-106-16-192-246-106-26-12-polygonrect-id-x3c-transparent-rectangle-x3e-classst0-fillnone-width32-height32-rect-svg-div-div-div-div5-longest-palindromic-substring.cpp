@@ -1,39 +1,34 @@
 class Solution {
-private: 
-    bool solve(vector<vector<bool>> &dp, int i, int j, string &s){
-        if(i == j){
-            return dp[i][j] = true;
-        }
-        if(j-i == 1){
-            if(s[i] == s[j]){
-                return dp[i][j] = true;
-            }
-            else{
-                return dp[i][j] = false;
-            }
-        }
-        if(s[i] == s[j] && dp[i+1][j-1] == true){
-            return dp[i][j] = true;
-        } else {
-            return dp[i][j] = false;
-        }
-    }
 public:
+    void updateStartAndEnd(int &j, int &k, string &s, int &n, int &start, int &end) {
+        while (j >= 0 && k < n && s[j] == s[k]) {
+            j--, k++;
+        };
+        if (k - j > end - start) end = k, start = j;                
+    };
+    
+    void getMaxPalindromeLen(int &i, string &s, int &n, int &start, int &end) {
+        if (i + 1 < n && s[i] == s[i + 1]) {
+            int j = i, k = i + 1;
+            updateStartAndEnd(j, k, s, n, start, end);
+        };   
+        if (i - 1 >= 0 && s[i] == s[i - 1]) {
+            int j = i - 1, k = i;
+            updateStartAndEnd(j, k, s, n, start, end);            
+        };   
+        if (i - 1 >= 0 && i + 1 < n && s[i - 1] == s[i + 1]) {
+            int j = i - 1, k = i + 1;
+            updateStartAndEnd(j, k, s, n, start, end);
+        };   
+        
+    };
+    
     string longestPalindrome(string s) {
-        int n = s.size();
-        int startIndex = 0; int maxlen = 0;
-        vector<vector<bool>> dp(n, vector<bool>(n, false));
-        for(int g=0; g<n; g++){
-            for(int i=0, j=g; j<n; i++, j++){
-                solve(dp, i, j, s);
-                if(dp[i][j] == true){
-                    if(j-i+1 > maxlen){
-                        startIndex = i;
-                        maxlen = j-i+1;
-                    }
-                }
-            }
-        }
-        return s.substr(startIndex, maxlen);
-    }
+        int n = s.size(), start = 0, end = 0;
+        for (int i = 0; i < n; ++i) {
+            getMaxPalindromeLen(i, s, n, start, end);
+        };
+        if (!start && !end) return s.substr(0, 1);
+        return s.substr(start + 1, (end - 1) - (start + 1) + 1);
+    };
 };

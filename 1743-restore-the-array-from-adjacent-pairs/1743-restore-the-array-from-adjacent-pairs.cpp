@@ -2,7 +2,7 @@ class Solution {
 public:
     vector<int> restoreArray(vector<vector<int>>& pairs) {
         int n = pairs.size() + 1, curr = 2147483647;
-        map<int, pair<int, int>> m;
+        unordered_map<int, pair<int, int>> m;
         vector<int> ans(n);
         for (auto &vec : pairs) {
             if (m.find(vec[0]) == m.end()) {

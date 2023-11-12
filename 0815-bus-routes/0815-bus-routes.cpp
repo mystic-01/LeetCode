@@ -21,12 +21,10 @@ public:
                 };
                 for (auto &val : m[node]) {
                     // 'val' is the ith row of routes we need to process now
-                    if (!vis.count(val)) {
-                        for (auto &num : routes[val]) {
-                            if (num != source) q.push(num);
-                        };
-                        vis.insert(val);
-                    };                
+                    for (auto &num : routes[val]) {
+                        q.push(num);
+                    };
+                    routes[val].clear();
                 };
             };
             ++dist;

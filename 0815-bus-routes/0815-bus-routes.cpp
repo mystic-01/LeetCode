@@ -9,7 +9,7 @@ public:
         };
         int dist = 0;
         queue<int> q;
-        unordered_set<int> vis;
+        unordered_set<int> vis = {source};
         q.push(source);
         
         while (!q.empty()) {
@@ -22,7 +22,10 @@ public:
                 for (auto &val : m[node]) {
                     // 'val' is the ith row of routes we need to process now
                     for (auto &num : routes[val]) {
-                        q.push(num);
+                        if (!vis.count(num)) {
+                            vis.insert(num);
+                            q.push(num);
+                        }                        
                     };
                     routes[val].clear();
                 };

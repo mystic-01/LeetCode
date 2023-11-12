@@ -23,7 +23,7 @@ public:
                     // 'val' is the ith row of routes we need to process now
                     if (!vis.count(val)) {
                         for (auto &num : routes[val]) {
-                            q.push(num);
+                            if (num != source) q.push(num);
                         };
                         vis.insert(val);
                     };                

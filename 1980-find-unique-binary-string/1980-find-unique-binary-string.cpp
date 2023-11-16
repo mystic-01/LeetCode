@@ -1,8 +1,8 @@
 class Solution {
 public:
-    string recurse(int i, int &n, set<string> &s, string &ds) {
+    string recurse(int i, int &n, vector<string> &s, string &ds) {
         if (i == n) {
-            if (ds.size() == n && s.find(ds) == s.end()) {
+            if (ds.size() == n && find(s.begin(), s.end(), ds) == s.end()) {
                 string ans = "";
                 ans += ds;
                 return ans;
@@ -26,6 +26,6 @@ public:
         int n = nums[0].size();
         string ds = "";
         set<string> s(nums.begin(), nums.end());
-        return recurse(0, n, s, ds);
+        return recurse(0, n, nums, ds);
     };
 };

@@ -25,7 +25,6 @@ public:
     string findDifferentBinaryString(vector<string>& nums) {
         int n = nums[0].size();
         string ds = "";
-        set<string> s(nums.begin(), nums.end());
         return recurse(0, n, nums, ds);
     };
 };

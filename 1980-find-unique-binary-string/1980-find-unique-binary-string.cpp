@@ -1,28 +1,31 @@
 class Solution {
 public:
-    void recurse(int i, int &n, set<string> &s, string &ans, string &ds) {
-        // if (i > n) return;
-            
+    string recurse(int i, int &n, set<string> &s, string &ds) {
         if (i == n) {
-            if (s.find(ds) == s.end()) {
-                ans = ds;    
-            };   
-            return;
+            if (ds.size() == n && s.find(ds) == s.end()) {
+                string ans = "";
+                ans += ds;
+                return ans;
+            };    
+            return "";
         };
         
+        string ans = "";
         ds += '1';
-        if (!ans.size()) recurse(i + 1, n, s, ans, ds);
+        ans = recurse(i + 1, n, s, ds);
         ds.pop_back();
+        if (ans.size()) return ans;
+        
         ds += '0';
-        if (!ans.size()) recurse(i + 1, n, s, ans, ds);
+        ans = recurse(i + 1, n, s, ds);
         ds.pop_back();
+        return ans;
     };
     
     string findDifferentBinaryString(vector<string>& nums) {
         int n = nums[0].size();
-        string ans = "", ds = "";
+        string ds = "";
         set<string> s(nums.begin(), nums.end());
-        recurse(0, n, s, ans, ds);
-        return ans;
+        return recurse(0, n, s, ds);
     };
 };

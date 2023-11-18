@@ -1,14 +1,10 @@
 class Solution {
 public:
     int arithmeticTriplets(vector<int>& nums, int diff) {
-        set<int> s;
         unordered_map<int, int> next;        
         int triplets = 0;
-        for (int &x : nums) {
-            s.insert(x);             
-        };
-        for (auto &it : s) {
-            if (s.find(it + diff) != s.end()) {
+        for (auto &it : nums) {
+            if (find(begin(nums), end(nums), it + diff) != end(nums)) {
                 if (next.find(it) == next.end()) {
                     next[it] = 1;
                 };

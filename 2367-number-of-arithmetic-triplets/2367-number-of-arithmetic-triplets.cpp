@@ -5,11 +5,8 @@ public:
         int triplets = 0;
         for (auto &it : nums) {
             if (find(begin(nums), end(nums), it + diff) != end(nums)) {
-                if (next.find(it) == next.end()) {
-                    next[it] = 1;
-                };
-                next[it + diff] += next[it] + 1;    
-                next[it] = 1;
+                next[it + diff] += (next.find(it) == next.end() ? 2 : next[it] + 1);    
+                next.erase(it);
             };            
         };
         for (auto &it2 : next) {

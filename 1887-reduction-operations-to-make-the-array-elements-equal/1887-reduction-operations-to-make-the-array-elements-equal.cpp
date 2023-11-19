@@ -2,9 +2,8 @@ class Solution {
 public:
     int reductionOperations(vector<int>& nums) {
         int n = nums.size(), ops = 0, sortedPosition = 0, size = *max_element(begin(nums), end(nums)) + 1, freq[size];
-        for (int i = 0; i < size; ++i) {
-            freq[i] = 0;
-        };
+        memset(freq, 0, sizeof(freq));
+
         for (int &x : nums) {
             ++freq[x];    
         };

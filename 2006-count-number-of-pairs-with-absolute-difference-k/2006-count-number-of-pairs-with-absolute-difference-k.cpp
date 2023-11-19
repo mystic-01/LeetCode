@@ -11,10 +11,6 @@ public:
             if (m.find(it.first - k) != m.end()) {
                 pairs += m[it.first] * m[it.first - k];   
             };    
-            if (m.find(it.first + k) != m.end()) {
-                pairs += m[it.first] * m[it.first + k];  
-            };                
-            m[it.first] = 0;
         };
         
         return pairs;

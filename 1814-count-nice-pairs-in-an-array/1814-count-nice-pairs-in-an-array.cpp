@@ -12,7 +12,7 @@ public:
     
     int countNicePairs(vector<int>& nums) {
         int n = nums.size(), ans = 0, mod = 1e9 + 7;
-        map<int, int> m;
+        unordered_map<int, int> m;
         for (int i = 0; i < n; ++i) {
             ans = (ans + m[nums[i] - rev(nums[i])]++) % mod;           
         };

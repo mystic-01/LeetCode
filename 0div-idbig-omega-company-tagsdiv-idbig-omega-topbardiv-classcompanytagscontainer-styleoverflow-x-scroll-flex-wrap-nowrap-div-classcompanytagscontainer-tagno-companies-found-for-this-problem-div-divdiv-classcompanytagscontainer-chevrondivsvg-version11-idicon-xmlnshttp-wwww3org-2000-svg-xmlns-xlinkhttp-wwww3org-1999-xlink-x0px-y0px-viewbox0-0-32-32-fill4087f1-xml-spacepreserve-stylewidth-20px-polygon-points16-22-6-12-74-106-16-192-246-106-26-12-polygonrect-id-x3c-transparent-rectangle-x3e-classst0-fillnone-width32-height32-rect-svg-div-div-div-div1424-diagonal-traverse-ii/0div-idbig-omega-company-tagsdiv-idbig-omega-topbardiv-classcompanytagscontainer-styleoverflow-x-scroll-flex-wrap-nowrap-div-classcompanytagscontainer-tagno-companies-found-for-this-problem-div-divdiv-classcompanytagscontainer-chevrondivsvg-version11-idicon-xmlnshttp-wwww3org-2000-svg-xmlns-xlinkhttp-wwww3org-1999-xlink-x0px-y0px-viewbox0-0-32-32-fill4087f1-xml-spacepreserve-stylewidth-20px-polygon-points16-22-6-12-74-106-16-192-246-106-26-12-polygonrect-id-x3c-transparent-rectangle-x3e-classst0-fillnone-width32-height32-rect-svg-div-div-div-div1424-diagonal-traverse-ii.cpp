@@ -1,17 +1,21 @@
 class Solution {
 public:
     vector<int> findDiagonalOrder(vector<vector<int>>& nums) {
-        int row = nums.size();
+        int row = nums.size(), maxVal = 0;
+        for (int i = 0; i < row; ++i) {
+            maxVal = max(maxVal, i + (int)nums[i].size() - 1);
+        };
+        
         vector<int> ans;    
-        map<int, vector<int>> m;
+        vector<vector<int>> vec(maxVal + 1);
         for (int i = 0; i < row; ++i) {
             for (int j = 0; j < nums[i].size(); ++j) {
-                m[i + j].push_back(nums[i][j]);
+                vec[i + j].push_back(nums[i][j]);
             };
         };
-        for (auto &it : m) {
-            for (auto vec = it.second.rbegin(); vec != it.second.rend(); ++vec) {
-                ans.push_back(*vec);
+        for (auto &it : vec) {
+            for (auto iter = it.rbegin(); iter != it.rend(); ++iter) {
+                ans.push_back(*iter);
             };                            
         };
         return ans;

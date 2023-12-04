@@ -13,7 +13,7 @@ public:
                     ones[rains[i]] = i;    
                 } else {
                     auto lb = zeros.lower_bound(ones[rains[i]]);
-                    if (zeros.size() && lb != zeros.end()) {
+                    if (lb != zeros.end()) {
                         ans[*lb] = rains[i];
                         ones[rains[i]] = i;
                         zeros.erase(lb);

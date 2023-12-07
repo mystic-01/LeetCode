@@ -13,11 +13,17 @@ public:
         
         for (int right = 0; right < n; ++right) {
             isBadBit = 0, x = nums[right];
-            updateBits(x, bits, isBadBit, add);
 
+            for (int i = 0; i < 32; ++i, x >>= 1) {
+            if (x & 1) bits[i] += (1 ? 1 : -1);
+            if (bits[i] > 1) isBadBit = 1;    
+        }; 
             while (left < n && isBadBit) {
                 isBadBit = 0, x = nums[left];
-                updateBits(x, bits, isBadBit, subtract);
+                for (int i = 0; i < 32; ++i, x >>= 1) {
+            if (x & 1) bits[i] += (0 ? 1 : -1);
+            if (bits[i] > 1) isBadBit = 1;    
+        }; 
                 ++left;
             };
             maxLen = max(maxLen, right - left + 1);

@@ -8,7 +8,7 @@ public:
     };
     
     int longestNiceSubarray(vector<int>& nums) {
-        int bits[33] = {0}, n =  nums.size(), left = 0, maxLen = 1;
+        int bits[32] = {0}, n =  nums.size(), left = 0, maxLen = 1;
         for (int right = 0; right < n; ++right) {
             int x = nums[right];
             bool isBadAddition = 0, add = 1, subtract = 0;

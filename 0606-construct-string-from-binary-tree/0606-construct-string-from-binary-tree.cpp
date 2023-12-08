@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-    string tree2str(TreeNode* root) {
+    string tree2str(TreeNode* &root) {
         return root ? to_string(root->val) + 
             (root->left ? "(" + tree2str(root->left) + ")" : "") + 
             (root->right ? ((root->left ? "(" : "()(") + tree2str(root->right) + ")") : "") : ""; 

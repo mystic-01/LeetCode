@@ -6,8 +6,7 @@ public:
         int x = 0, y = 0;
         for (int j = 0; j < col; ++j) {
             for (int i = 0; i < row; ++i) {
-                ans[x][y++] = matrix[i][j];
-                if (y == row) x++, y = 0;
+                ans[j][i] = matrix[i][j];
             };        
         };        
         return ans;

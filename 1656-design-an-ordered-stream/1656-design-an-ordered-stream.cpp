@@ -1,14 +1,14 @@
 class OrderedStream {
 public:
     int idx = 0;
-    vector<string> stream;
+    vector<string> stream, ans;
     OrderedStream(int n) {
         stream.resize(n);
     };
     
     vector<string> insert(int idKey, string value) {
         stream[idKey - 1] = value;
-        vector<string> ans;
+        ans.resize(0);
         for (; idx < stream.size() && stream[idx].size(); ++idx) {
             ans.push_back(stream[idx]);                            
         };

@@ -19,7 +19,7 @@ public:
     int maxLength(vector<string>& arr) {
         int mask = 0, ansVal = recurse(0, mask, arr), ansBits = 0;
         while (ansVal) {
-            ansBits += (ansVal % 2), ansVal /= 2;
+            ansBits += (ansVal & 1), ansVal >>= 1;
         };
         return ansBits;
     };

@@ -1,8 +1,8 @@
 class Solution {
 public:
     string minWindow(string s, string t) {
-        int n = s.size(), freq[59] = {0}, needed = t.size(), start = 0, end = INT_MAX;
-        bool chars[59] = {0};
+        int n = s.size(), freq[58] = {0}, needed = t.size(), start = 0, end = INT_MAX;
+        bool chars[58] = {0};
         
         for (int i = 0; i < needed; ++i) {
             chars[t[i] - 'A'] = 1, ++freq[t[i] - 'A'];    

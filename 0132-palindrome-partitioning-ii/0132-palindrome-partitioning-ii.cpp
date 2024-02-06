@@ -2,7 +2,7 @@ class Solution {
 public:
     int minCut(string s) {
         int n = s.size(), dp[n + 1];
-        fill(dp, dp + n, 1e5);
+        fill(dp, dp + n, n + 1);
         dp[n] = 0;
         
         for (int idx = n - 1; idx >= 0; --idx) {

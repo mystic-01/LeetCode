@@ -18,12 +18,12 @@ public:
         while (kthPermutation.size() < n) {
             int currIdx = k / fact[--nDupe];
             for (int i = 0; currIdx >= 0 && i < 9; ++i) {
-                if (chars[i] != '0') {
+                if (chars[i] != 'X') {
                     --currIdx;    
                 };
                 if (currIdx < 0) {
                     kthPermutation += chars[i];
-                    chars[i] = '0';
+                    chars[i] = 'X';
                 };
             };
             k %= fact[nDupe];

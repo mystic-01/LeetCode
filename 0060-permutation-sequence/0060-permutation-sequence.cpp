@@ -17,9 +17,15 @@ public:
         int nDupe = n;
         while (kthPermutation.size() < n) {
             int currIdx = k / fact[--nDupe];
-            kthPermutation = kthPermutation + chars[currIdx];
-            auto it = begin(chars) + currIdx;
-            chars.erase(it);
+            for (int i = 0; currIdx >= 0 && i < 9; ++i) {
+                if (chars[i] != '0') {
+                    --currIdx;    
+                };
+                if (currIdx < 0) {
+                    kthPermutation += chars[i];
+                    chars[i] = '0';
+                };
+            };
             k %= fact[nDupe];
         };
         return kthPermutation;

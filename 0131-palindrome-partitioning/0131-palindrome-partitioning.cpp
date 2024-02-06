@@ -8,6 +8,7 @@ public:
         return true;
     };  
         
+    // pair<int, int> - Ingenious Harshit!!!!
     void solve(int idx, string &s, int n, vector<vector<string>>& ans, vector<pair<int, int>> &ds) {
         if(idx == n) {
             ans.push_back({});

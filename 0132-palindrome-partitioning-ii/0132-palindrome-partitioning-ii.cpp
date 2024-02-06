@@ -7,26 +7,19 @@ public:
         return start >= end;
     };
     
-    int countMinPartitions(int idx, int end, string &s, int *dp) {
-        if (idx > end) {
-            return 0;
-        };
-        if (dp[idx] != -1) {
-            return dp[idx];
-        };
+    int minCut(string s) {
+        int n = s.size(), dp[n + 1];
+        fill(dp, dp + n, INT_MAX);
+        dp[n] = 0;
         
-        int count = INT_MAX;
-        for (int i = end; i >= idx; --i) {
-            if (isPalindrome(idx, i, s)) {
-                count = min(count, 1 + countMinPartitions(i + 1, end, s, dp));                    
+        for (int idx = n - 1; idx >= 0; --idx) {
+            for (int i = n - 1; i >= idx; --i) {
+                if (isPalindrome(idx, i, s)) {
+                    dp[idx] = min(dp[idx], 1 + dp[i + 1]);
+                };
             };
         };
-        return dp[idx] = count;
-    };
-    
-    int minCut(string s) {
-        int n = s.size(), dp[n];
-        fill(dp, dp + n, -1);
-        return countMinPartitions(0, n - 1, s, dp) - 1;
+        
+        return dp[0] - 1;
     };
 };

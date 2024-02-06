@@ -1,23 +1,25 @@
 class Solution {
 public: 
-    bool isPalindrome(string &s) {
-        int i = 0, j = s.length() - 1;
+    bool isPalindrome(string &s, int i, int j) {
         while (i < j) {
-            if (s[i] != s[j]) return 0;
+            if (s[i] != s[j]) return false;
             i++, j--;
         };
-        return 1;
+        return true;
     };  
         
-    void solve(int idx, string s, int n, vector<vector<string>>& ans, vector<string> ds) {
+    void solve(int idx, string &s, int n, vector<vector<string>>& ans, vector<pair<int, int>> &ds) {
         if(idx == n) {
-            ans.push_back(ds);
+            ans.push_back({});
+            for (auto &[first, second] : ds) {
+                string curr = s.substr(first, second - first + 1);
+                ans.back().push_back(curr);
+            };
         };
         
         for (auto i = idx; i < n; i++) {
-            string curr = s.substr(idx, i - idx + 1);
-            if (isPalindrome(curr)) {
-                ds.push_back(curr);
+            if (isPalindrome(s, idx, i)) {
+                ds.push_back({idx, i});
                 solve(i + 1, s, n, ans, ds);
                 ds.pop_back();
             };            
@@ -26,7 +28,7 @@ public:
         
     vector<vector<string>> partition(string s) {
         vector<vector<string>> ans;
-        vector<string> ds;
+        vector<pair<int, int>> ds;
         int n = s.length();
         solve(0, s, n, ans, ds);
         return ans;

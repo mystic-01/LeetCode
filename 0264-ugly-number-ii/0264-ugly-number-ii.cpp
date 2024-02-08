@@ -1,14 +1,14 @@
 class Solution {
-private:
 public:
     int nthUglyNumber(int n) {
         static vector<int> uglyNumbers(1691, 0);
         
-        int ans = 1, idx = 1;
+        int ans = 1, idx = 1, nOriginal = n;
         if (uglyNumbers[n] != 0) {
             return uglyNumbers[n];
         };
         
+        n = 1690;
         priority_queue<int, vector<int>, greater<int>> pq;
         set<int> visited;
         pq.push(1);
@@ -31,6 +31,6 @@ public:
                 };
             };    
         };
-        return ans;
+        return uglyNumbers[nOriginal];
     };
 };

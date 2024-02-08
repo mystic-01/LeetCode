@@ -8,11 +8,8 @@ public:
         
         for (int idx = sqSize - 1; idx >= 1; --idx) {
             int sq = idx * idx;
-            for (int target = 0; target <= n; ++target) {
-                int newTarget = target - (sq);
-                if (newTarget >= 0) {
-                    dp[target] = min(dp[target], 1 + dp[newTarget]);
-                };
+            for (int target = sq; target <= n; ++target) {
+                dp[target] = min(dp[target], 1 + dp[target - sq]);
             };        
         };
         return dp[n];

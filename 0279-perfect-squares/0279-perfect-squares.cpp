@@ -8,9 +8,11 @@ public:
         if (dp[idx][target] != -1) {
             return dp[idx][target];  
         };
-        int sq = idx * idx;
-        int take = (target >= sq ? 1 + recurse(idx, target - sq, sqSize, dp) : outOfBound);
-        int notTake = recurse(idx + 1, target, sqSize, dp);
+        int take = outOfBound, notTake = outOfBound, newTarget = target - (idx * idx);
+        if (newTarget >= 0) {
+            take = 1 + recurse(idx, newTarget, sqSize, dp);
+        };
+        notTake = recurse(idx + 1, target, sqSize, dp);
         
         return dp[idx][target] = min(take, notTake);
     };

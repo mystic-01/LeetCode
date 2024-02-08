@@ -7,8 +7,9 @@ public:
         dp[0] = 0;
         
         for (int idx = sqSize - 1; idx >= 1; --idx) {
+            int sq = idx * idx;
             for (int target = 0; target <= n; ++target) {
-                int newTarget = target - (idx * idx);
+                int newTarget = target - (sq);
                 if (newTarget >= 0) {
                     dp[target] = min(dp[target], 1 + dp[newTarget]);
                 };

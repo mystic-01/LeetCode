@@ -8,7 +8,8 @@ public:
         if (dp[idx][target] != -1) {
             return dp[idx][target];  
         };
-        int take = (target >= squares[idx] ? 1 + recurse(idx, target - squares[idx], sqSize, squares, dp) : outOfBound);
+        int sq = idx * idx;
+        int take = (target >= sq ? 1 + recurse(idx, target - sq, sqSize, squares, dp) : outOfBound);
         int notTake = recurse(idx + 1, target, sqSize, squares, dp);
         
         return dp[idx][target] = min(take, notTake);

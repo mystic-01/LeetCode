@@ -1,6 +1,5 @@
+int nLimit = 1e4, sqSize = sqrt(nLimit) + 1, squares[101], outOfBound = 1e5;
 class Solution {
-private:
-    int nLimit = 1e4, sqSize = sqrt(nLimit) + 1, squares[101], outOfBound = 1e5;
 public:
     Solution() {
         for (int i = 1; i < sqSize; ++i) {

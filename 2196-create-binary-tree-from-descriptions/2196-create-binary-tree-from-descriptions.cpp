@@ -13,29 +13,26 @@ class Solution {
 public:
     TreeNode* createBinaryTree(vector<vector<int>>& descriptions) {
         unordered_map<int, TreeNode*> m;
-        unordered_set<int> notParents;
+        int xorOfAll = 0;
         for (auto &vec : descriptions) {
             int parent = vec[0], child = vec[1], isLeft = vec[2];
             if (m.find(parent) == m.end()) {
                 m[parent] = new TreeNode(parent);
+                xorOfAll ^= parent;
             };
             if (m.find(child) == m.end()) {
                 m[child] = new TreeNode(child);                
+                xorOfAll ^= child;
             };
             if (isLeft) {
                 m[parent]->left = m[child];            
             } else {
                 m[parent]->right = m[child];                
             };
-            notParents.insert(child);
         };
-        for (auto &vecAgain : descriptions) {
-            int parent = vecAgain[0];
-            if (notParents.count(parent) == 0) {
-                return m[parent];    
-            };
+        for (auto &vect : descriptions) {
+            xorOfAll ^= vect[1];
         };
-        
-        return nullptr;        
+        return m[xorOfAll];        
     };
 };

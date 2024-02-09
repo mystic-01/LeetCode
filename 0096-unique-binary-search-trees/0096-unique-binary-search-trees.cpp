@@ -19,6 +19,6 @@ public:
 };
 
 // numTree(0) = 1
-// numTree(1) = 1 + 1 + 0 - 1 = 1
-// numTree(2) = 1 + 1 + 0 - 1 = 1
-// numTree(3) = 3 + 3 + 1 + 0 = 7
+// numTree(1) = 1 + 1 + 0 = 1
+// numTree(2) = 1 + 1 + 0 = 2
+// numTree(3) = 2 + 2 + 1 = 5

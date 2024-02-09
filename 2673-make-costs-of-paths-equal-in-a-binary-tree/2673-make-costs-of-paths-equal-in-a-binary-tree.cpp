@@ -1,24 +1,14 @@
 class Solution {
 public:
     int minIncrements(int n, vector<int>& nums) {
-        int inc = 0;
-        
-        auto left = [](const int &i) {
-            return 2 * i + 1;    
-        }; 
-        auto right = [](const int &i) {
-            return 2 * i + 2;    
-        };         
-            
+        int increments = 0;
         for (auto i = n - 1; i >= 0; --i) {
-            int diffBetweenChildren = 0;
-            if (left(i) < n && right(i) < n) {
-                diffBetweenChildren = abs(nums[left(i)] - nums[right(i)]);                    
-                nums[i] += max(nums[left(i)], nums[right(i)]);                    
-                inc += diffBetweenChildren;
+            int leftIdx = 2 * i + 1, rightIdx = 2 * i + 2;
+            if (leftIdx < n && rightIdx < n) {
+                nums[i] += max(nums[leftIdx], nums[rightIdx]);
+                increments += abs(nums[leftIdx] - nums[rightIdx]);                    
             };
         };
-        
-        return inc;
+        return increments;
     };
 };

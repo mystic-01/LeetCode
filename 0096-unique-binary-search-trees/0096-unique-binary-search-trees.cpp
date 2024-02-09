@@ -1,20 +1,15 @@
 class Solution {
 public:
-    int countTrees(int n, int *dp) {
-        if (n == 0) return 1;
-        if (n == 1) return 1;
-        if (n == 2) return 2;
-        if (dp[n] != 0) return dp[n];
-            
-        int count = 0;
-        for (int i = 0; i < n; ++i) {
-            count += (countTrees(i, dp) * countTrees(n - i - 1, dp)); 
-        };
-        return dp[n] = count;
-    };
     int numTrees(int n) {
         int dp[20] = {0};
-        return countTrees(n, dp);
+        dp[0] = 1;
+        
+        for (int idx = 0; idx <= n; ++idx) {
+            for (int i = 0; i < idx; ++i) {
+                dp[idx] += (dp[i] * dp[idx - i - 1]);
+            };
+        };
+        return dp[n];
     };    
 };
 

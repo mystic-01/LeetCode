@@ -9,8 +9,7 @@ public:
                 if (i != j) {
                     int dist = pow(abs(points[i][0] - points[j][0]), 2) + pow(abs(points[i][1] - points[j][1]), 2);
                     if (++m[dist] >= 2) {
-                        boomerangs -= ((m[dist] - 1) * (m[dist] - 2));
-                        boomerangs += ((m[dist]) * (m[dist] - 1));
+                        boomerangs += ((m[dist] - 1) * 2);
                     }; 
                 };
             };        

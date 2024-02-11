@@ -15,10 +15,9 @@ public:
             for (int j = 0; j < n; ++j) {
                 if (i != j) {
                     int dist = pow(abs(points[i][0] - points[j][0]), 2) + pow(abs(points[i][1] - points[j][1]), 2);
-                    int count = ++m[dist];
-                    if (count >= 2) {
-                        boomerangs -= combinatorics[count - 1];
-                        boomerangs += combinatorics[count];
+                    if (++m[dist] >= 2) {
+                        boomerangs -= combinatorics[m[dist] - 1];
+                        boomerangs += combinatorics[m[dist]];
                     }; 
                 };
             };        

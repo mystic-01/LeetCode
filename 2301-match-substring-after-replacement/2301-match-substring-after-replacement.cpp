@@ -2,7 +2,7 @@ class Solution {
 public:
     bool matchReplacement(string s, string sub, vector<vector<char>>& mappings) {
         int n = s.size(), m = sub.size();
-        map<char, unordered_set<char>> mp;
+        unordered_map<char, unordered_set<char>> mp;
         for (vector<char> &vec : mappings) {
             mp[vec[0]].insert(vec[1]);    
         };        

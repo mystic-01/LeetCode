@@ -1,13 +1,6 @@
 class Solution {
 public:
     // KMP / Z-function
-    void printVec(vector<int> &curr) {
-        for (int &x : curr) {
-            cout << x << " ";
-        };
-        cout << "\n";        
-    };
-    
     void fillLps(vector<int> &pattern, int *lps) {
         int i = 0, prev = 0, m = pattern.size();
         lps[i++] = 0;
@@ -27,16 +20,17 @@ public:
     int countMatchingSubarrays(vector<int>& nums, vector<int>& pattern) {
         int n = nums.size(), m = pattern.size(), countMatched = 0, lps[m + 1];
         fillLps(pattern, lps);
-        vector<int> curr;
-        for (int i = 0; i + 1 < n; ++i) {
+        vector<int> curr(n - 1);
+        for (int i = 0; i < n - 1; ++i) {
             if (nums[i] - nums[i + 1] < 0) {
-                curr.push_back(1);
+                curr[i] = 1;
             } else if (nums[i] - nums[i + 1] > 0) {
-                curr.push_back(-1);
+                curr[i] = -1;
             } else {
-                curr.push_back(0);
+                curr[i] = 0;
             };
         };
+        
         int i = 0, j = 0;
         while (i < n - 1 && j < m) {
             if (curr[i] == pattern[j]) {

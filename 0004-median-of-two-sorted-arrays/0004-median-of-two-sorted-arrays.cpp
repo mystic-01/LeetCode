@@ -1,45 +1,25 @@
 class Solution {
 public:
-    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
-     // TODO!!!   
-        int n1 = nums1.size(), n2 = nums2.size(), totSize = n1 + n2, sizeBy2 = totSize / 2;
-        // cout << "\n\n";
-        if (n1 > n2) {
-            swap(nums1, nums2);
-            swap(n1, n2);
-        };
+double findMedianSortedArrays(vector<int>& a1, vector<int>& a2) {
+        if (a1.size() > a2.size()) swap(a1, a2); // make sure a1 is shorter
+        
+        int n1 = a1.size(), n2 = a2.size();
+        
+        // range of a1 cut location: n1 means no right half for a1
         int lo = 0, hi = n1;
         while (lo <= hi) {
-            int mid1 = (hi - lo) / 2 + lo;
-            int mid2 = sizeBy2 - mid1;
-            int l1 = INT_MIN, r1 = INT_MAX, l2 = INT_MIN, r2 = INT_MAX;
-            // cout << lo << " " << hi << " : " << mid1 << " " << mid2 << "      \t";
-            if (mid1 - 1 >= 0) {
-                l1 = nums1[mid1 - 1];                
-            };
-            if (mid2 - 1 >= 0) {
-                l2 = nums2[mid2 - 1];                
-            };            
-            if (mid1 < n1) {
-                r1 = nums1[mid1];
-            };            
-            if (mid2 < n2) {
-                r2 = nums2[mid2];
-            };
+            int cut1 = (lo + hi)/2; // cut location is counted to right half
+            int cut2 = (n1 + n2)/2 - cut1;
             
-            // cout << l1 << " " << r1 << " " << l2 << " " << r2 << "\n";
-            if (l1 > r2) {
-                hi = mid1 - 1;
-            } else if (r1 < l2) {
-                lo = mid1 + 1;
-            } else {
-                if (totSize % 2 == 0) {
-                    return (max(l1, l2) + min(r1, r2)) / 2.0;                        
-                } else {
-                    return min(r1, r2);
-                };
-            };  
-        };
-        return -69;
-    };
+            int l1 = cut1 == 0? INT_MIN : a1[cut1-1];
+            int l2 = cut2 == 0? INT_MIN : a2[cut2-1];
+            int r1 = cut1 == n1? INT_MAX : a1[cut1];
+            int r2 = cut2 == n2? INT_MAX : a2[cut2];
+            
+            if (l1 > r2) hi = cut1-1;
+            else if (l2 > r1) lo = cut1+1;
+            else return (n1+n2)%2? min(r1,r2) : (max(l1,l2) + min(r1,r2))/2.;
+        }
+return -1;    
+}
 };

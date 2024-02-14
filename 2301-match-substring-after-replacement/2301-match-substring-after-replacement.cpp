@@ -9,7 +9,7 @@ public:
         for (int i = 0; i + m <= n; ++i) {
             bool foundSubstr = true;
             for (int j = 0; j < m; ++j) {
-                if (!(s[i + j] == sub[j] || mp[sub[j]].count(s[i + j]))) {
+                if (!(s[i + j] == sub[j] || (mp.find(sub[j]) != mp.end() && mp[sub[j]].count(s[i + j])))) {
                     foundSubstr = false;
                     break;
                 };

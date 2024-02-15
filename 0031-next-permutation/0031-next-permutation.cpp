@@ -6,25 +6,21 @@ public:
         // swap(nums[i], nums[greater]);
         // sort(begin(nums) + i, end(nums));
         
-        int n = nums.size(), i = n - 2, greaterIdx, j;
-        while (i >= 0) {
+        int n = nums.size(), i = n - 1, j = n;
+        while (--i >= 0) {
             if (nums[i] < nums[i + 1]) {
                 break;    
             };
-            --i;
         };
         if (i >= 0) {
-            
-            j = i + 1, greaterIdx = i + 1;
-            while (j < n) {
-                if (nums[j] > nums[i] && nums[j] < nums[greaterIdx]) {
-                    greaterIdx = j;
+            while (--j < n) {
+                if (nums[j] > nums[i]) {
+                    break;
                 };
-                ++j;
             };
-            swap(nums[i], nums[greaterIdx]);
+            swap(nums[i], nums[j]);
         };
-        sort(begin(nums) + i + 1, end(nums));
+        reverse(begin(nums) + i + 1, end(nums));
     };
 };
 

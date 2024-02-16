@@ -47,7 +47,7 @@ public:
         cap = capacity;
     };
 
-    void removeNodeAndUpdateFreqMap(int freq, Node *node) {
+    void removeNodeAndUpdateFreqMap(Node *node, int &freq) {
         List *currList = freqMap[freq];
         if (!node) {
             node = currList->tail->prev;
@@ -69,9 +69,9 @@ public:
         nodeMap[key] = newNode;           
     };
     
-    void bumpUpFreq(Node *node, int &val, int freq) {
+    void bumpUpFreq(Node *node, int &val, int &freq) {
         // remove from currList
-        removeNodeAndUpdateFreqMap(freq, node);
+        removeNodeAndUpdateFreqMap(node, freq);
         // Add after head in nextList
         addNodeAndUpdateFreqMap(node->key, val, freq + 1);
     };
@@ -90,7 +90,7 @@ public:
             bumpUpFreq(nodeMap[key], value, nodeMap[key]->freq);
         } else {
             if (cap-- <= 0) {
-                removeNodeAndUpdateFreqMap(lowestFreq, nullptr);                                
+                removeNodeAndUpdateFreqMap(nullptr, lowestFreq);                                
             };
             lowestFreq = 0;
             addNodeAndUpdateFreqMap(key, value, lowestFreq);

@@ -17,8 +17,7 @@ public:
     };
     
     int minimumTotal(vector<vector<int>>& triangle) {
-        int row = triangle.size();
-        int dp[201][201];
+        int row = triangle.size(), dp[201][201];
         for (int i = 0; i < 201; ++i) {
             for (int j = 0; j < 201; ++j) {
                 dp[i][j] = -1;

@@ -2,7 +2,7 @@ static const int outOfBounds = INT_MAX;
 
 class Solution {
 public:
-    int recurse(int i, int j, int &row, vector<vector<int>> &triangle, vector<vector<int>> &dp) {
+    int recurse(int i, int j, int &row, vector<vector<int>> &triangle, int (*dp)[201]) {
         if (i == row - 1) {
             return triangle[i][j];    
         } else if (j >= triangle[i].size()) {
@@ -18,7 +18,12 @@ public:
     
     int minimumTotal(vector<vector<int>>& triangle) {
         int row = triangle.size();
-        vector<vector<int>> dp(row, vector<int>(row, -1));
+        int dp[201][201];
+        for (int i = 0; i < 201; ++i) {
+            for (int j = 0; j < 201; ++j) {
+                dp[i][j] = -1;
+            };        
+        };
         return recurse(0, 0, row, triangle, dp);
     };
 };

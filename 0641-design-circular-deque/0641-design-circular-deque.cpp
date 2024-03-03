@@ -18,9 +18,7 @@ public:
     };
     
     bool insertFront(int value) {
-        if (currSize == maxSize) {
-            return false;
-        }; 
+        if (currSize == maxSize) return false;
         Node *TBA = new Node(value, head, head->next);
         TBA->next->prev = TBA;
         head->next = TBA;
@@ -29,9 +27,7 @@ public:
     };
     
     bool insertLast(int value) {
-        if (currSize == maxSize) {
-            return false;
-        };     
+        if (currSize == maxSize) return false;
         Node *TBA = new Node(value, tail->prev, tail);
         TBA->prev->next = TBA;
         tail->prev = TBA;
@@ -40,9 +36,7 @@ public:
     };
     
     bool deleteFront() {
-        if (currSize == 0) {
-            return false;
-        };      
+        if (currSize == 0) return false;
         Node *TBD = head->next;
         head->next = TBD->next;
         TBD->next->prev = head;
@@ -51,9 +45,7 @@ public:
     };
     
     bool deleteLast() {
-        if (currSize == 0) {
-            return false;
-        }; 
+        if (currSize == 0) return false;
         Node *TBD = tail->prev;
         tail->prev = TBD->prev;
         TBD->prev->next = tail;
@@ -77,16 +69,3 @@ public:
         return currSize == maxSize;    
     };
 };
-
-/**
- * Your MyCircularDeque object will be instantiated and called as such:
- * MyCircularDeque* obj = new MyCircularDeque(k);
- * bool param_1 = obj->insertFront(value);
- * bool param_2 = obj->insertLast(value);
- * bool param_3 = obj->deleteFront();
- * bool param_4 = obj->deleteLast();
- * int param_5 = obj->getFront();
- * int param_6 = obj->getRear();
- * bool param_7 = obj->isEmpty();
- * bool param_8 = obj->isFull();
- */

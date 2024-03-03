@@ -7,16 +7,12 @@ public:
         for (char &ch : s) {
             if (++freq[ch - 'a'] > maxFreq) {
                 maxFreq = freq[ch - 'a'];
-                charSet = unordered_set<char>();
             };    
-            if (freq[ch - 'a'] == maxFreq) {
-                charSet.insert(ch);    
-            };
         };
         for (int i = s.size() - 1; i >= 0; --i) {
-            if (charSet.count(s[i])) {
+            if (freq[s[i] - 'a'] == maxFreq) {
                 ans = s[i] + ans;
-                charSet.erase(s[i]);
+                freq[s[i] - 'a'] = 0;
             };    
         };
         return ans;

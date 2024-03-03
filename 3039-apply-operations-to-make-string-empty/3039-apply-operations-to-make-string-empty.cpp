@@ -1,9 +1,8 @@
 class Solution {
 public:
     string lastNonEmptyString(string s) {
-        int freq[26] = {0}, maxFreq = 0;
-        unordered_set<char> charSet;
         string ans = "";
+        int freq[26] = {0}, maxFreq = 0;
         for (char &ch : s) {
             if (++freq[ch - 'a'] > maxFreq) {
                 maxFreq = freq[ch - 'a'];

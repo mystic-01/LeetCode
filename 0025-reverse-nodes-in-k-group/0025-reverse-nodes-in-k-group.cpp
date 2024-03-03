@@ -12,7 +12,7 @@ class Solution {
 public:
     void reverse(ListNode *prev, ListNode *head, ListNode *postEnd, int k) {
         ListNode *temp = head, *nextNode = nullptr;
-        while (temp && k--) {
+        while (k--) {
             nextNode = temp->next;
             temp->next = postEnd;
             postEnd = temp;

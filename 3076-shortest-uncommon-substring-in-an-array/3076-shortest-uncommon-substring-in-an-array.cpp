@@ -29,22 +29,17 @@ public:
         temp->flag = true;
     };
     
-    bool finder(string &word, int idx, string fun) {
+    bool finder(string &word, int idx) {
        Node* temp = root;
         for (auto i = 0; i < word.length(); i++) {
             if (!temp->contains(word[i])) return false;
             temp = temp->links[word[i] - 'a'];
         };
-        return fun == "search" ? temp->flag : (temp->countIndices.size() <= 1);
+        return (temp->countIndices.size() <= 1);
     };
-    
-    bool search(string &word) {
-        return finder(word, -1, "search");
-    };
-    
     
     bool startsWithOneCount(string &prefix, int idx) {
-        return finder(prefix, idx, "startsWith");
+        return finder(prefix, idx);
     };    
 };
 

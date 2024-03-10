@@ -18,30 +18,27 @@ public:
         string ans = "";
         for (int i = 0; i < col; ++i) {
             char best = ' ';
-            for (int j = 0; j < 26; ++j) {
-                char ch = 'A' + j;
-                if (!available.count(ch)) {
-                    continue;    
-                };
-                if (best == ' ') {
-                    best = ch;
-                    available.erase(best);
-                } else {
-                    int chMoreVoted = -1;
-                    for (int k = 0; k < 26; ++k) {
-                        if (freq[j][k] != freq[best - 'A'][k]) {
-                            chMoreVoted = freq[j][k] > freq[best - 'A'][k];
-                            break;
-                        };
-                    };    
-                    // cout << i << " " << chMoreVoted << " " << best << "\n";
-                    if (chMoreVoted == -1) {
-                        chMoreVoted = ch < best;    
-                    };
-                    if (chMoreVoted) {
-                        available.insert(best);
+            for (char ch = 'A'; ch <= 'Z'; ++ch) {
+                if (available.count(ch)) {
+                    if (best == ' ') {
                         best = ch;
                         available.erase(best);
+                    } else {
+                        int chMoreVoted = -1;
+                        for (int k = 0; k < 26; ++k) {
+                            if (freq[ch - 'A'][k] != freq[best - 'A'][k]) {
+                                chMoreVoted = freq[ch - 'A'][k] > freq[best - 'A'][k];
+                                break;
+                            };
+                        };    
+                        if (chMoreVoted == -1) {
+                            chMoreVoted = ch < best;    
+                        };
+                        if (chMoreVoted) {
+                            available.insert(best);
+                            best = ch;
+                            available.erase(best);
+                        };
                     };
                 };
             };        

@@ -15,7 +15,7 @@ public:
                 available.insert(ch);
             };        
         };
-        string ans = "";
+        string ans = votes[0];
         for (int i = 0; i < col; ++i) {
             char best = ' ';
             for (char ch = 'A'; ch <= 'Z'; ++ch) {
@@ -42,7 +42,7 @@ public:
                     };
                 };
             };        
-            ans += best;
+            ans[i] = best;
         };        
         return ans;
     };

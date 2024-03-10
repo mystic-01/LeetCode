@@ -7,15 +7,18 @@ public:
     
     void solve(vector<vector<char>>& board) {
         int row = board.size(), col = board[0].size();
-        queue<pair<int, int>> q;        
-        set<pair<int, int>> visited;        
+        bool visited[row][col];
+        for (int i = 0; i < row; ++i) {
+            fill(visited[i], visited[i] + col, false);
+        };
         for (int i = 0; i < row; ++i) {
             for (int j = 0; j < col; ++j) {
-                if (board[i][j] == 'O' && !visited.count({i, j})) {
+                if (board[i][j] == 'O' && !visited[i][j]) {
                     bool isQueueTainted = false;
+                    queue<pair<int, int>> q;        
                     set<pair<int, int>> currPairs;        
                     q.push({i, j});
-                    visited.insert({i, j});
+                    visited[i][j] = true;
                     
                     while (!q.empty()) {
                         int x = q.front().first, y = q.front().second;
@@ -26,9 +29,9 @@ public:
                         };
                         for (int k = 0; k < 4; ++k) {
                             int a = x + offsets[k][0], b = y + offsets[k][1];
-                            if (a >= 0 && a < row && b >= 0 && b < col && board[a][b] == 'O' && !visited.count({a, b})) {      
+                            if (a >= 0 && a < row && b >= 0 && b < col && board[a][b] == 'O' && !visited[a][b]) {      
                                 q.push({a, b});
-                                visited.insert({a, b});
+                                visited[a][b] = true;
                             };
                         };        
                     };

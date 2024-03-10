@@ -1,45 +1,46 @@
 struct Node {
-    Node* links[26] = { nullptr };
-    bool flag = false;
-    unordered_set<int> countIndices;
+    Node* links[26] = {nullptr};
+    bool countIndices[100] = {0};
+    int count = 0;
     
-    bool contains(char c) {
-        return links[c - 'a'];
+    bool contains(char &ch) {
+        return links[ch - 'a'];
     };
     
-    void put(char c) {
-        links[c - 'a'] = new Node();
+    void put(char &ch) {
+        links[ch - 'a'] = new Node();
     };
 };
 
 class Trie {
-public:
+private:
     Node* root = new Node();
-
+public:
     Trie() {
         
     };
     
-    void insert(string &word) {
+    void insert(string &word, int &idx) {
         Node* temp = root;
         for (auto i = 0; i < word.length(); i++) {
             if (!temp->contains(word[i])) temp->put(word[i]);
             temp = temp->links[word[i] - 'a'];
         };
-        temp->flag = true;
+        temp->count += !temp->countIndices[idx];
+        temp->countIndices[idx] = true;
     };
     
-    bool finder(string &word, int idx) {
+    bool finder(string &word) {
        Node* temp = root;
         for (auto i = 0; i < word.length(); i++) {
             if (!temp->contains(word[i])) return false;
             temp = temp->links[word[i] - 'a'];
         };
-        return (temp->countIndices.size() <= 1);
+        return temp->count == 1;
     };
     
-    bool startsWithOneCount(string &prefix, int idx) {
-        return finder(prefix, idx);
+    bool startsWithOneCount(string &prefix) {
+        return finder(prefix);
     };    
 };
 
@@ -55,14 +56,7 @@ public:
             for (int i = 0; i < stringSize; ++i) {
                 for (int len = 1; len + i <= stringSize; ++len) {
                     string curr = str.substr(i, len);
-                    Node* node = trie->root;  
-                    for (char &ch : curr) {
-                        if (!node->contains(ch)) {
-                            node->put(ch);
-                        };
-                        node = node->links[ch - 'a'];
-                    };        
-                    node->countIndices.insert(idx);
+                    trie->insert(curr, idx);  
                 };                                    
             };  
             ++idx;
@@ -74,9 +68,9 @@ public:
             for (int i = 0; i < stringSize; ++i) {
                 for (int len = 1; len + i <= stringSize; ++len) {
                     string curr = stri.substr(i, len);
-                    int cSize = curr.size(), sSize = shortest.size(); 
-                    if ((!sSize || cSize < sSize || (cSize == sSize && curr < shortest))) {
-                        if (trie->startsWithOneCount(curr, idx)) {
+                    int shortestSize = shortest.size(); 
+                    if ((!shortestSize || len < shortestSize || (len == shortestSize && curr < shortest))) {
+                        if (trie->startsWithOneCount(curr)) {
                             shortest = curr;        
                         };
                     };                        

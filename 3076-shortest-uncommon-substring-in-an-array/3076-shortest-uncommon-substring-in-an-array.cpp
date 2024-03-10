@@ -20,7 +20,7 @@ public:
         
     };
     
-    void insert(string word) {
+    void insert(string &word) {
         Node* temp = root;
         for (auto i = 0; i < word.length(); i++) {
             if (!temp->contains(word[i])) temp->put(word[i]);
@@ -29,7 +29,7 @@ public:
         temp->flag = true;
     };
     
-    bool finder(string word, int idx, string fun) {
+    bool finder(string &word, int idx, string fun) {
        Node* temp = root;
         for (auto i = 0; i < word.length(); i++) {
             if (!temp->contains(word[i])) return false;
@@ -38,12 +38,12 @@ public:
         return fun == "search" ? temp->flag : (temp->countIndices.size() <= 1);
     };
     
-    bool search(string word) {
+    bool search(string &word) {
         return finder(word, -1, "search");
     };
     
     
-    bool startsWithOneCount(string prefix, int idx) {
+    bool startsWithOneCount(string &prefix, int idx) {
         return finder(prefix, idx, "startsWith");
     };    
 };

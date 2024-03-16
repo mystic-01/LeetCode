@@ -3,24 +3,32 @@ static int powerOfTwo[101] = {0};
 
 class Solution {
 public:
-    long long powerOf2(int power) {
-        if (power <= 1) {
-            return power + 1;    
-        };
-        if (powerOfTwo[power]) {
-            return powerOfTwo[power];     
-        };
-        long long temp = powerOf2(power / 2);
-        if (power % 2 == 0) {
-            return powerOfTwo[power] = (temp * temp) % mod;
-        } else {
-            return powerOfTwo[power] = (2 * temp * temp) % mod;     
-        };
+    Solution() {
+        powerOfTwo[0] = 1;
+        for (int i = 1; i <= 100; ++i) {
+            long long temp = (powerOfTwo[i - 1] * 2) % mod;                        
+            powerOfTwo[i] = temp;
+        };    
     };
+    
+    // long long powerOf2(int power) {
+    //     if (power <= 1) {
+    //         return power + 1;    
+    //     };
+    //     if (powerOfTwo[power]) {
+    //         return powerOfTwo[power];     
+    //     };
+    //     long long temp = powerOf2(power / 2);
+    //     if (power % 2 == 0) {
+    //         return powerOfTwo[power] = (temp * temp) % mod;
+    //     } else {
+    //         return powerOfTwo[power] = (2 * temp * temp) % mod;     
+    //     };
+    // };
     
     int recurse(int idx, int target, int count, int &n, vector<int> &nums, vector<vector<vector<int>>> &dp) {
         if (target == 0) {
-            return powerOf2(n - count);    
+            return powerOfTwo[n - count];    
         };
         if (idx == n) {
             return 0;    

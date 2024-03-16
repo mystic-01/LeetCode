@@ -6,11 +6,11 @@ public:
         if (power <= 1) {
             return power + 1;    
         };
+        long long temp = powerOf2(power / 2);
         if (power % 2 == 0) {
-            long long temp = powerOf2(power / 2);
             return (temp * temp) % mod;
         } else {
-            return (2 * powerOf2(power - 1)) % mod;     
+            return (2 * temp * temp) % mod;     
         };
     };
     

@@ -13,26 +13,27 @@ public:
     
     int sumOfPower(vector<int>& nums, int k) {
         int n = nums.size();
-        vector<vector<vector<int>>> dp(102, vector<vector<int>>(102, vector<int>(102, 0)));
+        vector<vector<int>> dp(102, vector<int>(102, 0)), prev(102, vector<int>(102, 0));
         
         for (int idx = n; idx >= 0; --idx) {
             for (int target = 0; target <= k; ++target) {
                 for (int count = n; count >= 0; --count) {
                     if (target == 0) {
-                        dp[idx][target][count] = powerOfTwo[n - count];  
+                        dp[target][count] = powerOfTwo[n - count];  
                     } else {
                         int take = 0, notTake = 0;
                         if (idx < n && target - nums[idx] >= 0) {
-                            take = dp[idx + 1][target - nums[idx]][count + 1];
+                            take = prev[target - nums[idx]][count + 1];
                         };
-                        notTake = dp[idx + 1][target][count];
-                        dp[idx][target][count] = (take + notTake) % mod;                    
+                        notTake = prev[target][count];
+                        dp[target][count] = (take + notTake) % mod;                    
                     };
                 };            
             };        
+            prev = dp;
         };
         
-        return dp[0][k][0];
+        return dp[k][0];
     };
 };
 

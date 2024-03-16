@@ -12,8 +12,12 @@ public:
     };
     
     int sumOfPower(vector<int>& nums, int k) {
-        int n = nums.size();
-        vector<vector<int>> dp(102, vector<int>(102, 0)), prev(102, vector<int>(102, 0));
+        int n = nums.size(), dp[102][102], prev[102][102];
+        for (int i = 0; i < 102; ++i) {
+            for (int j = 0; j < 102; ++j) {
+                prev[i][j] = dp[i][j] = 0;
+            };         
+        };
         
         for (int idx = n; idx >= 0; --idx) {
             for (int target = 0; target <= k; ++target) {
@@ -30,55 +34,13 @@ public:
                     };
                 };            
             };        
-            prev = dp;
+            for (int i = 0; i < 102; ++i) {
+                for (int j = 0; j < 102; ++j) {
+                    prev[i][j] = dp[i][j];
+                };         
+            };
         };
         
         return dp[k][0];
     };
 };
-
-
-/*
-
-1 2 
-3
-3
-
-3C0 -> 1
-3C1 -> 3
-3C2 -> 3
-3C3 -> 1
-
-E2 (1 + 1 + 2)
-count[ans[i].size() to end]++
-
-4C0 -> 1
-4C1 -> 4
-4C2 -> 6 - count[2]
-4C3 -> 4 - count[3] - count[2] - count[1]
-
-
-*/
-
-
-/*
-
-1 2 
-3
-3
-
-3C0 -> 1
-3C1 -> 3
-3C2 -> 3
-3C3 -> 1
-
-E2 (1 + 1 + 2)
-count[ans[i].size() to end]++
-
-4C0 -> 1
-4C1 -> 4
-4C2 -> 6 - count[2]
-4C3 -> 4 - count[3] - count[2] - count[1]
-
-
-*/

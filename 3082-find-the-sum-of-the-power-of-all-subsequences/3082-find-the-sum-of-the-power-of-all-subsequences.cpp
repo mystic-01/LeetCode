@@ -1,4 +1,5 @@
 static int mod = 1e9 + 7;
+static int powerOfTwo[101] = {0};
 
 class Solution {
 public:
@@ -6,11 +7,14 @@ public:
         if (power <= 1) {
             return power + 1;    
         };
+        if (powerOfTwo[power]) {
+            return powerOfTwo[power];     
+        };
         long long temp = powerOf2(power / 2);
         if (power % 2 == 0) {
-            return (temp * temp) % mod;
+            return powerOfTwo[power] = (temp * temp) % mod;
         } else {
-            return (2 * temp * temp) % mod;     
+            return powerOfTwo[power] = (2 * temp * temp) % mod;     
         };
     };
     

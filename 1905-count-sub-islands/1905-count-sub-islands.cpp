@@ -4,19 +4,18 @@ public:
     
     int countSubIslands(vector<vector<int>>& grid1, vector<vector<int>>& grid2) {
         int row = grid1.size(), col = grid1[0].size(), validIslands = 0;
+        queue<pair<int, int>> q;
         
         for (int i = 0; i < row; ++i) {
             for (int j = 0; j < col; ++j) {
                 if (grid2[i][j]) {
                     bool isSubIsland = true;
-                    queue<pair<int, int>> q;
-
                     q.push({i, j});
                     grid2[i][j] = 0;
                     
                     while (!q.empty()) {
                         int x = q.front().first, y = q.front().second;
-                        isSubIsland = isSubIsland && grid1[x][y];
+                        isSubIsland &= grid1[x][y];
                         q.pop();
                         for (int k = 0; k < 4; ++k) {
                             int a = x + offsets[k][0], b = y + offsets[k][1];

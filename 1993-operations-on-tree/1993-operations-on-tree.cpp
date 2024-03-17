@@ -26,13 +26,6 @@ public:
         return false;
     };
     
-    int getParent(int i, int &num, int *masterParent) {
-        if (masterParent[i] == -1 || masterParent[i] == num) {
-            return masterParent[i];     
-        };            
-        return masterParent[i] = getParent(masterParent[i], num, masterParent);
-    };
-    
     bool upgrade(int num, int user) {
         int val = num;
         while (val != -1) {
@@ -47,7 +40,10 @@ public:
             masterParent[i] = parent[i];
         };
         for (int i = 0; i < n; ++i) {
-            int val = getParent(i, num, masterParent); 
+            int val = masterParent[i]; 
+            while (val != -1 && val != num) {
+                val = masterParent[i] = masterParent[val];
+            };
             if (val == num && isLocked[i]) {
                 unlockedAnyNode = true;
                 isLocked[i] = 0;                    

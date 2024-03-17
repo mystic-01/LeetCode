@@ -26,7 +26,7 @@ public:
         return false;
     };
     
-    int getParent(int i, int &num, vector<int> &masterParent) {
+    int getParent(int i, int &num, int *masterParent) {
         if (masterParent[i] == -1 || masterParent[i] == num) {
             return masterParent[i];     
         };            
@@ -42,7 +42,10 @@ public:
             val = parent[val];
         };
         bool unlockedAnyNode = false;
-        vector<int> masterParent = parent;
+        int masterParent[n];
+        for (int i = 0; i < n; ++i) {
+            masterParent[i] = parent[i];
+        };
         for (int i = 0; i < n; ++i) {
             int val = getParent(i, num, masterParent); 
             if (val == num && isLocked[i]) {

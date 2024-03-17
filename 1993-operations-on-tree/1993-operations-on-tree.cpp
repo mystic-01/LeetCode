@@ -37,10 +37,11 @@ public:
         bool unlockedAnyNode = false;
         vector<int> masterParent = parent;
         for (int i = 0; i < n; ++i) {
-            while (masterParent[i] != -1 && masterParent[i] != num) {
-                masterParent[i] = masterParent[masterParent[i]];
+            int val = masterParent[i]; 
+            while (val != -1 && val != num) {
+                masterParent[i] = val = masterParent[val];
             };
-            if (masterParent[i] == num && isLocked[i]) {
+            if (val == num && isLocked[i]) {
                 unlockedAnyNode = true;
                 isLocked[i] = 0;                    
             };

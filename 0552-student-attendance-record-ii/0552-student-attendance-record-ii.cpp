@@ -2,6 +2,7 @@ static const int mod = 1e9 + 7;
 
 class Solution {
 public:
+    // Understand and learn the Power Exponentiation log(n) solution for this problem
     int checkRecord(int n) {
         int dp[2][3], prev[2][3];
         memset(dp, 0, sizeof(dp));

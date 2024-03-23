@@ -4,7 +4,7 @@ class Solution {
 public:
     int minOperations(vector<int>& target, vector<int>& arr) {
         int n = arr.size(), t = target.size();
-        map<int, int> m;
+        unordered_map<int, int> m;
         for (int i = 0; i < t; ++i) {
             m[target[i]] = i;
         };

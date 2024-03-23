@@ -23,10 +23,6 @@ public:
     
     void reorderList(ListNode *head) {
         // reverse from midpoint
-        if (!head || !head->next) {
-            return;    
-        };
-        // ListNode *dummy = new ListNode(69, head), *slow = dummy, *fast = dummy;
         ListNode *slow = head, *fast = head;
         while (fast && fast->next) {
             slow = slow->next;

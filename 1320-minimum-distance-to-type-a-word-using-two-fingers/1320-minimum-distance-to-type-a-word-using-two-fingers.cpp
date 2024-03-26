@@ -9,14 +9,15 @@ public:
     
     int minimumDistance(string word) {
         pair<int, int> dist[26];
-        int n = word.size(), dp[n + 1][27][27];
+        int n = word.size(), dp[27][27], prev[27][27];
         memset(dp, -1, sizeof(dp));
+        memset(prev, -1, sizeof(prev));
         for (int i = 0; i < 26; ++i) {
             dist[i] = {i / 6, i % 6};
         };
         for (char a = invalidChar; a >= 'A'; --a) {
             for (char b = invalidChar; b >= 'A'; --b) {
-                dp[n][a - 'A'][b - 'A'] = 0;
+                prev[a - 'A'][b - 'A'] = 0;
             };
         };
         
@@ -26,19 +27,23 @@ public:
                     int distOne = outOfBounds, distTwo = outOfBounds; 
                     int wordIdx = word[idx] - 'A', aIdx = a - 'A', bIdx = b - 'A';
 
-                    distOne = getDist(word[idx], a, dist) + dp[idx + 1][wordIdx][bIdx];
+                    distOne = getDist(word[idx], a, dist) + prev[wordIdx][bIdx];
 
                     if (b == invalidChar) {
-                        distTwo = 0 + dp[idx + 1][aIdx][wordIdx];
+                        distTwo = 0 + prev[aIdx][wordIdx];
                     } else {
-                        distTwo = getDist(word[idx], b, dist) + dp[idx + 1][aIdx][wordIdx];
+                        distTwo = getDist(word[idx], b, dist) + prev[aIdx][wordIdx];
                     };        
-                    dp[idx][aIdx][bIdx] = min(distOne, distTwo);
+                    dp[aIdx][bIdx] = min(distOne, distTwo);
                 };
             };
-            
+            for (char a = invalidChar; a >= 'A'; --a) {
+                for (char b = invalidChar; b >= 'A'; --b) {
+                    prev[a - 'A'][b - 'A'] = dp[a - 'A'][b - 'A'];
+                };
+            };            
         };
         
-        return dp[1][word[0] - 'A'][invalidChar - 'A'];
+        return prev[word[0] - 'A'][invalidChar - 'A'];
     };
 };

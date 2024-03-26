@@ -4,13 +4,14 @@ public:
     vector<vector<long long>> splitPainting(vector<vector<int>>& nums) {
         int n = nums.size();
         vector<vector<long long>> ans;
-        vector<long long> line(maxSize, 0);
-        vector<bool> isEnd(maxSize, 0);
-        
+        long long line[maxSize];
+        memset(line, 0, sizeof(line));
+        bool isEnd[maxSize];
+        memset(isEnd, 0, sizeof(isEnd));
+            
         long long start = 0, end = 0, val = 0; 
         for (int i = 0; i < n; ++i) {
             start = nums[i][0], end = nums[i][1], val = nums[i][2];
-            
             line[start] += val, line[end] -= val, isEnd[end] = true;
         };
         start = 1, end = 1, val = line[1];

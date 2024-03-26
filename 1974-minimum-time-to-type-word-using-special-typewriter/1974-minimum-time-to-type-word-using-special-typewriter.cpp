@@ -1,7 +1,7 @@
 class Solution {
 public:
     int getDist(char &ch1, char &ch2) {
-        return min({abs(ch1 - ch2), abs(ch1 + 26 - ch2), abs(ch1 - 26 - ch2)});         
+        return min(abs(ch1 - ch2), 26 - abs(ch1 - ch2));
     };
     int minTimeToType(string word) {
         int n = word.size(), moves = n;

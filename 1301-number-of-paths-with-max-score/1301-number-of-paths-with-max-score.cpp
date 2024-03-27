@@ -6,9 +6,9 @@ public:
     vector<int> pathsWithMaxScore(vector<string>& board) {
         int row = board.size(), col = board[0].size();
         board[row - 1][col - 1] = '0';
-        pair<int, int> dp[101], prev[101];
-        for (int i = 0; i < 101; ++i) {
-            prev[i] = {-1, -1};
+        pair<int, int> dp[col + 1], prev[col + 1];
+        for (int j = 0; j < col + 1; ++j) {
+            prev[j] = {-1, -1};
         };
         
         for (int i = 0; i < row; ++i) {
@@ -35,7 +35,7 @@ public:
                 maxCount = (maxCount + (upLeft.first == maxVal ? upLeft.second : 0)) % mod;
                 dp[j] = {maxVal + val, maxCount};
             };        
-            for (int j = 0; j < col; ++j) {
+            for (int j = 0; j < col + 1; ++j) {
                 prev[j] = dp[j];
             };            
         };

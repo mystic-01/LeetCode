@@ -1,4 +1,4 @@
-static const int outOfBounds = -1e5, mod = 1e9 + 7;
+static const int outOfBounds = -1e2, mod = 1e9 + 7;
 static const pair<int, int> invalidPair = {-1, -1};
 
 class Solution {

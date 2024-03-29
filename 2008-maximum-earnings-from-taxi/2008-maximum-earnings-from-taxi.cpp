@@ -18,8 +18,8 @@ public:
             if (curr > maxProfit) {
                 maxProfit = curr;            
                 ms.insert(start);
+                maxTillHereMap[start] = maxProfit;
             };
-            maxTillHereMap[start] = maxProfit;
         };
         return maxProfit;
     };

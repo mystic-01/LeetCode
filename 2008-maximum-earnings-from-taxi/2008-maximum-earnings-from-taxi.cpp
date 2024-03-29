@@ -15,10 +15,11 @@ public:
             if (it != ms.end()) {
                 curr += maxTillHereMap[*it];
             };
-            maxProfit = max(maxProfit, curr);
-            
+            if (curr > maxProfit) {
+                maxProfit = curr;            
+                ms.insert(start);
+            };
             maxTillHereMap[start] = maxProfit;
-            ms.insert(start);
         };
         return maxProfit;
     };

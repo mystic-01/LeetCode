@@ -5,7 +5,7 @@ public:
         
         long long sz = rides.size(), maxProfit = 0;
         multiset<int> ms;
-        unordered_map<int, long long> maxTillHereMap;
+        long long maxTillHereMap[n + 1];
         
         for (int i = sz - 1; i >= 0; --i) {
             int start = rides[i][0], ending = rides[i][1], tip = rides[i][2];

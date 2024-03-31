@@ -18,25 +18,25 @@ public:
         recurse(idx + 1, target, nums, ans, ds);
     };
     
-    bool recurseAgain(int idx, int slotsLeft, unordered_map<int, int> &curr, unordered_map<int, int> &org, vector<vector<int>> &ans) {
-        if (idx == ans.size()) {
+    bool recurseAgain(auto it, int slotsLeft, unordered_map<int, int> &curr, unordered_map<int, int> &org, set<vector<int>> &ans) {
+        if (it == ans.end()) {
             return slotsLeft == 0;            
         };
         
         bool take = false, notTake = false;
         bool wasted = false;
-        for (int &x : ans[idx]) {
+        for (const int &x : *it) {
             if (++curr[x] > org[x]) {
                 wasted = true;
             };                        
         };        
         if (!wasted) {
-            take = recurseAgain(idx, slotsLeft - 1, curr, org, ans);                
+            take = recurseAgain(it, slotsLeft - 1, curr, org, ans);                
         };
-        for (int &x : ans[idx]) {
+        for (const int &x : *it) {
             --curr[x];
         };
-        notTake = recurseAgain(idx + 1, slotsLeft, curr, org, ans);
+        notTake = recurseAgain(next(it, 1), slotsLeft, curr, org, ans);
         return take || notTake;
     };
 
@@ -49,18 +49,14 @@ public:
         unordered_map<int, int> org, curr;
         vector<int> ds;
         set<vector<int>> ans;
-        vector<vector<int>> ansVec;
         for (int i = 0; i < n; ++i) {
             ++org[nums[i]];    
         };
         
         sort(begin(nums), end(nums));
         recurse(0, target, nums, ans, ds);
-
-        for (auto &vec : ans) {
-            ansVec.push_back(vec);
-        };
-        return recurseAgain(0, 4, curr, org, ansVec);
+        auto it = begin(ans);
+        return recurseAgain(it, 4, curr, org, ans);
     };
 };
 

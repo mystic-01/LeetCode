@@ -1,37 +1,26 @@
 class MedianFinder {
 private:
-    multiset<int> ms;
-    multiset<int> ::iterator mid = ms.begin();
+    priority_queue<int> maxHeap;
+    priority_queue<int, vector<int>, greater<int>> minHeap;
 public:
     MedianFinder() {
-
+        
     };
     
     void addNum(int num) {
-        if (ms.size() == 0) {
-            ms.insert(num);
-            mid = ms.begin();
-        } else if (num >= *mid) {
-            ms.insert(num);
-            if (ms.size() % 2 == 0) {
-                ++mid;    
-            }; 
-        } else {
-            ms.insert(num);
-            if (ms.size() % 2) {
-                --mid;    
-            };            
+        minHeap.push(num);        
+        maxHeap.push(minHeap.top());
+        minHeap.pop();        
+        if (maxHeap.size() > minHeap.size()) {
+            minHeap.push(maxHeap.top());    
+            maxHeap.pop();
         };
     };
     
     double findMedian() {
-        return ms.size() % 2 ? *mid : (*mid + *prev(mid, 1)) / 2.0;        
+        if (minHeap.size() > maxHeap.size()) {
+            return minHeap.top();            
+        };
+        return (minHeap.top() + maxHeap.top()) / 2.0;
     };
 };
-
-/**
- * Your MedianFinder object will be instantiated and called as such:
- * MedianFinder* obj = new MedianFinder();
- * obj->addNum(num);
- * double param_2 = obj->findMedian();
- */

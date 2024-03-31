@@ -12,6 +12,8 @@ public:
                 if (divi <= k) {
                     sub.push_back(nums[j]);
                     s.insert(sub);
+                } else {
+                    break;
                 };
             };        
         };

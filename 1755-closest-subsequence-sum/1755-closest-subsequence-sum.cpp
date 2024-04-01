@@ -12,32 +12,41 @@ public:
         if (target >= maxSum || target <= minSum) {
             return min(abs(target - maxSum), abs(target - minSum));            
         };
-
+        // Create list of all possible sums using power-set algo
         vector<int> v1 = {0}, v2 = {0};
         for (int i = 0; i < n / 2; ++i) {
-            int sz = v1.size();
-            for (int j = 0; j < sz; ++j) {
+            for (int j = 0, sz = v1.size(); j < sz; ++j) {
                 v1.push_back(nums[i] + v1[j]);    
             };
         };
         for (int i = n / 2; i < n; ++i) {
-            int sz = v2.size();
-            for (int j = 0; j < sz; ++j) {
+            for (int j = 0, sz = v2.size(); j < sz; ++j) {
                 v2.push_back(nums[i] + v2[j]);    
             };
         };
-        
-        set<int> s(begin(v2), end(v2));
+        // Check if any of the sums found produce the smallest diif with the target
         int ans = 1e9;
         for (int i = 0; i < v1.size(); ++i) {
-            auto it = s.lower_bound(target - v1[i]);
-            if (it != end(s)) {
-                ans = min(ans, abs(target - (v1[i] + *it)));                
+            ans = min(ans, abs(target - v1[i]));
+        };
+        for (int i = 0; i < v2.size(); ++i) {
+            ans = min(ans, abs(target - v2[i]));
+        };        
+        // Two sum with 'l' pointer on left of first vector and 'r' pointer on right of second vector
+        // works exactly like a normal two sum now
+        sort(begin(v1), end(v1));
+        sort(begin(v2), end(v2));
+        int l = 0, r = v2.size() - 1;
+        while (l <= v1.size() - 1 && r >= 0) {
+            int sum = v1[l] + v2[r];
+            ans = min(ans, abs(target - sum));
+            if (sum > target) {
+                --r;
+            } else if (sum < target) {
+                ++l;
+            } else {
+                return 0;
             };
-            if (it != begin(s)) {
-                --it;
-                ans = min(ans, abs(target - (v1[i] + *it)));                
-            };           
         };
         return ans;
     };

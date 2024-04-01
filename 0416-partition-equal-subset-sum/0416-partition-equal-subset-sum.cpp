@@ -21,6 +21,7 @@ public:
         if (sum % 2) {
             return false;            
         };
+        sort(begin(nums), end(nums), greater<int>());
         vector<vector<int>> dp(n + 1, vector<int>(sum + 1, -1));
         return recurse(0, 0, target, nums, dp);
     };

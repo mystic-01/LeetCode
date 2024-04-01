@@ -1,7 +1,8 @@
 class Solution {
 public:
     int minimumDifference(vector<int>& nums) {
-        // 21 -> 10
+        // These are he days I do this for!!!!
+        // Hard question solved at one go, by using a custom-modified version of a brand new technique just learnt !!!
         int n = nums.size(), totSum = accumulate(begin(nums), end(nums), 0), target = totSum / 2;
         vector<pair<int, int>> v1 = {{0, 0}}, v2 = {{0, 0}};
         
@@ -16,7 +17,7 @@ public:
             };        
         };        
         
-        vector<set<int>> vectorOfSets(n / 2 + 1);
+        set<int> vectorOfSets[n / 2 + 1];
         for (int j = 0, sz = v2.size(); j < sz; ++j) {
             int val = v2[j].first, idx = v2[j].second;
             vectorOfSets[idx].insert(val);
@@ -46,21 +47,4 @@ public:
         
         return ans;
     };
-    
-
-// 2 -1 0
-// 4 -1 0
-// 2 4 0
-// 2 -1 4
-
-// -2 -1 0
-// -2 
-    // -9 -2 -1 0 2 4
-    
-    
-    
-// 0,0  2,1  -1,1  1,2  0,1  2,2  -1,2  1,3                    0,0  4,1  -2,1  2,2  -9,1  -5,2  -11,2  -7,3
-// 0,0  2,1  -1,1  1,2  0,1  2,2  -1,2  1,3                    0,0  4,1  -2,1  2,2  -9,1  -5,2  -11,2  -7,3
-
-    
 };

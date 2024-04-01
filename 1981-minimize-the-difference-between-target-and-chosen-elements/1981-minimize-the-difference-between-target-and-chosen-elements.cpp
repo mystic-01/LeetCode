@@ -10,12 +10,13 @@ public:
             maxSum += nums[i][0], maxVal = max(maxVal, nums[i][0]);
         };
         
-        vector<int> dp(maxSum + maxVal + 1, 0), prev(maxSum + maxVal + 1, 0);
+        int dp[maxSum + maxVal + 1], prev[maxSum + maxVal + 1];
+        memset(dp, 0, sizeof(dp));
+        memset(prev, 0, sizeof(prev));
 
         for (int sum = maxSum + maxVal; sum >= 0; --sum) {
             prev[sum] = abs(target - sum);
         };
-        
         for (int i = row - 1; i >= 0; --i) {
             for (int sum = maxSum; sum >= 0; --sum) {
                 int closest = 1e8;
@@ -24,7 +25,9 @@ public:
                 };
                 dp[sum] = closest;                                                
             };    
-            prev = dp;
+            for (int sum = maxSum; sum >= 0; --sum) {
+                prev[sum] = dp[sum];
+            };
         };
         return prev[0];
     };

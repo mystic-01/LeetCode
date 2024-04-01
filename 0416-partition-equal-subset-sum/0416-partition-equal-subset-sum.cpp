@@ -6,7 +6,9 @@ public:
             return false;            
         };
         sort(begin(nums), end(nums), greater<int>());
-        vector<int> dp(target + 1, false), prev(target + 1, false);
+        bool dp[target + 1], prev[target + 1];
+        memset(dp, false, sizeof(dp));        
+        memset(prev, false, sizeof(prev));
         
         prev[target] = true;
         
@@ -19,7 +21,9 @@ public:
                 };
                 dp[sum] = dp[sum] || prev[sum];
             };     
-            prev = dp;
+            for (int sum = target; sum >= 0; --sum) {
+                prev[sum] = dp[sum];
+            };
         };
         return prev[0];
     };

@@ -1,9 +1,7 @@
 class Solution {
 public:   
     int minAbsDifference(vector<int>& nums, int target) {
-        sort(begin(nums), end(nums));            
         int n = nums.size(), maxSum = 0, minSum = 0;
-        
         for (int &x : nums) {
             if (x > 0) {
                 maxSum += x;

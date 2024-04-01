@@ -5,7 +5,6 @@ public:
         if (totSum % 2) {
             return false;            
         };
-        sort(begin(nums), end(nums), greater<int>());
         bool dp[target + 1], prev[target + 1];
         memset(dp, false, sizeof(dp));        
         memset(prev, false, sizeof(prev));

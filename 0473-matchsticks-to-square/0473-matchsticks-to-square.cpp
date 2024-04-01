@@ -29,7 +29,7 @@ public:
         if (totSum % 4) {
             return false;            
         };
-        // sort(begin(nums), end(nums));
+        sort(begin(nums), end(nums));
         return recurse(0, target, 4, nums, target);
     };
 };

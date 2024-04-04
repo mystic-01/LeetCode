@@ -24,11 +24,7 @@ public:
             };  
             
             for (int j = col - 1; j >= 0; --j) {
-                curr[j] = points[i][j] + max(left[j], right[j]);
-            };
-            
-            for (int j = col - 1; j >= 0; --j) {
-                prev[j] = curr[j];
+                prev[j] = points[i][j] + max(left[j], right[j]);
             };
         };
         return *max_element(prev, prev + col);

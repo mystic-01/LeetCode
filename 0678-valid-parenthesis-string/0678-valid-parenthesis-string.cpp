@@ -1,24 +1,40 @@
 class Solution {
 public:
-    bool checkValidString(string s, bool checkedOnce = false) {
-        int left = 0, aestrik = 0, right = 0;
+    bool checkValidString(string s) {
+        int open = 0, close = 0, aestrik = 0;
         for (char &ch : s) {
-            if (ch == '(') ++left;
-            else if (ch == '*') ++aestrik;
-            else {
-                ++right;
-                if (right > left + aestrik) return false;
-            };    
+            if (ch == '(') {
+                ++open;
+            } else if (ch == '*') {
+                ++aestrik;                
+            } else {
+                if (open) {
+                    --open;
+                } else if (aestrik) {
+                    --aestrik;
+                } else {
+                    return false;
+                };
+            };            
         };
         
-        if (left > right + aestrik) return false;
-        int diff = abs(left - right);
-        
-        if (diff != 0 && aestrik < abs(left - right)) return false;
         reverse(begin(s), end(s));
+        open = 0, close = 0, aestrik = 0;
         for (char &ch : s) {
-            ch = ch == ')' ? '(' : (ch == '(' ? ')' : '*');   
-        };
-        return checkedOnce || checkValidString(s, true);
+            if (ch == ')') {
+                ++close;
+            } else if (ch == '*') {
+                ++aestrik;                
+            } else {
+                if (close) {
+                    --close;
+                } else if (aestrik) {
+                    --aestrik;
+                } else {
+                    return false;
+                };
+            };            
+        };        
+        return true;
     };
 };

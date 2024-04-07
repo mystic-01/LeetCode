@@ -19,7 +19,7 @@ public:
         };
         
         reverse(begin(s), end(s));
-        open = 0, close = 0, aestrik = 0;
+        aestrik = 0;
         for (char &ch : s) {
             if (ch == ')') {
                 ++close;

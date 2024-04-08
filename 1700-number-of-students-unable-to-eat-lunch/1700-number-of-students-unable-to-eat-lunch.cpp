@@ -1,17 +1,24 @@
 class Solution {
 public:
     int countStudents(vector<int>& students, vector<int>& sandwiches) {
-        int stuSize = students.size(), n = sandwiches.size();
-        int ones = accumulate(students.begin(), students.end(), 0), zeros = n - ones;
+        int n = students.size(), ones = 0, zeros = 0;
+        for (int &x : students) {
+            ones += (x == 1);
+            zeros += (x == 0);
+        };
         for (int i = 0; i < n; ++i) {
-            if (sandwiches[i]) {
-                if (ones) ones--;
-                else return n - i;
+            if (sandwiches[i] == 0) {
+                if (!zeros) {
+                    break;
+                };    
+                --zeros;
             } else {
-                if (zeros) zeros--;
-                else return n - i;
+                if (!ones) {
+                    break;
+                };
+                --ones;
             };
         };
-        return 0;
+        return ones + zeros; 
     };
 };

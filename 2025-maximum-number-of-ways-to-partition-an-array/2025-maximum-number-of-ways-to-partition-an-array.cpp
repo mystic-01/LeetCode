@@ -3,16 +3,18 @@ public:
     int waysToPartition(vector<int>& nums, int k) {
         int n = nums.size(), count = 0, ansIfChanged[n];
         memset(ansIfChanged, 0, sizeof(ansIfChanged));
-        long long lSum[n];
         unordered_map<long long, vector<int>> m;
 
+        long long totSum = 0, lSum = 0;
         for (int i = 0; i < n; ++i) {
-            lSum[i] = (i > 0 ? lSum[i - 1] + nums[i]: nums[i]);
+            totSum += nums[i];
             m[k - nums[i]].push_back(i);
         };
         
         for (int i = 1; i < n; ++i) {
-            long long left = lSum[i - 1], right = lSum[n - 1] - lSum[i - 1];
+            lSum += nums[i - 1];
+            long long left = lSum, right = totSum - lSum;
+
             count += left == right;
 
             long long diff1 = left - right;
@@ -34,15 +36,3 @@ public:
         return count;
     };
 };
-
-
-// arr  2  -1  2
-// lsum 2   1  3
-// abs  1   4  1
-    
-    
-//     p1
-//     2, 1
-    
-//     p2
-//     1, 2

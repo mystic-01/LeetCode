@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int countAdjacentMines(int x, int y, int &row, int &col, vector<vector<char>> &board) {
+    int countAdjacentMines(int &x, int &y, int &row, int &col, vector<vector<char>> &board) {
         int count = 0;
         for (int di = -1; di <= 1; ++di) {
             for (int dj = -1; dj <= 1; ++dj) {

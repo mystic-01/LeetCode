@@ -1,24 +1,22 @@
 class Solution {
 public:
-    int trap(vector<int>& heights) {
-        int n = heights.size(), l = 0, r = n - 1, lMax = 0, rMax = 0, ans = 0;
-        while (l <= r) {
-            if (heights[l] <= heights[r]) {
-                if (heights[l] >= lMax) {
-                    lMax = heights[l];
+    int trap(vector<int>& nums) {
+        int n = nums.size(), water = 0, leftMax = -1, rightMax = -1, left = 0, right = n - 1;
+        while (left <= right) {
+            if (leftMax <= rightMax) {
+                if (nums[left] >= leftMax) {
+                    leftMax = nums[left++];                    
                 } else {
-                    ans += (lMax - heights[l]);    
+                    water += (leftMax - nums[left++]);
                 };
-                ++l;
             } else {
-                if (heights[r] >= rMax) {
-                    rMax = heights[r];
+                if (nums[right] >= rightMax) {
+                    rightMax = nums[right--];                    
                 } else {
-                    ans += (rMax - heights[r]);    
-                };    
-                --r;
-            };    
+                    water += (rightMax - nums[right--]);
+                };                
+            };                
         };
-        return ans;
+        return water;
     };
 };

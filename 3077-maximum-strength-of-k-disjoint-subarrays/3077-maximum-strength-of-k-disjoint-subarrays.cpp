@@ -18,9 +18,7 @@ public:
                     int sign = k % 2 ? 1 : -1;
                     long long take = oob, notTake = oob, val = sign * nums[idx] * k;
 
-                    take = val + prev[k][0];
-                    take = max(take, val + (k - 1 >= 0 ? prev[k - 1][1] : oob));
-
+                    take = val + max(prev[k][0], (k - 1 >= 0 ? prev[k - 1][1] : oob));
                     if (isStart) {
                         notTake = prev[k][1];
                     };

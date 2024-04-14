@@ -18,7 +18,7 @@ public:
         };
 
         int sign = k % 2 ? 1 : -1;
-        long long take = oob, notTake = oob, startNew = oob, val = sign * nums[idx] * k;
+        long long take = oob, notTake = oob, val = sign * nums[idx] * k;
         
         // take = val + recurse(idx + 1, k, 0, nums, dp);
         // startNew = val + recurse(idx + 1, k - 1, 1, nums, dp);
@@ -31,7 +31,7 @@ public:
             notTake = recurse(idx + 1, k - 1, 1, nums, dp);            
         };
         
-        return dp[idx][k][isStart] = max(max(take, notTake), startNew);
+        return dp[idx][k][isStart] = max(take, notTake);
     };
     
     long long maximumStrength(vector<int>& nums, int k) {

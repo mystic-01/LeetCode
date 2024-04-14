@@ -27,10 +27,7 @@ public:
         
         if (isStart) {
             notTake = recurse(idx + 1, k, 1, nums, dp);
-        } else {
-            notTake = recurse(idx + 1, k - 1, 1, nums, dp);            
         };
-        
         return dp[idx][k][isStart] = max(take, notTake);
     };
     

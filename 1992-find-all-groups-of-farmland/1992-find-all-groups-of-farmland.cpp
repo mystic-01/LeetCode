@@ -6,15 +6,17 @@ public:
 
         for (int i = 0; i < row; ++i) {
             for (int j = 0; j < col; ++j) {
-                if (land[i][j]) {
+                if (land[i][j] && (i - 1 == -1 || land[i - 1][j] == 0) && (j - 1 == -1 || land[i][j - 1] == 0)) {
                     vector<int> curr = {i, j, 0, 0};
-                    for (int k = i; k < row && land[k][j]; ++k) {
-                        for (int l = j; l < col && land[k][l]; ++l) {
-                            land[k][l] = 0;
-                            curr[2] = max(curr[2], k);
-                            curr[3] = max(curr[3], l);
-                        };                    
+                    int k = i;
+                    while (k < row && land[k][j] == 1) {
+                        ++k;    
                     };
+                    curr[2] = --k;
+                    while (j < col && land[i][j] == 1) {
+                        ++j;    
+                    };
+                    curr[3] = --j;
                     ans.push_back(curr);
                 };
             };

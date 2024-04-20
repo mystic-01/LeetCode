@@ -6,7 +6,7 @@ public:
 
         for (int i = 0; i < row; ++i) {
             for (int j = 0; j < col; ++j) {
-                if (land[i][j] && (i - 1 == -1 || land[i - 1][j] == 0) && (j - 1 == -1 || land[i][j - 1] == 0)) {
+                if (land[i][j] && (i == 0 || land[i - 1][j] == 0) && (j == 0 || land[i][j - 1] == 0)) {
                     vector<int> curr = {i, j, 0, 0};
                     int k = i;
                     while (k < row && land[k][j] == 1) {

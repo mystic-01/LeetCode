@@ -34,14 +34,8 @@ class Solution {
 public:
     vector<vector<string>> accountsMerge(vector<vector<string>>& accounts) {
         int idx = 0;
-        unordered_map<string, int> nameToIdx, emailToIdx;
+        unordered_map<string, int> emailToIdx;
         unordered_map<int, string> idxToEmail;
-        for (auto &v : accounts) {
-            if (nameToIdx.find(v[0]) == nameToIdx.end()) {
-                nameToIdx[v[0]] = idx++;
-            };
-        };
-        idx = 0;
         unordered_map<int, string> par;
         for (auto &vec : accounts) {
             for (int i = 1; i < vec.size(); ++i) {

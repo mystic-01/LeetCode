@@ -35,19 +35,18 @@ public:
     vector<vector<string>> accountsMerge(vector<vector<string>>& accounts) {
         int idx = 0;
         unordered_map<string, int> nameToIdx, emailToIdx;
-        unordered_map<int, string> idxToName, idxToEmail;
+        unordered_map<int, string> idxToEmail;
         for (auto &v : accounts) {
             if (nameToIdx.find(v[0]) == nameToIdx.end()) {
-                idxToName[idx] = v[0];
                 nameToIdx[v[0]] = idx++;
             };
         };
         idx = 0;
-        unordered_map<int, int> par;
+        unordered_map<int, string> par;
         for (auto &vec : accounts) {
             for (int i = 1; i < vec.size(); ++i) {
                 if (emailToIdx.find(vec[i]) == emailToIdx.end()) {
-                    par[idx] = nameToIdx[vec[0]];
+                    par[idx] = vec[0];
                     idxToEmail[idx] = vec[i];
                     emailToIdx[vec[i]] = idx++;
                 };
@@ -73,8 +72,7 @@ public:
         for (auto &it : emailSets) {
             ans.push_back({});
             int currStrLeaderIdx = emailToIdx[it.first];
-            int currStrLeaderParentIdx = par[currStrLeaderIdx]; 
-            ans.back().push_back(idxToName[currStrLeaderParentIdx]);
+            ans.back().push_back(par[currStrLeaderIdx]);
             for (auto &str : it.second) {
                 ans.back().push_back(str);            
             };

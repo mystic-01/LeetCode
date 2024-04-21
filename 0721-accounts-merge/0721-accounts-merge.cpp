@@ -14,7 +14,7 @@ public:
         };
         return parent[i] = findPar(parent[i]);
     };
-    void unionBySize(int u, int v) {
+    void unionBySize(int &u, int &v) {
         int parU = findPar(u);
         int parV = findPar(v);
         
@@ -30,27 +30,26 @@ public:
     };    
 };
 
-
 class Solution {
 public:
     vector<vector<string>> accountsMerge(vector<vector<string>>& accounts) {
         int idx = 0;
-        unordered_map<string, int> m, m2;
-        unordered_map<int, string> reverseM, reverseM2;
+        unordered_map<string, int> nameToIdx, emailToIdx;
+        unordered_map<int, string> idxToName, idxToEmail;
         for (auto &v : accounts) {
-            if (m.find(v[0]) == m.end()) {
-                reverseM[idx] = v[0];
-                m[v[0]] = idx++;
+            if (nameToIdx.find(v[0]) == nameToIdx.end()) {
+                idxToName[idx] = v[0];
+                nameToIdx[v[0]] = idx++;
             };
         };
         idx = 0;
         unordered_map<int, int> par;
         for (auto &vec : accounts) {
             for (int i = 1; i < vec.size(); ++i) {
-                if (m2.find(vec[i]) == m.end()) {
-                    par[idx] = m[vec[0]];
-                    reverseM2[idx] = vec[i];
-                    m2[vec[i]] = idx++;
+                if (emailToIdx.find(vec[i]) == emailToIdx.end()) {
+                    par[idx] = nameToIdx[vec[0]];
+                    idxToEmail[idx] = vec[i];
+                    emailToIdx[vec[i]] = idx++;
                 };
             };            
         };  
@@ -58,22 +57,24 @@ public:
         DSU *dsu = new DSU(idx);        
         for (auto &vec : accounts) {
             for (int i = 1; i < vec.size() - 1; ++i) {
-                dsu->unionBySize(m2[vec[i]], m2[vec[i + 1]]);
+                dsu->unionBySize(emailToIdx[vec[i]], emailToIdx[vec[i + 1]]);
             };            
         };          
       
-        unordered_map<string, set<string>> stringLeader;
+        unordered_map<string, set<string>> emailSets;
         for (auto &vec : accounts) {
             for (int i = 1; i < vec.size(); ++i) {
-                int currPar = dsu->findPar(m2[vec[i]]);
-                stringLeader[reverseM2[currPar]].insert(vec[i]);
-            };            
+                int currPar = dsu->findPar(emailToIdx[vec[i]]);
+                emailSets[idxToEmail[currPar]].insert(vec[i]);
+            };
         };         
         
         vector<vector<string>> ans;
-        for (auto &it : stringLeader) {
+        for (auto &it : emailSets) {
             ans.push_back({});
-            ans.back().push_back(reverseM[par[m2[it.first]]]);
+            int currStrLeaderIdx = emailToIdx[it.first];
+            int currStrLeaderParentIdx = par[currStrLeaderIdx]; 
+            ans.back().push_back(idxToName[currStrLeaderParentIdx]);
             for (auto &str : it.second) {
                 ans.back().push_back(str);            
             };

@@ -34,14 +34,15 @@ class Solution {
 public:
     vector<vector<string>> accountsMerge(vector<vector<string>>& accounts) {
         int idx = 0;
-        unordered_map<string, int> emailToIdx;
-        unordered_map<int, string> idxToEmail;
+        unordered_map<string, int> getIdxFromEmail;
+        unordered_map<int, string> getEmailFromIdx;
         unordered_map<int, string> getNameFromIdx;
+        
         for (auto &vec : accounts) {
             for (int i = 1; i < vec.size(); ++i) {
-                if (emailToIdx.find(vec[i]) == emailToIdx.end()) {
-                    idxToEmail[idx] = vec[i];
-                    emailToIdx[vec[i]] = idx++;
+                if (getIdxFromEmail.find(vec[i]) == getIdxFromEmail.end()) {
+                    getEmailFromIdx[idx] = vec[i];
+                    getIdxFromEmail[vec[i]] = idx++;
                 };
             };            
         };  
@@ -49,27 +50,28 @@ public:
         DSU *dsu = new DSU(idx);        
         for (auto &vec : accounts) {
             for (int i = 1; i < vec.size() - 1; ++i) {
-                dsu->unionBySize(emailToIdx[vec[i]], emailToIdx[vec[i + 1]]);
+                dsu->unionBySize(getIdxFromEmail[vec[i]], getIdxFromEmail[vec[i + 1]]);
             };            
         };          
       
         unordered_map<string, set<string>> emailSets;
         for (auto &vec : accounts) {
             for (int i = 1; i < vec.size(); ++i) {
-                int currParEmailIdx = dsu->findPar(emailToIdx[vec[i]]);
-                emailSets[idxToEmail[currParEmailIdx]].insert(vec[i]);
+                int currParEmailIdx = dsu->findPar(getIdxFromEmail[vec[i]]);
+                emailSets[getEmailFromIdx[currParEmailIdx]].insert(vec[i]);
                 getNameFromIdx[currParEmailIdx] = vec[0];
             };
         };         
         
-        vector<vector<string>> ans;
+        idx = 0;
+        vector<vector<string>> ans(emailSets.size());
         for (auto &it : emailSets) {
-            ans.push_back({});
-            int currStrLeaderIdx = emailToIdx[it.first];
-            ans.back().push_back(getNameFromIdx[currStrLeaderIdx]);
+            int currEmailLeaderIdx = getIdxFromEmail[it.first];
+            ans[idx].push_back(getNameFromIdx[currEmailLeaderIdx]);
             for (auto &str : it.second) {
-                ans.back().push_back(str);            
+                ans[idx].push_back(str);            
             };
+            ++idx;
         };
         return ans;
     };

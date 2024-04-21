@@ -36,11 +36,10 @@ public:
         int idx = 0;
         unordered_map<string, int> emailToIdx;
         unordered_map<int, string> idxToEmail;
-        unordered_map<int, string> par;
+        unordered_map<int, string> getNameFromIdx;
         for (auto &vec : accounts) {
             for (int i = 1; i < vec.size(); ++i) {
                 if (emailToIdx.find(vec[i]) == emailToIdx.end()) {
-                    par[idx] = vec[0];
                     idxToEmail[idx] = vec[i];
                     emailToIdx[vec[i]] = idx++;
                 };
@@ -57,8 +56,9 @@ public:
         unordered_map<string, set<string>> emailSets;
         for (auto &vec : accounts) {
             for (int i = 1; i < vec.size(); ++i) {
-                int currPar = dsu->findPar(emailToIdx[vec[i]]);
-                emailSets[idxToEmail[currPar]].insert(vec[i]);
+                int currParEmailIdx = dsu->findPar(emailToIdx[vec[i]]);
+                emailSets[idxToEmail[currParEmailIdx]].insert(vec[i]);
+                getNameFromIdx[currParEmailIdx] = vec[0];
             };
         };         
         
@@ -66,7 +66,7 @@ public:
         for (auto &it : emailSets) {
             ans.push_back({});
             int currStrLeaderIdx = emailToIdx[it.first];
-            ans.back().push_back(par[currStrLeaderIdx]);
+            ans.back().push_back(getNameFromIdx[currStrLeaderIdx]);
             for (auto &str : it.second) {
                 ans.back().push_back(str);            
             };

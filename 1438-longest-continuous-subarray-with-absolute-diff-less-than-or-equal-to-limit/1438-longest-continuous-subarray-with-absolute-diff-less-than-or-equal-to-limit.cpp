@@ -1,31 +1,22 @@
 class Solution {
 public:
     int longestSubarray(vector<int>& nums, int limit) {
-        int n = nums.size(), left = 0, maxLen = 1;
+        int n = nums.size(), best = 0, left = 0;
         map<int, int> m;
         for (int i = 0; i < n; ++i) {
-            auto lo = begin(m);
-            auto hi = end(m);
-            if (!m.empty()) {        
-                --hi;
-            };
-            // cout << s.size() << "\n";
-            while (!m.empty() && (abs(nums[i] - lo->first) > limit || abs(nums[i] - hi->first) > limit)) {
+            ++m[nums[i]];
+            auto it = begin(m);
+            auto it2 = rbegin(m);
+            while (it2->first - it->first > limit) {
                 if (--m[nums[left]] == 0) {
                     m.erase(nums[left]);    
                 };
-                if (!m.empty()) {        
-                    lo = begin(m);
-                    hi = end(m), --hi;
-                    // cout << i << " " << limit << " " << nums[i] << " " << *lo << "\n";
-                };
                 ++left;
+                it = begin(m);
+                it2 = rbegin(m);
             };
-            // cout << i << " " << left << "\n";
-            maxLen = max(maxLen, i - left + 1);
-            ++m[nums[i]];
+            best = max(best, i - left + 1);
         };
-            // cout << "\n";
-        return maxLen;
+        return best;
     };
 };
